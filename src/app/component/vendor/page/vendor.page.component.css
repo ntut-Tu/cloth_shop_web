@@ -1,0 +1,43 @@
+.vendor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #007bff;
+  padding: 10px;
+  color: white;
+}
+
+.navbar-left a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.navbar-right button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar-right button:hover {
+  background-color: #c82333;
+}
+
+.content {
+  padding: 20px;
+  background-color: #f7f7f7;
+  flex-grow: 1;
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

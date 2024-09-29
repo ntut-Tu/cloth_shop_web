@@ -1,0 +1,25 @@
+<div class="login-container">
+  <meta charset="utf-8" />
+  <form (ngSubmit)="onLogin()">
+    <div>
+      <label for="role">选择角色:</label>
+      <select [(ngModel)]="role" name="role" required>
+        <option value="admin">Admin</option>
+        <option value="customer">Customer</option>
+        <option value="vendor">Vendor</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="username">用户名:</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div>
+      <label for="password">密码:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <button type="submit">登录</button>
+  </form>
+</div>

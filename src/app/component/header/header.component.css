@@ -1,0 +1,13 @@
+/* header.component.css */
+.header-container {
+  background-color: #96c9ff;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
