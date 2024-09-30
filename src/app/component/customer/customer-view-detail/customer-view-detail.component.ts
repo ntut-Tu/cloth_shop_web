@@ -1,6 +1,6 @@
-// customer-view-detail.component.ts
 import { Component, Input } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
+import { ProductModel } from '../../../model/product.model';
+import { CartService, CartItem } from '../../../service/cart.service';
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -10,8 +10,16 @@ import {ProductModel} from "../../../model/product.model";
 export class CustomerViewDetailComponent {
   @Input() product!: ProductModel;
 
+  constructor(private cartService: CartService) {}
+
   addToCart() {
-    console.log('加入購物車:', this.product);
-    // 購物車邏輯
+    const item: CartItem = {
+      id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
+      quantity: 1
+    };
+    this.cartService.addToCart(item);
+    console.log('加入購物車:', item);
   }
 }

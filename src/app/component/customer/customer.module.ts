@@ -6,10 +6,10 @@ import { customerRoutes } from './customer.routes';
 import { CustomerPageComponent } from './page/customer.page.component';
 import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
-import {AppModule} from "../../app.module";
-import {ProductListComponent} from "../shared/product-list/product-list.component";
 import {SharedModule} from "../shared/shared.module";
-import { CustomerViewDetailComponent } from './customer-view-detail/customer-view-detail.component';
+import { CartComponent } from './cart/cart.component';
+import {CookieService} from "ngx-cookie-service";
+import {CartService} from "../../service/cart.service";
 
 
 @NgModule({
@@ -17,6 +17,11 @@ import { CustomerViewDetailComponent } from './customer-view-detail/customer-vie
     CustomerPageComponent,
     ProductsComponent,
     OrdersComponent,
+    CartComponent,
+  ],
+  providers:[
+    CookieService,
+    CartService
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,23 @@
+<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
+  <h2>購物車</h2>
+  <div class="cart-item" *ngFor="let item of cartItems">
+    <div class="cart-item-info">
+      <h3>{{ item.name }}</h3>
+      <p>價格: {{ item.price }} 元</p>
+    </div>
+    <div class="cart-item-controls">
+      <input type="number" [value]="item.quantity" min="1" (input)="updateQuantity(item, $event)" />
+      <button (click)="removeItem(item)">移除</button>
+    </div>
+  </div>
+  <div class="cart-total">
+    <h3>总价: {{ getTotalPrice() }} 元</h3>
+  </div>
+  <div class="cart-checkout">
+    <button (click)="checkout()">結帳</button>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <p>購物車為空</p>
+</ng-template>
