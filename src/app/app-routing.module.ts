@@ -12,7 +12,6 @@ export const routes: Routes = [
   { path: 'admin', component: AdminPageComponent },
   { path: 'customer', component: CustomerPageComponent },
   { path: 'vendor', component: VendorPageComponent },
-  // 其他路由
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: HomepageLoginPageComponent },
   {

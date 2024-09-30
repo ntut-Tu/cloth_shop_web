@@ -1,0 +1,21 @@
+<!-- product-card.component.html -->
+<div class="product-card" (click)="openDetail(product)">
+  <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" />
+  <h2>{{ product.name }}</h2>
+  <div class="price">价格: {{ product.price }}元</div>
+</div>
+
+<!-- 弹出产品详情的 modal -->
+<div *ngIf="selectedProduct" class="modal-backdrop" (click)="closeDetail()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button (click)="closeDetail()" class="close-button">×</button>
+
+    <!-- 动态加载 vendor 或 customer 详细信息组件 -->
+    <ng-container *ngIf="isVendor; else customerTemplate">
+      <app-vendor-view-detail [product]="selectedProduct"></app-vendor-view-detail>
+    </ng-container>
+    <ng-template #customerTemplate>
+      <app-customer-view-detail [product]="selectedProduct"></app-customer-view-detail>
+    </ng-template>
+  </div>
+</div>

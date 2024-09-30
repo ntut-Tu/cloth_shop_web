@@ -13,9 +13,10 @@
 }
 
 .navbar-left a {
+  margin-right: 50px; /* 增大导航链接间的间距 */
   color: white;
   text-decoration: none;
-  margin-right: 20px;
+  font-size: 30px; /* 增大字体大小 */
 }
 
 .navbar-right button {

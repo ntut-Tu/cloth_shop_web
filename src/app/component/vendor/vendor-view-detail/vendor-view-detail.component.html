@@ -1,0 +1,10 @@
+<!-- vendor-view-detail.component.html -->
+<div class="vendor-view-detail">
+  <img [src]="product.imageUrl" alt="{{ product.name }}" class="detail-image" />
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <div class="price">价格: {{ product.price }}元</div>
+  <button (click)="editProduct()">编辑</button>
+  <button class="delete" (click)="deleteProduct()">删除</button>
+</div>
+

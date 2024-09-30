@@ -1,0 +1,18 @@
+/* product-list.component.css */
+
+/* 布局设置 */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 改为靠左对齐 */
+  padding: 20px;
+  gap: 20px; /* 卡片之间的间距 */
+}
+
+/* 每个产品卡片的布局和间距设置 */
+.product-list .product-card {
+  flex: 1 1 calc(16.66% - 40px); /* 每个卡片占宽度的16.66%，减去间距，以便每行最多显示6个 */
+  max-width: calc(16.66% - 40px); /* 确保卡片的最大宽度也被设置 */
+  box-sizing: border-box;
+  margin-bottom: 20px; /* 卡片之间的垂直间距 */
+}
