@@ -1,6 +1,6 @@
 // product-list.component.ts
 import { Component, Input } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
+import {Product} from "../../../model/product";
 
 @Component({
   selector: 'app-product-list',
@@ -8,6 +8,6 @@ import {ProductModel} from "../../../model/product.model";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  @Input() products: ProductModel[] = [];
+  @Input() products: Product[] = [];
   @Input() isVendor: boolean = false;
 }

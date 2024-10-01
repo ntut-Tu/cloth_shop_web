@@ -1,6 +1,6 @@
 // vendor-view-detail.component.ts
 import { Component, Input } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
+import {Product} from "../../../model/product";
 
 @Component({
   selector: 'app-vendor-view-detail',
@@ -8,7 +8,7 @@ import {ProductModel} from "../../../model/product.model";
   styleUrls: ['./vendor-view-detail.component.css']
 })
 export class VendorViewDetailComponent {
-  @Input() product!: ProductModel;
+  @Input() product!: Product;
 
   editProduct() {
     console.log('编辑产品:', this.product);

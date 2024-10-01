@@ -1,7 +1,7 @@
 // login.admin.page.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service'; // 登入驗證
+import { AuthService } from '../../service/mock/auth.service'; // 登入驗證
 
 @Component({
   selector: 'app-login-page',

@@ -1,6 +1,6 @@
 // product-card.component.ts
 import { Component, Input } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
+import {Product} from "../../../model/product";
 
 @Component({
   selector: 'app-product-card',
@@ -8,12 +8,12 @@ import {ProductModel} from "../../../model/product.model";
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  @Input() product!: ProductModel;
+  @Input() product!: Product;
   @Input() isVendor: boolean = false;
 
-  selectedProduct: ProductModel | null = null;
+  selectedProduct: Product | null = null;
 
-  openDetail(product: ProductModel) {
+  openDetail(product: Product) {
     this.selectedProduct = product;
   }
 

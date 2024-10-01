@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ProductModel } from '../model/product.model';  // 引入商品模型
+import { Product } from '../../model/product';  // 引入商品模型
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ export class ProductService {
 
   constructor() {}
 
-  getProducts(): Observable<ProductModel[]> {
+  getProducts(): Observable<Product[]> {
     // 假數據
-    const products: ProductModel[] = [
+    const products: Product[] = [
       {
         id: 1,
         name: 'T-shirt',

@@ -1,7 +1,7 @@
 // products.component.ts
 import { Component, OnInit } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
-import {ProductService} from "../../../service/products.service";
+import {Product} from "../../../model/product";
+import {ProductService} from "../../../service/mock/products.service";
 
 @Component({
   selector: 'app-products',
@@ -9,7 +9,7 @@ import {ProductService} from "../../../service/products.service";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  customerProducts: ProductModel[] = [];
+  customerProducts: Product[] = [];
 
   constructor(private productsService: ProductService) {}
 

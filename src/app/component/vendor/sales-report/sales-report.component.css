@@ -1,0 +1,36 @@
+/* 基础表格样式 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead th {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* 悬停效果 */
+tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* 订单详情展开部分的样式 */
+.order-details {
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.order-details div {
+  padding: 5px 0;
+}

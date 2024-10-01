@@ -1,7 +1,7 @@
 // product-management.component.ts
 import { Component, OnInit } from '@angular/core';
-import {ProductModel} from "../../../model/product.model";
-import {ProductService} from "../../../service/products.service";
+import {Product} from "../../../model/product";
+import {ProductService} from "../../../service/mock/products.service";
 
 @Component({
   selector: 'app-product-management',
@@ -9,7 +9,7 @@ import {ProductService} from "../../../service/products.service";
   styleUrls: ['./product-management.component.css']
 })
 export class ProductManagementComponent implements OnInit {
-  vendorProducts: ProductModel[] = [];
+  vendorProducts: Product[] = [];
 
   constructor(private productsService: ProductService) {}
 

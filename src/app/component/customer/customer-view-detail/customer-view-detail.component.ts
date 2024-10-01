@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ProductModel } from '../../../model/product.model';
-import { CartService, CartItem } from '../../../service/cart.service';
+import { Product } from '../../../model/product';
+import { CartService, CartItem } from '../../../service/mock/cart.service';
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -8,7 +8,7 @@ import { CartService, CartItem } from '../../../service/cart.service';
   styleUrls: ['./customer-view-detail.component.css']
 })
 export class CustomerViewDetailComponent {
-  @Input() product!: ProductModel;
+  @Input() product!: Product;
 
   constructor(private cartService: CartService) {}
 

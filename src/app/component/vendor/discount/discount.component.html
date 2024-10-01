@@ -1,1 +1,34 @@
-<p>discount works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Code</th>
+    <th>Expiry Date</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let discount of discounts; let i = index">
+    <tr (click)="toggleDetails(i)">
+      <td>{{ discount.id }}</td>
+      <td>{{ discount.code}}</td>
+      <td>{{ discount.expiryDate }}</td>
+      <td *ngIf="discount.expiryDate<nowTime" class="expire-status">
+        EXPIRED
+      </td>
+      <td *ngIf="discount.expiryDate>=nowTime" class="not-expire-status">
+        NOT EXPIRED
+      </td>
+    </tr>
+    <tr *ngIf="toggledOrderIndex === i">
+      <td colspan="4">
+        <div class="edit-discount">
+          <button>
+            edit
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
