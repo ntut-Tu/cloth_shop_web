@@ -26,6 +26,10 @@ export class AuthService {
     return of(false);
   }
 
+  register(username: string, email: string, password: string, role: string): Observable<boolean> {
+    return of(false);
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }

@@ -7,6 +7,7 @@ import { NavbarComponent } from './component/shared/navbar/navbar.component';
 import { HomeLoginPageComponent } from './component/home/login.page/home.login.page.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './component/shared/header/header.component';
+import {HomeRegisterPageComponent} from "./component/home/register.page/home.register.page.component";
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HeaderComponent } from './component/shared/header/header.component';
     NavbarComponent,
     HomeLoginPageComponent,
     HeaderComponent,
+    HomeRegisterPageComponent,
   ],
   imports: [
     BrowserModule,

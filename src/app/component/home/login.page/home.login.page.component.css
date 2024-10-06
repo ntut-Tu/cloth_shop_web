@@ -29,7 +29,7 @@ label {
 input[type="text"],
 input[type="password"],
 select {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -49,4 +49,9 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.register {
+  margin-top: 20px; /* 增加與登入按鈕的距離 */
+  text-align: center; /* 確保註冊文字居中 */
 }
