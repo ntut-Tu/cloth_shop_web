@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../../../model/product';
-import { CartService, CartItem } from '../../../service/mock/cart.service';
+import {CartItem, Product} from '../../../model/product';
+import { CartService } from '../../../service/mock/cart.service';
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -16,9 +16,14 @@ export class CustomerViewDetailComponent {
     const item: CartItem = {
       id: this.product.id,
       name: this.product.name,
+      // description: this.product.description,
       price: this.product.price,
+      // imageUrl: this.product.imageUrl,
+      seller_id: this.product.seller_id,
+      seller_name: this.product.seller_name,
       quantity: 1
     };
+
     this.cartService.addToCart(item);
     console.log('加入購物車:', item);
   }
