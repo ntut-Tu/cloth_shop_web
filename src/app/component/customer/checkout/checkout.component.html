@@ -1,0 +1,27 @@
+<div class="cart-container">
+  <ng-container *ngFor="let seller of cartGroupedBySeller | keyvalue">
+    <div class="seller-container">
+      <div class="seller-header">
+        <div class="seller-name">{{ seller.value[0].seller_name }}</div>
+        <div class="seller-total-price">Total: {{ calculateTotalPrice(seller.value) | currency }}</div>
+      </div>
+      <div class="product-list">
+        <ng-container *ngFor="let item of seller.value">
+          <div class="product-item">
+            <div class="product-name">{{ item.name }}</div>
+            <div class="product-quantity">
+              <input type="number" [(ngModel)]="item.quantity" min="1" (change)="updateQuantity(item)">
+            </div>
+            <div class="product-price">{{ item.price | currency }}</div>
+            <button class="delete-button" (click)="removeItem(item)">Delete</button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="order-summary">
+    <div class="total-amount">Total Amount: {{ calculateGrandTotal() | currency }}</div>
+    <button class="submit-order" (click)="submitOrder()">Submit Order</button>
+  </div>
+</div>

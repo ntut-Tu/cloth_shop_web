@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem, CartService } from '../../../service/mock/cart.service';
+import { CartService } from '../../../service/mock/cart.service';
+import {CartItem} from "../../../model/product";
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,6 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    // 订阅购物车数据变化
     this.cartService.cart$.subscribe(cartItems => {
       this.cartItems = cartItems;
     });
