@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'http://localhost'
+  baseUrl: `${window.location.protocol}//${window.location.hostname}`
 };
