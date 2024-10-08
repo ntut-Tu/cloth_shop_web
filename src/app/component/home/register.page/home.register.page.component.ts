@@ -1,7 +1,8 @@
 // register.page.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../service/mock/auth.service'; // 登入驗證
+import { AuthService } from '../../../service/auth.service';
+import {UserRole} from "../../../model/user.role"; // 登入驗證
 
 @Component({
   selector: 'app-register-page',
@@ -13,7 +14,7 @@ export class HomeRegisterPageComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  role: string = 'customer'; // 默認= customer
+  role: UserRole = UserRole.Customer; // 默認= customer
 
   constructor(private authService: AuthService, private router: Router) {}
 

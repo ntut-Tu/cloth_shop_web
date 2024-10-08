@@ -8,6 +8,7 @@ import { HomeLoginPageComponent } from './component/home/login.page/home.login.p
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './component/shared/header/header.component';
 import {HomeRegisterPageComponent} from "./component/home/register.page/home.register.page.component";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {HomeRegisterPageComponent} from "./component/home/register.page/home.reg
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   exports: [
