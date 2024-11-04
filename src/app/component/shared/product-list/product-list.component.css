@@ -1,0 +1,9 @@
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 每个卡片最小200px，最大填满可用空间 */
+  gap: 50px; /* 卡片之间的间距 */
+  padding: 20px;
+  justify-items: center; /* 中心对齐卡片 */
+}
+
+

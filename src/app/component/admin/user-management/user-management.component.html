@@ -1,1 +1,36 @@
-<p>admin.user.management works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Account</th>
+    <th>EstablishDate</th>
+    <th>AccountStatus</th>
+    <th>AccountType</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let user of users; let i = index">
+    <tr (click)="toggleDetails(i)">
+      <td>{{ user.id }}</td>
+      <td>{{ user.account}}</td>
+      <td>{{ user.establishDate }}</td>
+      <td *ngIf="user.accountStatus!='active'" class="expire-status">
+        {{user.accountStatus}}
+      </td>
+      <td *ngIf="user.accountStatus=='active'" class="not-expire-status">
+        {{user.accountStatus}}
+      </td>
+      <td>{{user.accountType}}</td>
+    </tr>
+    <tr *ngIf="toggledOrderIndex === i">
+      <td colspan="5">
+        <div class="edit-user">
+          <button>
+            edit
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

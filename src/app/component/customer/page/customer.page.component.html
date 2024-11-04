@@ -1,8 +1,8 @@
 <div class="customer-container">
   <nav class="navbar">
     <div class="navbar-left">
-      <a routerLink="products" routerLinkActive="active">Products</a>
-      <a routerLink="orders" routerLinkActive="active">Orders</a>
+      <a routerLink="products" routerLinkActive="active">商品</a>
+      <a routerLink="orders" routerLinkActive="active">訂單</a>
     </div>
     <div class="navbar-right">
       <button (click)="logout()">Logout</button>
@@ -10,6 +10,11 @@
   </nav>
 
   <div class="content">
-    <router-outlet></router-outlet>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="cart-placeholder" *ngIf="showCart">
+      <app-cart></app-cart>
+    </div>
   </div>
 </div>

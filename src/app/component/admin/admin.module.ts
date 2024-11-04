@@ -7,6 +7,7 @@ import { AdminPageComponent } from './page/admin.page.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { TransactionRecordsComponent } from './transaction-records/transaction-r
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(adminRoutes) // 使用 `forChild` 注册子路由
+    RouterModule.forChild(adminRoutes),
+    SharedModule,
+    // 使用 `forChild` 注册子路由
   ]
 })
 export class AdminModule { }

@@ -1,25 +1,24 @@
-// login.admin.page.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service'; // 登入驗證
+import { AuthService } from '../../../service/auth.service';
+import { UserRole } from '../../../model/user.role';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './homepage.login.page.component.html',
-  styleUrls: ['./homepage.login.page.component.css']
+  templateUrl: './home.login.page.component.html',
+  styleUrls: ['./home.login.page.component.css']
 })
-export class HomepageLoginPageComponent {
+export class HomeLoginPageComponent {
   username: string = '';
   password: string = '';
-  role: string = 'customer'; // 默認= customer
+  role: UserRole = UserRole.Customer;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.authService.login(this.username, this.password, this.role).subscribe(
-      (isAuthenticated) => {
+    this.authService.login(this.username, this.password, this.role).subscribe({
+      next: (isAuthenticated) => {
         if (isAuthenticated) {
-          // 跳轉
           if (this.role === 'admin') {
             this.router.navigate(['/admin']);
           } else if (this.role === 'customer') {
@@ -31,10 +30,10 @@ export class HomepageLoginPageComponent {
           alert('登入失敗，帳號密碼錯誤');
         }
       },
-      (error) => {
+      error: (error) => {
         console.error('登入失敗', error);
         alert('登入失敗，伺服器錯誤');
       }
-    );
+    });
   }
 }

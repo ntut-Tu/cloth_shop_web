@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,9 +27,10 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
 select {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -49,4 +50,8 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+.login {
+  margin-top: 20px; /* 增加與登入按鈕的距離 */
+  text-align: center; /* 確保註冊文字居中 */
 }

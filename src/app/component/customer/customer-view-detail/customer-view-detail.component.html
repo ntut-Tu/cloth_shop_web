@@ -1,0 +1,9 @@
+<!-- customer-view-detail.component.html -->
+<div class="customer-view-detail">
+  <img [src]="product.imageUrl" alt="{{ product.name }}" class="detail-image" />
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <div class="price">价格: {{ product.price }}元</div>
+  <button (click)="addToCart()">加入购物车</button>
+</div>
+
