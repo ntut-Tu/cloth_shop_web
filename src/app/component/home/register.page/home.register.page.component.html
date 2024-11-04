@@ -1,6 +1,8 @@
 <div class="register-container">
   <meta charset="utf-8" />
-  <form (ngSubmit)="onRegister()">
+
+  <!-- 第一步：基本信息表單 -->
+  <form *ngIf="step === 1" (ngSubmit)="onNextStep()">
     <div>
       <label for="role">選擇角色:</label>
       <select [(ngModel)]="role" name="role" required>
@@ -30,9 +32,51 @@
       <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required />
     </div>
 
-    <button type="submit">註冊</button>
-    <div class="login">已有帳號？
-      <a routerLink="login" routerLinkActive="active">登入</a>
-    </div>
+    <button type="submit">下一步</button>
   </form>
+
+  <!-- 第二步：角色特定信息表單 -->
+  <form *ngIf="step === 2" (ngSubmit)="onRegister()">
+    <div *ngIf="role === 'vendor'">
+      <h3>填寫店鋪資訊</h3>
+      <div>
+        <label for="storeAddress">店鋪地址:</label>
+        <input type="text" id="storeAddress" [(ngModel)]="storeAddress" name="storeAddress" />
+      </div>
+
+      <div>
+        <label for="storeDescription">店鋪描述:</label>
+        <input type="text" id="storeDescription" [(ngModel)]="storeDescription" name="storeDescription" />
+      </div>
+
+      <div>
+        <label for="storeLogoUrl">店鋪標誌網址:</label>
+        <input type="text" id="storeLogoUrl" [(ngModel)]="storeLogoUrl" name="storeLogoUrl" />
+      </div>
+
+      <div>
+        <label for="paymentAccount">付款帳戶:</label>
+        <input type="text" id="paymentAccount" [(ngModel)]="paymentAccount" name="paymentAccount" />
+      </div>
+    </div>
+
+    <div *ngIf="role === 'customer'">
+      <h3>填寫客戶資訊</h3>
+      <div>
+        <label for="defaultShippingAddress">預設送貨地址:</label>
+        <input type="text" id="defaultShippingAddress" [(ngModel)]="defaultShippingAddress" name="defaultShippingAddress" />
+      </div>
+
+      <div>
+        <label for="billingAddress">帳單地址:</label>
+        <input type="text" id="billingAddress" [(ngModel)]="billingAddress" name="billingAddress" />
+      </div>
+    </div>
+
+    <button type="submit">註冊</button>
+  </form>
+
+  <div class="login">已有帳號？
+    <a routerLink="login" routerLinkActive="active">登入</a>
+  </div>
 </div>
