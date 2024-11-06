@@ -5,6 +5,7 @@ import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductCardComponent} from "./product-card/product-card.component";
 import {VendorViewDetailComponent} from "../vendor/vendor-view-detail/vendor-view-detail.component";
 import {CustomerViewDetailComponent} from "../customer/customer-view-detail/customer-view-detail.component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {CustomerViewDetailComponent} from "../customer/customer-view-detail/cust
   exports: [
     VendorViewDetailComponent,
     CustomerViewDetailComponent,
-    ProductListComponent
+    ProductListComponent,
+    FormsModule
   ]
 })
 export class SharedModule {}

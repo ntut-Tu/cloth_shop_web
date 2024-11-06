@@ -1,4 +1,24 @@
 <!-- product-list.component.html -->
 <div class="product-list">
-  <app-product-card *ngFor="let product of products" [product]="product" [isVendor]="isVendor"></app-product-card>
+  <app-product-card
+    *ngFor="let product of products"
+    [product]="product"
+    [isVendor]="isVendor"
+    (loadDetail)="onLoadDetail($event)">
+  </app-product-card>
+</div>
+
+<!-- Product detail modal -->
+<div *ngIf="selectedProduct" class="modal-backdrop" (click)="closeDetail()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button (click)="closeDetail()" class="close-button">×</button>
+
+    <!-- Vendor or customer detail components -->
+    <ng-container *ngIf="isVendor; else customerTemplate">
+      <app-vendor-view-detail [product]="detailedProduct"></app-vendor-view-detail>
+    </ng-container>
+    <ng-template #customerTemplate>
+      <app-customer-view-detail [product]="detailedProduct"></app-customer-view-detail>
+    </ng-template>
+  </div>
 </div>

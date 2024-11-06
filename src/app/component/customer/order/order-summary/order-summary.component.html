@@ -1,0 +1,11 @@
+<div (click)="toggleExpand()">
+  <h3>Order ID: {{ order.orderId }}</h3>
+  <p>Date: {{ order.orderDate }}</p>
+  <p>Total Amount: {{ order.totalAmount }}</p>
+  <p>Payment Status: {{ order.payStatus }}</p>
+  <p>Shipping Status: {{ order.shipStatus }}</p>
+</div>
+
+<div *ngIf="isExpanded">
+  <app-store-order-summary *ngFor="let store of storeOrders" [storeOrder]="store" [jwtToken]="jwtToken"></app-store-order-summary>
+</div>

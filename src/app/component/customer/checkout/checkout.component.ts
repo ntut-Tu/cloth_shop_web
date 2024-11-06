@@ -1,27 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from "../../../service/mock/cart.service";
-import { OrderService } from "../../../service/mock/order.service";
-import { CartItem } from "../../../model/product";
+import {CartItem} from "../../../model/product-summary";
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
   cartItems: CartItem[] = [];
-  cartGroupedBySeller: { [key: string]: CartItem[] } = {};  // 定义 cartGroupedBySeller 作为对象
+  cartGroupedBySeller: { [key: string]: CartItem[] } = {};
 
-  constructor(private cartService: CartService, private orderService: OrderService) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.loadCartFromCookies();
+    this.cartItems = this.cartService.loadCartFromSession();
     this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
   }
 
   groupCartItemsBySeller(items: CartItem[]): { [key: string]: CartItem[] } {
     return items.reduce((acc: { [key: string]: CartItem[] }, item: CartItem) => {
-      const sellerKey = item.seller_name;
+      const sellerKey = item.storeDescription;
       if (!acc[sellerKey]) {
         acc[sellerKey] = [];
       }
@@ -42,21 +41,20 @@ export class CheckoutComponent {
     if (item.quantity < 1) {
       item.quantity = 1;
     }
-    this.cartService.addToCart(item);  // 更新购物车中的数量
-    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);  // 重新分组
+    this.cartService.saveCartToSession(this.cartItems);
+    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
   }
 
   removeItem(item: CartItem): void {
     this.cartService.removeItem(item);
-    this.cartItems = this.cartService.loadCartFromCookies();  // 更新视图
-    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);  // 重新分组
+    this.cartItems = this.cartService.loadCartFromSession();
+    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
   }
 
   submitOrder(): void {
-    // 清除购物车数据
-    this.cartService.saveCartToCookies([]);
-    this.cartItems = [];  // 重置购物车
-    this.cartGroupedBySeller = {};  // 清空商家分组
+    this.cartService.saveCartToSession([]);
+    this.cartItems = [];
+    this.cartGroupedBySeller = {};
     alert('Order submitted successfully!');
   }
 }

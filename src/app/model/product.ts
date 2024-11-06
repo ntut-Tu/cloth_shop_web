@@ -7,6 +7,4 @@ export interface Product {
   seller_id:  number;
   seller_name: string;
 }
-export interface CartItem extends Product {
-  quantity: number;
-}
+

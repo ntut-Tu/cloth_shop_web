@@ -1,0 +1,10 @@
+<div *ngIf="jwtToken; else loginPrompt">
+  <div *ngFor="let order of orders">
+    <app-order-summary [order]="order" [jwtToken]="jwtToken"></app-order-summary>
+  </div>
+</div>
+
+<!-- 若使用者未登入（沒有 jwtToken），顯示登入提示 -->
+<ng-template #loginPrompt>
+  <p>Please log in to view your orders.</p>
+</ng-template>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../service/mock/cart.service';
-import {CartItem} from "../../../model/product";
+import {CartItem} from "../../../model/product-summary";
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
 
     if (quantity > 0) {
       item.quantity = quantity;
-      this.cartService.saveCartToCookies(this.cartItems);
+      this.cartService.saveCartToSession(this.cartItems);
     }
   }
 

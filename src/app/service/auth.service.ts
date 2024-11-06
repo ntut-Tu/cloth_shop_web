@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import {environment} from "../../environments/environment";
-import {UserRole} from "../model/user.role";
-import {RegisterRequest} from "../model/RegisterRequest";
-
-
+import { environment } from "../../environments/environment";
+import { UserRole } from "../model/user.role";
+import { RegisterRequest } from "../model/RegisterRequest";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl =  environment.baseUrl+'/api/auth';
+  private apiUrl = environment.baseUrl + '/api/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
+
   login(username: string, password: string, role: UserRole): Observable<boolean> {
     const loginData = {
       username: username,
@@ -29,7 +29,8 @@ export class AuthService {
     ).pipe(
       map(response => {
         if (response.status && response.data?.token) {
-          localStorage.setItem('token', response.data.token);
+          // 儲存 JWT 到 cookie
+          this.cookieService.set('token', response.data.token, { path: '/', sameSite: 'Lax' });
           return true;
         }
         return false;
@@ -40,7 +41,6 @@ export class AuthService {
       })
     );
   }
-
 
   checkUser(username: string, role: UserRole): Observable<boolean> {
     const checkData = { username, role };
@@ -56,7 +56,6 @@ export class AuthService {
     );
   }
 
-
   registerDetails(registerData: RegisterRequest): Observable<boolean> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -71,12 +70,12 @@ export class AuthService {
     );
   }
 
-
+  // 從 cookie 中取得 token
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.cookieService.get('token');
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.cookieService.delete('token', '/');
   }
 }

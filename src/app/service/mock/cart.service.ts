@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-import {CartItem} from "../../model/product";
-
-
+import {CartItem} from "../../model/product-summary";
 
 @Injectable({
   providedIn: 'root'
@@ -12,41 +9,44 @@ export class CartService {
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  constructor(private cookieService: CookieService) {
+  constructor() {
     this.loadInitialCart();
   }
 
   loadInitialCart(): void {
-    const cartItems = this.loadCartFromCookies();
+    const cartItems = this.loadCartFromSession();
     this.cartSubject.next(cartItems);
   }
 
-  loadCartFromCookies(): CartItem[] {
-    const cartData = this.cookieService.get('cart');
+  loadCartFromSession(): CartItem[] {
+    const cartData = sessionStorage.getItem('cart');
     return cartData ? JSON.parse(cartData) : [];
   }
 
-  getCartGroupedBySeller(): { [seller_id: number]: CartItem[] } {
-    const cartItems = this.loadCartFromCookies();
-
+  getCartGroupedBySeller(): { [fkVendorId: number]: CartItem[] } {
+    const cartItems = this.loadCartFromSession();
     return cartItems.reduce((groups, item) => {
-      if (!groups[item.seller_id]) {
-        groups[item.seller_id] = [];
+      if (!groups[item.fkVendorId]) {
+        groups[item.fkVendorId] = [];
       }
-      groups[item.seller_id].push(item);
+      groups[item.fkVendorId].push(item);
       return groups;
-    }, {} as { [seller_id: number]: CartItem[] });
+    }, {} as { [fkVendorId: number]: CartItem[] });
   }
 
-  saveCartToCookies(cartItems: CartItem[]): void {
-    this.cookieService.set('cart', JSON.stringify(cartItems));
+  saveCartToSession(cartItems: CartItem[]): void {
+    sessionStorage.setItem('cart', JSON.stringify(cartItems));
     this.cartSubject.next(cartItems);
   }
 
   addToCart(item: CartItem): void {
-    const cartItems = this.loadCartFromCookies();
+    console.log("Item to add:", item);
 
-    const existingItem = cartItems.find(cartItem => cartItem.id === item.id && cartItem.seller_id === item.seller_id);
+    const cartItems = this.loadCartFromSession();
+
+    const existingItem = cartItems.find(
+      cartItem => cartItem.productVariantId === item.productVariantId && cartItem.fkVendorId === item.fkVendorId
+    );
 
     if (existingItem) {
       existingItem.quantity++;
@@ -54,11 +54,13 @@ export class CartService {
       cartItems.push({ ...item, quantity: 1 });
     }
 
-    this.saveCartToCookies(cartItems);
+    this.saveCartToSession(cartItems);
   }
 
   removeItem(item: CartItem): void {
-    const cartItems = this.loadCartFromCookies().filter(cartItem => cartItem.id !== item.id);
-    this.saveCartToCookies(cartItems);
+    const cartItems = this.loadCartFromSession().filter(
+      cartItem => cartItem.productVariantId !== item.productVariantId || cartItem.fkVendorId !== item.fkVendorId
+    );
+    this.saveCartToSession(cartItems);
   }
 }

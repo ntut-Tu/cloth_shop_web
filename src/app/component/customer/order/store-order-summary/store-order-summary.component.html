@@ -1,0 +1,11 @@
+<div (click)="toggleExpand()">
+  <p>Store Order ID: {{ storeOrder.storeOrderId }}</p>
+  <p>Vendor ID: {{ storeOrder.vendorId }}</p>
+  <p *ngIf="storeOrder.seasonalDiscountId">Seasonal Discount ID: {{ storeOrder.seasonalDiscountId }}</p>
+  <p *ngIf="storeOrder.specialDiscountId">Special Discount ID: {{ storeOrder.specialDiscountId }}</p>
+  <p *ngIf="storeOrder.shippingDiscountId">Shipping Discount ID: {{ storeOrder.shippingDiscountId }}</p>
+</div>
+
+<div *ngIf="isExpanded">
+  <app-order-item-detail *ngFor="let item of orderItems" [item]="item"></app-order-item-detail>
+</div>

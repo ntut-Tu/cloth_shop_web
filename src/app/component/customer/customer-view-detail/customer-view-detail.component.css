@@ -1,37 +1,70 @@
-/* customer-view-detail.component.css */
-
-/* 容器样式 */
 .customer-view-detail {
-  background-color: #f8f9fa;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   text-align: center;
 }
 
-/* 标题样式 */
-.customer-view-detail h3 {
-  font-size: 1.8em;
+.customer-view-detail .detail-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
   margin-bottom: 20px;
+}
+
+.customer-view-detail h2 {
+  font-size: 24px;
   color: #333;
+  margin-bottom: 10px;
 }
 
-/* 按钮样式优化 */
-.customer-view-detail button {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  padding: 12px 25px;
+.customer-view-detail p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.variant-selection {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.variant-selection label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.variant-selection select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
   border: none;
-  border-radius: 25px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1.1em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin: 10px 0;
 }
 
-.customer-view-detail button:hover {
-  background: linear-gradient(135deg, #0056b3, #00448a);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+button:hover {
+  background-color: #45a049;
 }

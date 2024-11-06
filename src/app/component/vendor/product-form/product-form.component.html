@@ -1,0 +1,52 @@
+<div class="product-form">
+  <h2>Add New Product</h2>
+  <form (ngSubmit)="submitProduct()">
+    <label>
+      Name:
+      <input [(ngModel)]="product.name" name="name" required>
+    </label>
+    <label>
+      Description:
+      <textarea [(ngModel)]="product.description" name="description"></textarea>
+    </label>
+    <label>
+      Category:
+      <input [(ngModel)]="product.category" name="category" required>
+    </label>
+    <label>
+      Image URL:
+      <input [(ngModel)]="product.imageUrl" name="imageUrl">
+    </label>
+
+    <!-- 變體輸入 -->
+    <div class="variant-section">
+      <h3>Product Variants</h3>
+      <div *ngFor="let variant of product.productVariants; let i = index">
+        <p>Variant {{ i + 1 }}</p>
+        <p>Color: {{ variant.color }}, Size: {{ variant.size }}, Price: {{ variant.price }}, Stock: {{ variant.stock }}</p>
+        <button type="button" (click)="removeVariant(i)">Remove</button>
+      </div>
+
+      <h4>Add New Variant</h4>
+      <label>
+        Color:
+        <input [(ngModel)]="newVariant.color" name="color">
+      </label>
+      <label>
+        Size:
+        <input [(ngModel)]="newVariant.size" name="size">
+      </label>
+      <label>
+        Price:
+        <input type="number" [(ngModel)]="newVariant.price" name="price" min="0">
+      </label>
+      <label>
+        Stock:
+        <input type="number" [(ngModel)]="newVariant.stock" name="stock" min="0">
+      </label>
+      <button type="button" (click)="addVariant()">Add Variant</button>
+    </div>
+
+    <button type="submit">Submit Product</button>
+  </form>
+</div>

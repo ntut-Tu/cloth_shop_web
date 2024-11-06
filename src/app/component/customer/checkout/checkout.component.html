@@ -2,7 +2,7 @@
   <ng-container *ngFor="let seller of cartGroupedBySeller | keyvalue">
     <div class="seller-container">
       <div class="seller-header">
-        <div class="seller-name">{{ seller.value[0].seller_name }}</div>
+        <div class="fkVendorId">{{ seller.value[0].fkVendorId }}</div>
         <div class="seller-total-price">Total: {{ calculateTotalPrice(seller.value) | currency }}</div>
       </div>
       <div class="product-list">
