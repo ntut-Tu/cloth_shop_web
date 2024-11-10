@@ -1,7 +1,7 @@
 import {UserRole} from "./user.role";
 
 export interface RegisterRequest {
-  username: string;
+  account: string;
   email: string;
   password: string;
   role: UserRole;

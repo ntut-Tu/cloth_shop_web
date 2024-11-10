@@ -54,7 +54,7 @@ export class HomeRegisterPageComponent {
 
   onRegister() {
     const registerData: RegisterRequest = {
-      username: this.username,
+      account: this.username,
       email: this.email,
       password: this.password,
       role: this.role,
