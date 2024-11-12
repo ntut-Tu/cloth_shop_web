@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {OrderSummary} from "../../../../model/OrderSummary";
+import {OrderSummaryModel} from "../../../../model/order-summary.model";
 import {OrderService} from "../../../../service/order.service";
 import {AuthService} from "../../../../service/auth.service";
 
@@ -11,7 +11,7 @@ import {AuthService} from "../../../../service/auth.service";
 })
 export class OrderListComponent implements OnInit {
 
-  orders: OrderSummary[] = [];
+  orders: OrderSummaryModel[] = [];
   jwtToken: string | null = null;
 
   constructor(private orderService: OrderService, private authService: AuthService) { }

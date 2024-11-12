@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {OrderItemDetail} from "../../../../model/OrderItemDetail";
+import {OrderItemDetailDTO} from "../../../../model/order-item-detail.model";
 
 @Component({
   selector: 'app-order-item-detail',
@@ -8,6 +8,6 @@ import {OrderItemDetail} from "../../../../model/OrderItemDetail";
 })
 export class OrderItemDetailComponent {
 
-  @Input() item!: OrderItemDetail;
+  @Input() item!: OrderItemDetailDTO;
 
 }

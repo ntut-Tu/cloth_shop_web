@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {ProductService} from "../../../service/product.service";
-import {ProductSummary} from "../../../model/product-summary";
+import {ProductSummaryModel} from "../../../model/product-summary.model";
 
 
 @Component({
@@ -9,9 +9,9 @@ import {ProductSummary} from "../../../model/product-summary";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  @Input() products: ProductSummary[] = [];
+  @Input() products: ProductSummaryModel[] = [];
   @Input() isVendor: boolean = false;
-  selectedProduct: ProductSummary | null = null;
+  selectedProduct: ProductSummaryModel | null = null;
   detailedProduct: any = null;
 
   constructor(private productService: ProductService) {}
@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
     // Initial load can be handled here if needed
   }
 
-  onLoadDetail(product: ProductSummary) {
+  onLoadDetail(product: ProductSummaryModel) {
     this.selectedProduct = product;
 
     // Load the detailed information from the service (e.g., by ID)

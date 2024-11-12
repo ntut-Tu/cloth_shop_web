@@ -1,6 +1,6 @@
 // vendor-view-detail.component.ts
 import { Component, Input } from '@angular/core';
-import {Product} from "../../../model/product";
+import {Product} from "../../../model/product.model";
 
 @Component({
   selector: 'app-vendor-view-detail',

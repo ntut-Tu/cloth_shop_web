@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {UserInfo} from "../../model/user.info";
+import {UserInfoModel} from "../../model/outdated/user-info.model";
 import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManageService {
-  getUserList():Observable<UserInfo[]>{
-    const userList:UserInfo[]=[
+  getUserList():Observable<UserInfoModel[]>{
+    const userList:UserInfoModel[]=[
       {
         id:1,
         account:'admin',

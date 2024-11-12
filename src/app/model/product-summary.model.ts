@@ -1,6 +1,6 @@
-import {Product} from "./product";
+import {Product} from "./product.model";
 
-export interface ProductSummary {
+export interface ProductSummaryModel {
   productId: number;
   name: string;
   totalSales: number;

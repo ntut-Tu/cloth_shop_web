@@ -1,4 +1,4 @@
-export interface StoreOrderSummary {
+export interface StoreOrderSummaryModel {
   storeOrderId: number;
   vendorId: number;
   seasonalDiscountId?: number;

@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from "../../environments/environment";
-import { UserRole } from "../model/user.role";
-import { RegisterRequest } from "../model/RegisterRequest";
+import { UserRoleModel } from "../model/user-role.model";
+import { RegisterRequestModel } from "../model/register-request.model";
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  login(username: string, password: string, role: UserRole): Observable<boolean> {
+  login(username: string, password: string, role: UserRoleModel): Observable<boolean> {
     const loginData = {
       username: username,
       password: password,
@@ -42,7 +42,7 @@ export class AuthService {
     );
   }
 
-  checkUser(username: string, role: UserRole): Observable<boolean> {
+  checkUser(username: string, role: UserRoleModel): Observable<boolean> {
     const checkData = { username, role };
 
     return this.http.post<{ status: boolean, message: string, data: null }>(
@@ -56,7 +56,7 @@ export class AuthService {
     );
   }
 
-  registerDetails(registerData: RegisterRequest): Observable<boolean> {
+  registerDetails(registerData: RegisterRequestModel): Observable<boolean> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post<{ status: boolean, message: string, data: null }>(

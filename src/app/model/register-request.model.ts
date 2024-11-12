@@ -1,10 +1,10 @@
-import {UserRole} from "./user.role";
+import {UserRoleModel} from "./user-role.model";
 
-export interface RegisterRequest {
+export interface RegisterRequestModel {
   username: string;
   email: string;
   password: string;
-  role: UserRole;
+  role: UserRoleModel;
 
   storeAddress?: string;
   storeDescription?: string;

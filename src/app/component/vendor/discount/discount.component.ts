@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {SalesReportService} from "../../../service/mock/sales-report.service";
-import {Discount} from "../../../model/discount.model";
+import {Discount} from "../../../model/outdated/discount.model";
 import {DiscountManageService} from "../../../service/mock/discount-manage.service";
 import {LocalTimeService} from "../../../service/local-time.service";
 

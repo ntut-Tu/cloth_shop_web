@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from "../../../model/user.info";
+import {UserInfoModel} from "../../../model/outdated/user-info.model";
 import {UserManageService} from "../../../service/mock/user-manage.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {UserManageService} from "../../../service/mock/user-manage.service";
   styleUrl: './user-management.component.css'
 })
 export class UserManagementComponent implements OnInit{
-  users:UserInfo[]=[];
+  users:UserInfoModel[]=[];
   toggledOrderIndex: number | null = null;
 
   constructor(private userManageService:UserManageService) {}

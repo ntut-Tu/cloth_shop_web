@@ -1,4 +1,4 @@
-export interface UserInfo {
+export interface UserInfoModel {
   id:number;
   account:string;
   establishDate:number;

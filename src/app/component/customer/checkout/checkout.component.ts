@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "../../../service/mock/cart.service";
-import {CartItem} from "../../../model/product-summary";
+import {CartItem} from "../../../model/product-summary.model";
 
 @Component({
   selector: 'app-checkout',

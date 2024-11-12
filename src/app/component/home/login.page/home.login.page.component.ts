@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
-import { UserRole } from '../../../model/user.role';
+import { UserRoleModel } from '../../../model/user-role.model';
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +11,7 @@ import { UserRole } from '../../../model/user.role';
 export class HomeLoginPageComponent {
   username: string = '';
   password: string = '';
-  role: UserRole = UserRole.Customer;
+  role: UserRoleModel = UserRoleModel.Customer;
 
   constructor(private authService: AuthService, private router: Router) {}
 

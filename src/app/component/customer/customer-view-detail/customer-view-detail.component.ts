@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CartService } from '../../../service/mock/cart.service';
-import { CartItem, ProductDetail, ProductVariant } from "../../../model/product-summary";
+import { CartItem, ProductDetail, ProductVariant } from "../../../model/product-summary.model";
 
 @Component({
   selector: 'app-customer-view-detail',

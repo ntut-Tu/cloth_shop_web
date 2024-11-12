@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../../service/product.service";
-import {ProductSummary} from "../../../model/product-summary";
+import {ProductSummaryModel} from "../../../model/product-summary.model";
 
 @Component({
   selector: 'app-products',
@@ -8,7 +8,7 @@ import {ProductSummary} from "../../../model/product-summary";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  customerProducts: ProductSummary[] = [];
+  customerProducts: ProductSummaryModel[] = [];
   currentPage: number = 1;
   pageSize: number = 30;
 

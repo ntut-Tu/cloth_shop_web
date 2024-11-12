@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {ProductSummary} from "../../../model/product-summary";
+import {ProductSummaryModel} from "../../../model/product-summary.model";
 
 @Component({
   selector: 'app-product-card',
@@ -7,11 +7,11 @@ import {ProductSummary} from "../../../model/product-summary";
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  @Input() product!: ProductSummary;
+  @Input() product!: ProductSummaryModel;
   @Input() isVendor: boolean = false;
 
   // EventEmitter to notify parent when detail needs to be loaded
-  @Output() loadDetail = new EventEmitter<ProductSummary>();
+  @Output() loadDetail = new EventEmitter<ProductSummaryModel>();
 
   openDetail() {
     // Emit the event to notify the parent component

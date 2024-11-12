@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {Discount} from "../../model/discount.model";
+import {Discount} from "../../model/outdated/discount.model";
 
 @Injectable({
   providedIn: 'root'

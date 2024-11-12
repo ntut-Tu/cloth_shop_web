@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {OrderService} from "../../../../service/order.service";
-import {OrderSummary} from "../../../../model/OrderSummary";
-import {StoreOrderSummary} from "../../../../model/StoreOrderSummary";
+import {OrderSummaryModel} from "../../../../model/order-summary.model";
+import {StoreOrderSummaryModel} from "../../../../model/store-order-summary.model";
 
 @Component({
   selector: 'app-order-summary',
@@ -10,9 +10,9 @@ import {StoreOrderSummary} from "../../../../model/StoreOrderSummary";
 })
 export class OrderSummaryComponent {
 
-  @Input() order!: OrderSummary;
+  @Input() order!: OrderSummaryModel;
   @Input() jwtToken!: string;
-  storeOrders: StoreOrderSummary[] = [];
+  storeOrders: StoreOrderSummaryModel[] = [];
   isExpanded: boolean = false;
 
   constructor(private orderService: OrderService) { }

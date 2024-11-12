@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
-import { UserRole } from '../../../model/user.role';
-import { RegisterRequest } from '../../../model/RegisterRequest';
+import { UserRoleModel } from '../../../model/user-role.model';
+import { RegisterRequestModel } from '../../../model/register-request.model';
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +14,7 @@ export class HomeRegisterPageComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  role: UserRole = UserRole.Customer;
+  role: UserRoleModel = UserRoleModel.Customer;
 
   // Step tracking
   step: number = 1;
@@ -53,7 +53,7 @@ export class HomeRegisterPageComponent {
   }
 
   onRegister() {
-    const registerData: RegisterRequest = {
+    const registerData: RegisterRequestModel = {
       username: this.username,
       email: this.email,
       password: this.password,
