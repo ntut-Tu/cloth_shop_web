@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from "../../../service/mock/cart.service";
-import {CartItem} from "../../../model/product-summary.model";
+import {CheckoutService} from "../../../service/business/checkout.service";
 
 @Component({
   selector: 'app-checkout',
@@ -8,53 +7,38 @@ import {CartItem} from "../../../model/product-summary.model";
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  cartItems: CartItem[] = [];
-  cartGroupedBySeller: { [key: string]: CartItem[] } = {};
+  totalAmount: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(protected checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.loadCartFromSession();
-    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
+    this.checkoutService.loadCartItems();
+    this.calculateTotals();
   }
 
-  groupCartItemsBySeller(items: CartItem[]): { [key: string]: CartItem[] } {
-    return items.reduce((acc: { [key: string]: CartItem[] }, item: CartItem) => {
-      const sellerKey = item.storeDescription;
-      if (!acc[sellerKey]) {
-        acc[sellerKey] = [];
-      }
-      acc[sellerKey].push(item);
-      return acc;
-    }, {});
+  /**
+   * 應用折扣並重新計算
+   */
+  applyDiscount(code: string, type: 'order' | 'store_order', storeId?: number): void {
+    this.checkoutService.applyDiscount(code, type, storeId).subscribe(valid => {
+      if (valid) this.calculateTotals();
+    });
   }
 
-  calculateTotalPrice(items: CartItem[]): number {
-    return items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  /**
+   * 計算總金額，包含折扣和其他優惠
+   */
+  calculateTotals(): void {
+    this.checkoutService.calculateTotals().subscribe(response => {
+      this.totalAmount = response.data.final_amount;
+    });
   }
 
-  calculateGrandTotal(): number {
-    return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  }
-
-  updateQuantity(item: CartItem): void {
-    if (item.quantity < 1) {
-      item.quantity = 1;
-    }
-    this.cartService.saveCartToSession(this.cartItems);
-    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
-  }
-
-  removeItem(item: CartItem): void {
-    this.cartService.removeItem(item);
-    this.cartItems = this.cartService.loadCartFromSession();
-    this.cartGroupedBySeller = this.groupCartItemsBySeller(this.cartItems);
-  }
-
+  /**
+   * 提交訂單
+   */
   submitOrder(): void {
-    this.cartService.saveCartToSession([]);
-    this.cartItems = [];
-    this.cartGroupedBySeller = {};
+    this.checkoutService.submitOrder();
     alert('Order submitted successfully!');
   }
 }

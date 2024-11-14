@@ -1,27 +1,38 @@
 <div class="cart-container">
-  <ng-container *ngFor="let seller of cartGroupedBySeller | keyvalue">
+  <!-- 按賣家分組的商品列表 -->
+  <ng-container *ngFor="let storeOrder of checkoutService.storeOrders">
     <div class="seller-container">
       <div class="seller-header">
-        <div class="fkVendorId">{{ seller.value[0].fkVendorId }}</div>
-        <div class="seller-total-price">Total: {{ calculateTotalPrice(seller.value) | currency }}</div>
+        <div class="fkVendorId">Vendor ID: {{ storeOrder.store_id }}</div>
+        <div class="seller-total-price">
+          Total: {{ checkoutService.calculateStoreTotal(storeOrder) | currency }}
+        </div>
       </div>
+
+      <!-- 商品列表 -->
       <div class="product-list">
-        <ng-container *ngFor="let item of seller.value">
+        <ng-container *ngFor="let item of storeOrder.product_variants">
           <div class="product-item">
-            <div class="product-name">{{ item.name }}</div>
+            <div class="product-name">Product ID: {{ item.product_variant_id }}</div>
             <div class="product-quantity">
-              <input type="number" [(ngModel)]="item.quantity" min="1" (change)="updateQuantity(item)">
+              <input
+                type="number"
+                [(ngModel)]="item.quantity"
+                min="1"
+                (change)="checkoutService.updateQuantity(item)"
+              />
             </div>
-            <div class="product-price">{{ item.price | currency }}</div>
-            <button class="delete-button" (click)="removeItem(item)">Delete</button>
+            <div class="product-price">{{ item.quantity * checkoutService.getProductPrice(item.product_variant_id) | currency }}</div>
+            <button class="delete-button" (click)="checkoutService.removeItem(item)">Delete</button>
           </div>
         </ng-container>
       </div>
     </div>
   </ng-container>
 
+  <!-- 訂單摘要與提交按鈕 -->
   <div class="order-summary">
-    <div class="total-amount">Total Amount: {{ calculateGrandTotal() | currency }}</div>
+    <div class="total-amount">Total Amount: {{ totalAmount | currency }}</div>
     <button class="submit-order" (click)="submitOrder()">Submit Order</button>
   </div>
 </div>

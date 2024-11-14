@@ -1,7 +1,7 @@
 import {UserRoleModel} from "./user-role.model";
 
 export interface RegisterRequestModel {
-  username: string;
+  account: string;
   email: string;
   password: string;
   role: UserRoleModel;
