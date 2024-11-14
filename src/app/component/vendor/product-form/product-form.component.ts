@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AddProductRequest, ProductDetail, ProductVariant} from "../../../model/product-summary.model";
-import {ProductService} from "../../../service/product.service";
-import {AuthService} from "../../../service/auth.service";
+import {ProductService} from "../../../service/business/product.service";
+import {AuthService} from "../../../service/business/auth.service";
 
 @Component({
   selector: 'app-product-form',
@@ -51,7 +51,7 @@ export class ProductFormComponent {
       return;
     }
     // 使用 AddProductRequest 作為參數提交
-    this.productService.addProduct(this.product, token).subscribe({
+    this.productService.addProduct(this.product).subscribe({
       next: (response) => {
         if (response.status) {
           console.log('Product added successfully:', response.data);

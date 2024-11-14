@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderSummaryModel} from "../../../../model/order-summary.model";
-import {OrderService} from "../../../../service/order.service";
-import {AuthService} from "../../../../service/auth.service";
+import {OrderService} from "../../../../service/business/order.service";
+import {AuthService} from "../../../../service/business/auth.service";
 
 
 @Component({
@@ -12,23 +12,15 @@ import {AuthService} from "../../../../service/auth.service";
 export class OrderListComponent implements OnInit {
 
   orders: OrderSummaryModel[] = [];
-  jwtToken: string | null = null;
 
   constructor(private orderService: OrderService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.jwtToken = this.authService.getToken();
-    if (this.jwtToken) {
-      this.loadUserOrderSummaries();
-    } else {
-      console.error('User is not authenticated');
-    }
   }
 
   loadUserOrderSummaries(): void {
-    if (!this.jwtToken) return;
 
-    this.orderService.getUserOrderSummaries(this.jwtToken).subscribe(response => {
+    this.orderService.getUserOrderSummaries().subscribe(response => {
       if (response.status) {
         this.orders = response.data;
       } else {

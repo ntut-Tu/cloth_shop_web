@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {OrderService} from "../../../../service/order.service";
+import {OrderService} from "../../../../service/business/order.service";
 import {StoreOrderSummaryModel} from "../../../../model/store-order-summary.model";
 import {OrderItemDetailDTO} from "../../../../model/order-item-detail.model";
 
@@ -11,7 +11,6 @@ import {OrderItemDetailDTO} from "../../../../model/order-item-detail.model";
 export class StoreOrderSummaryComponent {
 
   @Input() storeOrder!: StoreOrderSummaryModel;
-  @Input() jwtToken!: string;
   orderItems: OrderItemDetailDTO[] = [];
   isExpanded: boolean = false;
 
@@ -22,7 +21,7 @@ export class StoreOrderSummaryComponent {
       this.isExpanded = false;
       this.orderItems = [];
     } else {
-      this.orderService.getOrderItemsByStoreOrderId(this.jwtToken, this.storeOrder.storeOrderId).subscribe(response => {
+      this.orderService.getOrderItemsByStoreOrderId(this.storeOrder.storeOrderId).subscribe(response => {
         if (response.status) {
           this.orderItems = response.data;
           this.isExpanded = true;

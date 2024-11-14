@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../service/auth.service';
+import { AuthService } from '../../../service/business/auth.service';
 import { UserRoleModel } from '../../../model/user-role.model';
 import { RegisterRequestModel } from '../../../model/register-request.model';
 
