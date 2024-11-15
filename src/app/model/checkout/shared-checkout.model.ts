@@ -7,6 +7,7 @@ export interface CheckoutBaseOrderModel {
 
 // 基礎商店訂單接口
 export interface CheckoutBaseStoreOrderModel {
+  tempDiscountCode?: string;
   store_id: number;
   special_discount_code?: string;
   seasonal_discount_code?: string;

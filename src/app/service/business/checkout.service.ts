@@ -10,7 +10,7 @@ import { ApiResponseDTO } from "../../model/api-response.model";
   providedIn: 'root'
 })
 export class CheckoutService {
-  private orderDataSubject = new BehaviorSubject<ConfirmAmountModel | null>(null);
+  orderDataSubject = new BehaviorSubject<ConfirmAmountModel | null>(null);
   orderData$ = this.orderDataSubject.asObservable();
 
   constructor(

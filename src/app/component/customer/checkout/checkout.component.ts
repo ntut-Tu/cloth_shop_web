@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from "../../../service/business/checkout.service";
 import {CartService} from "../../../service/business/cart.service";
+import {ConfirmDiscountResponseModel} from "../../../model/checkout/confirm-oder.model";
+import {ApiResponseDTO} from "../../../model/api-response.model";
 
 @Component({
   selector: 'app-checkout',
@@ -10,6 +12,7 @@ import {CartService} from "../../../service/business/cart.service";
 export class CheckoutComponent implements OnInit {
   totalAmount: number = 0;
   shippingDiscountCode: string = '';
+  tempDiscountCode: string = '';
   constructor(protected checkoutService: CheckoutService,protected cartService: CartService) {}
 
   ngOnInit(): void {
@@ -32,5 +35,55 @@ export class CheckoutComponent implements OnInit {
   submitOrder(): void {
     this.checkoutService.submitOrder();
     alert('Order submitted successfully!');
+  }
+
+  applyStoreDiscount(code: string, storeId: number): void {
+    if (!code) return;
+    this.checkoutService.applyDiscount(code, 'store_order', storeId).subscribe({
+      next: (response: ApiResponseDTO<ConfirmDiscountResponseModel>) => {
+        if (response.data.is_valid) {
+          const orderData = this.checkoutService.orderDataSubject.getValue();
+          // 根據返回的類型更新正確的欄位
+          if (orderData && response.data.discount_type === 'special') {
+            orderData.store_orders.find(
+              (store) => store.store_id === storeId
+            )!.special_discount_code = code;
+          } else if (orderData && response.data.discount_type === 'seasonal') {
+            orderData.store_orders.find(
+              (store) => store.store_id === storeId
+            )!.seasonal_discount_code = code;
+          }
+          // 更新 BehaviorSubject 的值
+          this.checkoutService.orderDataSubject.next(orderData);
+        } else {
+          alert(response.message || 'Invalid Discount Code');
+        }
+      },
+      error: (err) => {
+        console.error('Failed to apply discount:', err);
+        alert('An error occurred. Please try again.');
+      },
+    });
+  }
+
+  applyOrderDiscount(code: string): void {
+    if (!code) return;
+    this.checkoutService.applyDiscount(code, 'order').subscribe({
+      next: (response: ApiResponseDTO<ConfirmDiscountResponseModel>) => {
+        const orderData = this.checkoutService.orderDataSubject.getValue();
+        if (orderData && response.data.is_valid) {
+          // 更新全局訂單折扣
+          orderData.shipping_discount_code = code;
+          // 更新 BehaviorSubject 的值
+          this.checkoutService.orderDataSubject.next(orderData);
+        } else {
+          alert(response.message || 'Invalid Discount Code');
+        }
+      },
+      error: (err) => {
+        console.error('Failed to apply order discount:', err);
+        alert('An error occurred. Please try again.');
+      },
+    });
   }
 }

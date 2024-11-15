@@ -11,10 +11,7 @@
       <div class="store-products">
         <ng-container *ngFor="let product of storeOrder.product_variants">
           <div class="product-item">
-            <!-- 商品名稱與 ID -->
             <div class="product-name">Product ID: {{ product.product_variant_id }}</div>
-
-            <!-- 數量調整 -->
             <div class="product-quantity">
               <label for="quantity-{{ product.product_variant_id }}">Quantity:</label>
               <input
@@ -26,44 +23,40 @@
                 class="quantity-input"
               />
             </div>
-
-            <!-- 商品總價 -->
             <div class="product-price">
-              {{ product.quantity * (cartService.getCartItemUsingProductId(product.product_variant_id).price || 0)| currency }}
+              {{ product.quantity * (cartService.getCartItemUsingProductId(product.product_variant_id).price || 0) | currency }}
             </div>
-
-            <!-- 刪除按鈕 -->
-            <button class="delete-button" (click)="cartService.removeItemUsingProductId(product)">
-              Delete
-            </button>
+            <button class="delete-button" (click)="cartService.removeItemUsingProductId(product)">Delete</button>
           </div>
         </ng-container>
       </div>
 
       <!-- 店家折扣區域 -->
       <div class="store-discounts">
-        <!-- 季節優惠碼 -->
-        <div class="discount-input">
-          <label for="seasonal-{{ storeOrder.store_id }}">Seasonal Discount:</label>
-          <input
-            id="seasonal-{{ storeOrder.store_id }}"
-            type="text"
-            [(ngModel)]="storeOrder.seasonal_discount_code"
-            (blur)="checkoutService.applyDiscount(storeOrder.seasonal_discount_code, 'store_order', storeOrder.store_id)"
-            placeholder="Enter Seasonal Discount"
-          />
+        <!-- 如果已應用優惠 -->
+        <div *ngIf="storeOrder.special_discount_code || storeOrder.seasonal_discount_code">
+          <span>Current Discount:
+            {{ storeOrder.special_discount_code || storeOrder.seasonal_discount_code }}
+          </span>
         </div>
 
-        <!-- 特殊優惠碼 -->
-        <div class="discount-input">
-          <label for="special-{{ storeOrder.store_id }}">Special Discount:</label>
-          <input
-            id="special-{{ storeOrder.store_id }}"
-            type="text"
-            [(ngModel)]="storeOrder.special_discount_code"
-            (blur)="checkoutService.applyDiscount(storeOrder.special_discount_code, 'store_order', storeOrder.store_id)"
-            placeholder="Enter Special Discount"
-          />
+        <!-- 如果尚未應用優惠 -->
+        <div *ngIf="!(storeOrder.special_discount_code || storeOrder.seasonal_discount_code)">
+          <div class="discount-input">
+            <label for="discount-{{ storeOrder.store_id }}">Store Discount:</label>
+            <input
+              id="discount-{{ storeOrder.store_id }}"
+              type="text"
+              [(ngModel)]="storeOrder.tempDiscountCode"
+              placeholder="Enter Discount Code"
+            />
+            <button
+              class="apply-discount-button"
+              (click)="applyStoreDiscount(storeOrder.tempDiscountCode||'', storeOrder.store_id)"
+            >
+              Apply Discount
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -78,12 +71,14 @@
 
     <div class="summary-row">
       <span>Shipping Discount:</span>
-      <input
-        type="text"
-        placeholder="Enter Shipping Discount Code"
-        [(ngModel)]="shippingDiscountCode"
-        (blur)="checkoutService.applyDiscount(shippingDiscountCode, 'order')"
-      />
+      <div>
+        <input
+          type="text"
+          placeholder="Enter Shipping Discount Code"
+          [(ngModel)]="shippingDiscountCode"
+        />
+        <button (click)="applyOrderDiscount(shippingDiscountCode)">Apply Discount</button>
+      </div>
     </div>
 
     <div class="summary-row">
@@ -91,7 +86,6 @@
       <span>{{ totalAmount | currency }}</span>
     </div>
 
-    <!-- 確認與提交按鈕 -->
     <button class="submit-order-button" (click)="submitOrder()">Confirm and Submit</button>
   </div>
 </div>
