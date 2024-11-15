@@ -97,8 +97,10 @@ export class CartService {
    * @param item 要取得的商品id
    */
   getCartItemUsingProductId(id :any): CartItem {
-    return <CartItem>this.loadCartFromSession().find(
+    const ret = <CartItem>this.loadCartFromSession().find(
       cartItem => cartItem.productVariantId === id
     );
+    console.log(ret);
+    return ret;
   }
 }

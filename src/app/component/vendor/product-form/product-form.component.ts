@@ -12,13 +12,11 @@ export class ProductFormComponent {
 
   // 使用 AddProductRequest 作為 product 的資料結構
   product: AddProductRequest = {
-    productId: 0, // 可以忽略，後端會生成
     name: '',
     description: '',
     imageUrl: '',
     category: '',
     isList: true,
-    fkVendorId: 1, // 假設一個預設的商家 ID
     productVariants: [] // 初始為空的變體列表
   };
 
@@ -72,13 +70,11 @@ export class ProductFormComponent {
   resetForm() {
     // 重設表單
     this.product = {
-      productId: 0,
       name: '',
       description: '',
       imageUrl: '',
       category: '',
       isList: true,
-      fkVendorId: 1,
       productVariants: []
     };
   }

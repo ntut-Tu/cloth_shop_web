@@ -17,13 +17,11 @@ export interface ProductVariant {
   price :  number;
 }
 export interface AddProductRequest{
-  productId : number;
   name : string;
   description  : string;
   imageUrl : string;
   category  : string;
   isList : boolean;
-  fkVendorId :number;
   productVariants: ProductVariant[];
 }
 export interface ProductDetail {
