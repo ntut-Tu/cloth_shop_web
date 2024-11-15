@@ -9,7 +9,7 @@ import { ProductsComponent } from './products/products.component';
 import {SharedModule} from "../shared/shared.module";
 import { CartComponent } from './cart/cart.component';
 import {CookieService} from "ngx-cookie-service";
-import {CartService} from "../../service/mock/cart.service";
+import {CartService} from "../../service/business/cart.service";
 import { CheckoutComponent } from './checkout/checkout.component';
 import {FormsModule} from "@angular/forms";
 import { OrderListComponent } from './order/order-list/order-list.component';

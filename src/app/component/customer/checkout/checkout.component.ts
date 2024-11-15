@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CheckoutService} from "../../../service/business/checkout.service";
+import { CheckoutService } from "../../../service/business/checkout.service";
+import {CartService} from "../../../service/business/cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -8,25 +9,16 @@ import {CheckoutService} from "../../../service/business/checkout.service";
 })
 export class CheckoutComponent implements OnInit {
   totalAmount: number = 0;
-
-  constructor(protected checkoutService: CheckoutService) {}
+  shippingDiscountCode: string = '';
+  constructor(protected checkoutService: CheckoutService,protected cartService: CartService) {}
 
   ngOnInit(): void {
-    this.checkoutService.loadCartItems();
+    this.checkoutService.initializeOrder();
     this.calculateTotals();
   }
 
   /**
-   * 應用折扣並重新計算
-   */
-  applyDiscount(code: string, type: 'order' | 'store_order', storeId?: number): void {
-    this.checkoutService.applyDiscount(code, type, storeId).subscribe(valid => {
-      if (valid) this.calculateTotals();
-    });
-  }
-
-  /**
-   * 計算總金額，包含折扣和其他優惠
+   * 計算總金額
    */
   calculateTotals(): void {
     this.checkoutService.calculateTotals().subscribe(response => {

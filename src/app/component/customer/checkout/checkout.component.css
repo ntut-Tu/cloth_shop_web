@@ -1,46 +1,42 @@
-.cart-container {
-  width: 100%;
-  margin-bottom: 20px;
-  position: relative;
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 }
 
-.seller-container {
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
+.store-order-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
 }
 
-.seller-header {
+.store-header {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.product-list {
-  margin-top: 10px;
+.store-products {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .product-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
 }
 
 .product-name {
   flex: 2;
 }
 
-.product-quantity input {
-  width: 60px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.product-quantity {
+  flex: 1;
+  text-align: center;
 }
 
 .product-price {
@@ -49,39 +45,40 @@
 }
 
 .delete-button {
-  background-color: #ff6666;
+  background-color: #f44336;
   color: white;
-  padding: 8px 12px;
   border: none;
-  border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-.delete-button:hover {
-  background-color: #ff4c4c;
+.discount-input input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .order-summary {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.summary-row {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.total-amount {
-  font-size: 1.5em;
-  margin-right: 20px;
-}
-
-.submit-order {
-  background-color: #4CAF50;
+.submit-order-button {
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.submit-order:hover {
-  background-color: #45a049;
 }

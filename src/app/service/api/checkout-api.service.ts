@@ -8,7 +8,8 @@ import {
   ConfirmDiscountResponseModel
 } from "../../model/checkout/confirm-oder.model";
 import { ApiResponseDTO } from "../../model/api-response.model";
-import {environment} from "../../../environments/environment"; // 假設 ApiResponseDTO 定義在這個路徑
+import {environment} from "../../../environments/environment";
+import {SubmitOrderModel} from "../../model/checkout/submit-order.model"; // 假設 ApiResponseDTO 定義在這個路徑
 
 @Injectable({
   providedIn: 'root'
