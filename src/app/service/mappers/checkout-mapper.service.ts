@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {CartItem} from "../../model/product-summary.model";
 import {CheckoutBaseStoreOrderModel} from "../../model/checkout/shared-checkout.model";
 import {SubmitOrderModel} from "../../model/checkout/submit-order.model";
+import {ConfirmAmountModel} from "../../model/checkout/confirm-oder.model";
 
 
 @Injectable({
@@ -32,5 +33,16 @@ export class CheckoutMapperService {
     }, {});
 
     return Object.values(grouped);
+  }
+
+  mapConfirmAmountModelToSubmitOrderModel(confirmAmountModel: ConfirmAmountModel): SubmitOrderModel {
+    return {
+      ...confirmAmountModel, // Copy fields from ConfirmAmountModel
+      payment_method: '', // Default or provided value
+      credit_card_last_four: '', // Default or provided value
+      delivery_type: '', // Default or provided value
+      pickup_store: '', // Default or provided value
+      shipping_address: '', // Default or provided value
+    };
   }
 }

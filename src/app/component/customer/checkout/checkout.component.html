@@ -1,75 +1,68 @@
 <div class="checkout-container">
   <!-- 店家分組訂單 -->
-  <ng-container *ngFor="let storeOrder of (checkoutService.orderData$ | async)?.store_orders">
-    <div class="store-order-container">
-      <!-- 店家資訊 -->
-      <div class="store-header">
-        <span class="store-id">Store ID: {{ storeOrder.store_id }}</span>
-      </div>
+  <ng-container *ngIf="!showOrderSummary">
+    <ng-container *ngFor="let storeOrder of (checkoutService.orderData$ | async)?.store_orders">
+      <div class="store-order-container">
+        <!-- 店家資訊 -->
+        <div class="store-header">
+          <span class="store-id">Store ID: {{ storeOrder.store_id }}</span>
+        </div>
 
-      <!-- 商品列表 -->
-      <div class="store-products">
-        <ng-container *ngFor="let product of storeOrder.product_variants">
-          <div class="product-item">
-            <div class="product-name">Product ID: {{ product.product_variant_id }}</div>
-            <div class="product-quantity">
-              <label for="quantity-{{ product.product_variant_id }}">Quantity:</label>
+        <!-- 商品列表 -->
+        <div class="store-products">
+          <ng-container *ngFor="let product of storeOrder.product_variants">
+            <div class="product-item">
+              <div class="product-name">Product ID: {{ product.product_variant_id }}</div>
+              <div class="product-quantity">
+                <label for="quantity-{{ product.product_variant_id }}">Quantity:</label>
+                <input
+                  id="quantity-{{ product.product_variant_id }}"
+                  type="number"
+                  [(ngModel)]="product.quantity"
+                  min="1"
+                  (change)="cartService.updateQuantity(product)"
+                  class="quantity-input"
+                />
+              </div>
+              <div class="product-price">
+                {{ product.quantity * (cartService.getCartItemUsingProductId(product.product_variant_id).price || 0) | currency }}
+              </div>
+              <button class="delete-button" (click)="cartService.removeItemUsingProductId(product)">Delete</button>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- 店家折扣區域 -->
+        <div class="store-discounts">
+          <!-- 如果已應用優惠 -->
+          <div *ngIf="storeOrder.special_discount_code || storeOrder.seasonal_discount_code">
+            <span>Current Discount:
+              {{ storeOrder.special_discount_code || storeOrder.seasonal_discount_code }}
+            </span>
+          </div>
+
+          <!-- 如果尚未應用優惠 -->
+          <div *ngIf="!(storeOrder.special_discount_code || storeOrder.seasonal_discount_code)">
+            <div class="discount-input">
+              <label for="discount-{{ storeOrder.store_id }}">Store Discount:</label>
               <input
-                id="quantity-{{ product.product_variant_id }}"
-                type="number"
-                [(ngModel)]="product.quantity"
-                min="1"
-                (change)="cartService.updateQuantity(product)"
-                class="quantity-input"
+                id="discount-{{ storeOrder.store_id }}"
+                type="text"
+                [(ngModel)]="storeOrder.tempDiscountCode"
+                placeholder="Enter Discount Code"
               />
+              <button
+                class="apply-discount-button"
+                (click)="applyStoreDiscount(storeOrder.tempDiscountCode || '', storeOrder.store_id)"
+              >
+                Apply Discount
+              </button>
             </div>
-            <div class="product-price">
-              {{ product.quantity * (cartService.getCartItemUsingProductId(product.product_variant_id).price || 0) | currency }}
-            </div>
-            <button class="delete-button" (click)="cartService.removeItemUsingProductId(product)">Delete</button>
-          </div>
-        </ng-container>
-      </div>
-
-      <!-- 店家折扣區域 -->
-      <div class="store-discounts">
-        <!-- 如果已應用優惠 -->
-        <div *ngIf="storeOrder.special_discount_code || storeOrder.seasonal_discount_code">
-          <span>Current Discount:
-            {{ storeOrder.special_discount_code || storeOrder.seasonal_discount_code }}
-          </span>
-        </div>
-
-        <!-- 如果尚未應用優惠 -->
-        <div *ngIf="!(storeOrder.special_discount_code || storeOrder.seasonal_discount_code)">
-          <div class="discount-input">
-            <label for="discount-{{ storeOrder.store_id }}">Store Discount:</label>
-            <input
-              id="discount-{{ storeOrder.store_id }}"
-              type="text"
-              [(ngModel)]="storeOrder.tempDiscountCode"
-              placeholder="Enter Discount Code"
-            />
-            <button
-              class="apply-discount-button"
-              (click)="applyStoreDiscount(storeOrder.tempDiscountCode||'', storeOrder.store_id)"
-            >
-              Apply Discount
-            </button>
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
-
-  <!-- 訂單總結 -->
-  <div class="order-summary">
-    <div class="summary-row">
-      <span>Total Products:</span>
-      <span>{{ totalAmount | currency }}</span>
-    </div>
-
-    <div class="summary-row">
+    </ng-container>
+    <div class="discount-input">
       <span>Shipping Discount:</span>
       <div>
         <input
@@ -80,12 +73,64 @@
         <button (click)="applyOrderDiscount(shippingDiscountCode)">Apply Discount</button>
       </div>
     </div>
+    <!-- 下一步按鈕 -->
+    <button class="next-step-button" (click)="showOrderSummary = true">Next Step</button>
+  </ng-container>
 
+  <!-- 訂單總結 -->
+  <div class="order-summary" *ngIf="showOrderSummary">
+    <div class="summary-row">
+      <span>Total Products:</span>
+      <span>{{ totalAmount | currency }}</span>
+    </div>
     <div class="summary-row">
       <span>Final Total:</span>
       <span>{{ totalAmount | currency }}</span>
     </div>
-
+    <div class="summary-row">
+      <span>Payment Method:</span>
+      <div>
+        <label for="paymentMethod">選擇角色:</label>
+        <select [(ngModel)]="paymentMethod" name="role" required>
+          <option value="credit_card">delivery</option>
+          <option value="cash_on_delivery">pickup</option>
+        </select>
+      </div>
+    </div>
+    <div class="summary-row">
+      <span>Delivery Type</span>
+      <div>
+        <label for="deliveryType">選擇角色:</label>
+        <select [(ngModel)]="deliveryType" name="role" required>
+          <option value="delivery">delivery</option>
+          <option value="pickup">pickup</option>
+        </select>
+      </div>
+    </div>
+    <div class="summary-row">
+      <ng-container *ngIf="deliveryType === 'delivery'">
+        <span>Delivery Address:</span>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Delivery Address"
+            [(ngModel)]="shippingAddress"
+          />
+        </div>
+      </ng-container>
+    </div>
+    <div class="summary-row">
+      <ng-container *ngIf="deliveryType === 'pickup'">
+        <span>Pickup Store:</span>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Pickup Address"
+            [(ngModel)]="pickupStore"
+          />
+        </div>
+      </ng-container>
+    </div>
     <button class="submit-order-button" (click)="submitOrder()">Confirm and Submit</button>
   </div>
 </div>
