@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from "../../model/product-summary.model";
 import { ConfirmAmountModel, ConfirmAmountResponseModel, ConfirmDiscountModel, ConfirmDiscountResponseModel } from "../../model/checkout/confirm-oder.model";
-import { BehaviorSubject, Observable } from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import { CartService } from "./cart.service";
 import { CheckoutApiService } from "../api/checkout-api.service";
 import { ApiResponseDTO } from "../../model/api-response.model";
+import {SubmitOrderModel} from "../../model/checkout/submit-order.model";
+import {CheckoutMapperService} from "../mappers/checkout-mapper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,13 @@ import { ApiResponseDTO } from "../../model/api-response.model";
 export class CheckoutService {
   orderDataSubject = new BehaviorSubject<ConfirmAmountModel | null>(null);
   orderData$ = this.orderDataSubject.asObservable();
+  submitOrderDataSubject = new BehaviorSubject<SubmitOrderModel | null>(null);
+  submitOrderData$ = this.submitOrderDataSubject.asObservable();
 
   constructor(
     private cartService: CartService,
-    private checkoutApiService: CheckoutApiService
+    private checkoutApiService: CheckoutApiService,
+    private checkoutMapperService: CheckoutMapperService
   ) {}
 
   /**
@@ -95,5 +100,11 @@ export class CheckoutService {
   clearOrder(): void {
     this.orderDataSubject.next(null);
     this.cartService.saveCartToSession([]); // 清空購物車
+  }
+
+  getSubmitOrderData() {
+    const submitOrderData = this.checkoutMapperService.mapConfirmAmountModelToSubmitOrderModel(this.orderDataSubject.getValue()!);
+    this.submitOrderData$ = of(submitOrderData); // Wrap the result in an Observable
+    return this.submitOrderData$;
   }
 }

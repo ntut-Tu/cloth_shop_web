@@ -3,6 +3,7 @@ import { CheckoutService } from "../../../service/business/checkout.service";
 import {CartService} from "../../../service/business/cart.service";
 import {ConfirmDiscountResponseModel} from "../../../model/checkout/confirm-oder.model";
 import {ApiResponseDTO} from "../../../model/api-response.model";
+import {CheckoutMapperService} from "../../../service/mappers/checkout-mapper.service";
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,16 @@ export class CheckoutComponent implements OnInit {
   totalAmount: number = 0;
   shippingDiscountCode: string = '';
   tempDiscountCode: string = '';
-  constructor(protected checkoutService: CheckoutService,protected cartService: CartService) {}
+
+  showOrderSummary: boolean = false;
+
+  paymentMethod: string = 'credit_card' || 'cash_on_delivery';
+  creditCardLastFour: string = '';
+  deliveryType: string = 'delivery' || 'pickup';
+  pickupStore: string = '';
+  shippingAddress: string = '';
+
+  constructor(protected checkoutService: CheckoutService,protected cartService: CartService,private checkoutMapperService : CheckoutMapperService) {}
 
   ngOnInit(): void {
     this.checkoutService.initializeOrder();
@@ -33,6 +43,18 @@ export class CheckoutComponent implements OnInit {
    * 提交訂單
    */
   submitOrder(): void {
+    this.checkoutService.getSubmitOrderData().subscribe(submitOrderData => {
+      if (submitOrderData) {
+        submitOrderData.payment_method = this.paymentMethod;
+        submitOrderData.credit_card_last_four = this.creditCardLastFour;
+        submitOrderData.delivery_type = this.deliveryType;
+        submitOrderData.pickup_store = this.pickupStore;
+        submitOrderData.shipping_address = this.shippingAddress;
+        // You can now use submitOrderData or pass it to another function
+        this.checkoutService.submitOrderDataSubject.next(submitOrderData);
+        console.log(submitOrderData);
+      }
+    });
     this.checkoutService.submitOrder();
     alert('Order submitted successfully!');
   }
@@ -86,4 +108,6 @@ export class CheckoutComponent implements OnInit {
       },
     });
   }
+
+
 }
