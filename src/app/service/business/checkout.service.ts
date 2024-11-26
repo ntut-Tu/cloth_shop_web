@@ -86,7 +86,7 @@ export class CheckoutService {
    * 提交訂單數據
    */
   submitOrder(): void {
-    const currentOrder = this.orderDataSubject.getValue();
+    const currentOrder = this.checkoutMapperService.mapConfirmAmountModelToSubmitOrderModel(this.orderDataSubject.getValue());
     if (currentOrder) {
       this.checkoutApiService.submitOrder(currentOrder).subscribe(() => {
         this.clearOrder();

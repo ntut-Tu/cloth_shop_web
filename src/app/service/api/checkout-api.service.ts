@@ -42,7 +42,7 @@ export class CheckoutApiService {
    * @param order 包含訂單資訊的模型
    * @returns 提交訂單結果的 Observable，包含通用 API 響應
    */
-  submitOrder(order: ConfirmAmountModel): Observable<ApiResponseDTO<any>> {
+  submitOrder(order: SubmitOrderModel) : Observable<ApiResponseDTO<any>> {
     return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/submit-order`, order);
   }
 }

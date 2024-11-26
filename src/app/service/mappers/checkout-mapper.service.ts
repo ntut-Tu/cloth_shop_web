@@ -31,11 +31,13 @@ export class CheckoutMapperService {
       });
       return acc;
     }, {});
-
     return Object.values(grouped);
   }
 
-  mapConfirmAmountModelToSubmitOrderModel(confirmAmountModel: ConfirmAmountModel): SubmitOrderModel {
+  mapConfirmAmountModelToSubmitOrderModel(confirmAmountModel: ConfirmAmountModel|null): SubmitOrderModel {
+    if (!confirmAmountModel) {
+      throw new Error('ConfirmAmountModel is required');
+    }
     return {
       ...confirmAmountModel, // Copy fields from ConfirmAmountModel
       payment_method: '', // Default or provided value
