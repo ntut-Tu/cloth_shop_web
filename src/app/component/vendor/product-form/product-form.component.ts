@@ -28,6 +28,8 @@ export class ProductFormComponent {
     price: 0
   };
 
+  selectedFile: File | null = null;
+
   constructor(private productService: ProductService, private authService: AuthService) {}
 
   addVariant() {
@@ -41,6 +43,10 @@ export class ProductFormComponent {
     this.product.productVariants.splice(index, 1);
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
   submitProduct() {
     const token = this.authService.getToken();
     if (!token) {
@@ -48,7 +54,29 @@ export class ProductFormComponent {
       alert('Please log in before adding a product.');
       return;
     }
-    // 使用 AddProductRequest 作為參數提交
+
+    if (this.selectedFile) {
+      this.productService.uploadProductImage(this.selectedFile).subscribe({
+        next: (response) => {
+          if (response.status) {
+            this.product.imageUrl = response.data;
+            this.createProduct();
+          } else {
+            console.error('Failed to upload image:', response.message);
+            alert('Failed to upload image: ' + response.message);
+          }
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          alert('Error uploading image');
+        }
+      });
+    } else {
+      this.createProduct();
+    }
+  }
+
+  createProduct() {
     this.productService.addProduct(this.product).subscribe({
       next: (response) => {
         if (response.status) {
@@ -68,7 +96,7 @@ export class ProductFormComponent {
   }
 
   resetForm() {
-    // 重設表單
+    // 重设表单
     this.product = {
       name: '',
       description: '',
@@ -77,5 +105,6 @@ export class ProductFormComponent {
       isList: true,
       productVariants: []
     };
+    this.selectedFile = null;
   }
 }

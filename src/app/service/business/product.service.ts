@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { ApiResponseDTO } from '../../model/api-response.model';
 import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product-summary.model';
 import { ProductApiService } from '../api/product-api.service';
+import {ImageUploadApiService} from "../api/image-upload-api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private productApiService: ProductApiService) {}
+  constructor(private productApiService: ProductApiService,private imageUploadApiService: ImageUploadApiService) {}
 
   /**
    * 獲取產品摘要列表
@@ -37,5 +38,14 @@ export class ProductService {
    */
   addProduct(product: AddProductRequest): Observable<ApiResponseDTO<number>> {
     return this.productApiService.addProduct(product);
+  }
+
+  /**
+   * 上传图片
+   * @param file - 要上传的图片文件
+   * @returns 包含图片 URL 的 ApiResponseDTO
+   */
+  uploadProductImage(file: File): Observable<ApiResponseDTO<string>> {
+    return this.imageUploadApiService.uploadProductImage(file);
   }
 }

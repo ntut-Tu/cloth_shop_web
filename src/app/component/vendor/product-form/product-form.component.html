@@ -14,8 +14,8 @@
       <input [(ngModel)]="product.category" name="category" required>
     </label>
     <label>
-      Image URL:
-      <input [(ngModel)]="product.imageUrl" name="imageUrl">
+      Image File:
+      <input type="file" (change)="onFileSelected($event)">
     </label>
 
     <!-- 變體輸入 -->
