@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AddProductRequest, ProductDetail, ProductVariant} from "../../../model/product-summary.model";
 import {ProductService} from "../../../service/business/product.service";
 import {AuthService} from "../../../service/business/auth.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-product-form',
@@ -59,7 +60,7 @@ export class ProductFormComponent {
       this.productService.uploadProductImage(this.selectedFile).subscribe({
         next: (response) => {
           if (response.status) {
-            this.product.imageUrl = response.data;
+            this.product.imageUrl = environment.baseUrl + response.data;
             this.createProduct();
           } else {
             console.error('Failed to upload image:', response.message);
