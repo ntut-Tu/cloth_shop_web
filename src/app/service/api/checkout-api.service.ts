@@ -5,11 +5,18 @@ import {
   ConfirmAmountModel,
   ConfirmAmountResponseModel,
   ConfirmDiscountModel,
-  ConfirmDiscountResponseModel
+  ConfirmDiscountResponseModel, mapConfirmAmountResponse, mapConfirmDiscountResponse
 } from "../../model/checkout/confirm-oder.model";
 import { ApiResponseDTO } from "../../model/api-response.model";
 import {environment} from "../../../environments/environment";
-import {SubmitOrderModel} from "../../model/checkout/submit-order.model"; // 假設 ApiResponseDTO 定義在這個路徑
+import {
+  mapSubmitOrderResponse,
+  SubmitOrderModel,
+  SubmitOrderResponseModel
+} from "../../model/checkout/submit-order.model";
+import {inputTranslator, mapApiResponseData} from "../../utils/api-utils.service";
+import {map} from "rxjs/operators";
+import {CouponSummaryModel, mapCouponSummary} from "../../model/coupon/coupon.model"; // 假設 ApiResponseDTO 定義在這個路徑
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +32,11 @@ export class CheckoutApiService {
    * @returns 確認金額結果的 Observable，包含通用 API 響應
    */
   confirmOrderAmount(confirmAmount: ConfirmAmountModel): Observable<ApiResponseDTO<ConfirmAmountResponseModel>> {
-    return this.http.post<ApiResponseDTO<ConfirmAmountResponseModel>>(`${this.apiUrl}/confirm-amount`, confirmAmount);
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/confirm-amount`, confirmAmount).pipe(
+      map((response) =>
+        mapApiResponseData(response, mapConfirmAmountResponse)
+      )
+    );
   }
 
   /**
@@ -34,7 +45,11 @@ export class CheckoutApiService {
    * @returns 折扣確認結果的 Observable，包含通用 API 響應
    */
   confirmDiscount(discountRequest: ConfirmDiscountModel): Observable<ApiResponseDTO<ConfirmDiscountResponseModel>> {
-    return this.http.post<ApiResponseDTO<ConfirmDiscountResponseModel>>(`${this.apiUrl}/confirm-discount`, discountRequest);
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/confirm-discount`, discountRequest).pipe(
+      map((response) =>
+        mapApiResponseData(response, mapConfirmDiscountResponse)
+      )
+    );
   }
 
   /**
@@ -42,7 +57,15 @@ export class CheckoutApiService {
    * @param order 包含訂單資訊的模型
    * @returns 提交訂單結果的 Observable，包含通用 API 響應
    */
-  submitOrder(order: SubmitOrderModel) : Observable<ApiResponseDTO<any>> {
-    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/submit-order`, order);
+  submitOrder(order: SubmitOrderModel): Observable<ApiResponseDTO<SubmitOrderResponseModel>> {
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/submit-order`, order).pipe(
+      map((response) =>
+        mapApiResponseData(response,mapSubmitOrderResponse)
+      )
+    );
+  }
+
+  cancelOrder(orderId: string): Observable<ApiResponseDTO<any>> {
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/cancel-order`, { orderId });
   }
 }

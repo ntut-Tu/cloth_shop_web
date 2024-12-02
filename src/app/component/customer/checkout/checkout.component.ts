@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { CheckoutService } from "../../../service/business/checkout.service";
-import {CartService} from "../../../service/business/cart.service";
-import {ConfirmDiscountResponseModel} from "../../../model/checkout/confirm-oder.model";
-import {ApiResponseDTO} from "../../../model/api-response.model";
-import {CheckoutMapperService} from "../../../service/mappers/checkout-mapper.service";
+import { ConfirmDiscountResponseModel } from "../../../model/checkout/confirm-oder.model";
+import { ApiResponseDTO } from "../../../model/api-response.model";
 
 @Component({
   selector: 'app-checkout',
@@ -11,19 +9,22 @@ import {CheckoutMapperService} from "../../../service/mappers/checkout-mapper.se
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  netAmount: number = 0;
   totalAmount: number = 0;
+  discountAmount: number = 0;
+  shippingFee: number = 0;
   shippingDiscountCode: string = '';
   tempDiscountCode: string = '';
 
   showOrderSummary: boolean = false;
-
-  paymentMethod: string = 'credit_card' || 'cash_on_delivery';
+  paymentMethod: string = 'credit_card';
   creditCardLastFour: string = '';
-  deliveryType: string = 'delivery' || 'pickup';
+  deliveryType: string = 'delivery';
   pickupStore: string = '';
   shippingAddress: string = '';
+  orderId: string = '';
 
-  constructor(protected checkoutService: CheckoutService,protected cartService: CartService,private checkoutMapperService : CheckoutMapperService) {}
+  constructor(protected checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
     this.checkoutService.initializeOrder();
@@ -34,8 +35,33 @@ export class CheckoutComponent implements OnInit {
    * 計算總金額
    */
   calculateTotals(): void {
-    this.checkoutService.calculateTotals().subscribe(response => {
-      this.totalAmount = response.data.final_amount;
+    this.totalAmount = 404;
+    this.shippingFee = 404;
+    this.discountAmount = 404;
+    this.netAmount = 404;
+  }
+
+  /**
+   * 確認金額
+   */
+  confirmAmount(): void {
+    this.checkoutService.createReservation().subscribe({
+      next: (response: ApiResponseDTO<any>) => {
+        if (response.status) {
+          const data = response.data;
+          this.totalAmount = data.total_amount;
+          this.shippingFee = data.shipping_fee;
+          this.discountAmount = data.discount_amount;
+          this.netAmount = data.final_amount;
+          this.orderId = data.order_id;
+        } else {
+          alert(response.message || 'Failed to confirm amount.');
+        }
+      },
+      error: (err) => {
+        console.error('Error confirming amount:', err);
+        alert('Failed to confirm amount. Please try again.');
+      },
     });
   }
 
@@ -43,71 +69,56 @@ export class CheckoutComponent implements OnInit {
    * 提交訂單
    */
   submitOrder(): void {
-    this.checkoutService.getSubmitOrderData().subscribe(submitOrderData => {
-      if (submitOrderData) {
-        submitOrderData.payment_method = this.paymentMethod;
-        submitOrderData.credit_card_last_four = this.creditCardLastFour;
-        submitOrderData.delivery_type = this.deliveryType;
-        submitOrderData.pickup_store = this.pickupStore;
-        submitOrderData.shipping_address = this.shippingAddress;
-        // You can now use submitOrderData or pass it to another function
-        this.checkoutService.submitOrderDataSubject.next(submitOrderData);
-        console.log(submitOrderData);
-      }
+    this.checkoutService.submitOrder(this.orderId).subscribe({
+      next: (response: ApiResponseDTO<any>) => {
+        if (response.status) {
+          alert('Order submitted successfully!');
+          this.checkoutService.clearOrder();
+        } else {
+          alert(response.message || 'Failed to submit order.');
+        }
+      },
+      error: (err) => {
+        console.error('Error submitting order:', err);
+        alert('Failed to submit order. Please try again.');
+      },
     });
-    this.checkoutService.submitOrder();
-    alert('Order submitted successfully!');
   }
 
-  applyStoreDiscount(code: string, storeId: number): void {
+  /**
+   * 應用折扣碼
+   */
+  applyDiscount(code: string, type: 'order' | 'store_order', storeId?: number): void {
     if (!code) return;
-    this.checkoutService.applyDiscount(code, 'store_order', storeId).subscribe({
+    this.checkoutService.applyDiscount(code, type, storeId).subscribe({
       next: (response: ApiResponseDTO<ConfirmDiscountResponseModel>) => {
         if (response.data.is_valid) {
-          const orderData = this.checkoutService.orderDataSubject.getValue();
-          // 根據返回的類型更新正確的欄位
-          if (orderData && response.data.discount_type === 'special') {
-            orderData.store_orders.find(
-              (store) => store.store_id === storeId
-            )!.special_discount_code = code;
-          } else if (orderData && response.data.discount_type === 'seasonal') {
-            orderData.store_orders.find(
-              (store) => store.store_id === storeId
-            )!.seasonal_discount_code = code;
-          }
-          // 更新 BehaviorSubject 的值
-          this.checkoutService.orderDataSubject.next(orderData);
+          alert('Discount applied successfully!');
+          this.calculateTotals();
         } else {
-          alert(response.message || 'Invalid Discount Code');
+          alert(response.message || 'Invalid discount code.');
         }
       },
       error: (err) => {
-        console.error('Failed to apply discount:', err);
-        alert('An error occurred. Please try again.');
+        console.error('Error applying discount:', err);
+        alert('Failed to apply discount. Please try again.');
       },
     });
   }
 
-  applyOrderDiscount(code: string): void {
-    if (!code) return;
-    this.checkoutService.applyDiscount(code, 'order').subscribe({
-      next: (response: ApiResponseDTO<ConfirmDiscountResponseModel>) => {
-        const orderData = this.checkoutService.orderDataSubject.getValue();
-        if (orderData && response.data.is_valid) {
-          // 更新全局訂單折扣
-          orderData.shipping_discount_code = code;
-          // 更新 BehaviorSubject 的值
-          this.checkoutService.orderDataSubject.next(orderData);
-        } else {
-          alert(response.message || 'Invalid Discount Code');
-        }
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: Event): void {
+    this.cancelCheckout();
+  }
+
+  cancelCheckout(): void {
+    this.checkoutService.cancelOrder(this.orderId).subscribe({
+      next: (response: ApiResponseDTO<any>) => {
+        console.log('Checkout cancelled successfully');
       },
       error: (err) => {
-        console.error('Failed to apply order discount:', err);
-        alert('An error occurred. Please try again.');
+        console.error('Error cancelling checkout:', err);
       },
     });
   }
-
-
 }

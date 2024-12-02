@@ -39,7 +39,8 @@ export class CheckoutMapperService {
       throw new Error('ConfirmAmountModel is required');
     }
     return {
-      ...confirmAmountModel, // Copy fields from ConfirmAmountModel
+      ...confirmAmountModel,
+      order_id:'',// Copy fields from ConfirmAmountModel
       payment_method: '', // Default or provided value
       credit_card_last_four: '', // Default or provided value
       delivery_type: '', // Default or provided value

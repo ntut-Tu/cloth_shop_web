@@ -1,4 +1,4 @@
-import {CouponSummaryModel} from "../coupon/coupon.model";
+import {CouponSummaryModel, mapCouponSummary} from "../coupon/coupon.model";
 import {CheckoutBaseOrderModel, CheckoutBaseProductVariantModel} from "./shared-checkout.model";
 
 export interface ConfirmAmountModel extends CheckoutBaseOrderModel{
@@ -9,6 +9,7 @@ export interface ConfirmAmountResponseModel {
   shipping_fee: number;
   discount_amount: number;
   final_amount: number;
+  order_id: string;
 }
 
 
@@ -24,3 +25,20 @@ export interface ConfirmDiscountResponseModel{
   reason ?: string; //拒絕原因
   coupon ?: CouponSummaryModel;
 }
+
+// =================================Template=================================
+export const mapConfirmDiscountResponse = (dto: any): ConfirmDiscountResponseModel => ({
+  is_valid: dto.isValid,
+  discount_type: dto.discountType,
+  reason: dto.reason,
+  coupon: dto.coupon ? mapCouponSummary(dto.coupon) : undefined,
+});
+
+export const mapConfirmAmountResponse = (dto: any): ConfirmAmountResponseModel => ({
+  total_amount: dto.totalAmount,
+  shipping_fee: dto.shippingFee,
+  discount_amount: dto.discountAmount,
+  final_amount: dto.finalAmount,
+  order_id: dto.order_id, // 假設 order_id 是字符串，這裡進行數字轉換
+});
+

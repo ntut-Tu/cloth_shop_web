@@ -16,10 +16,10 @@ export class OrderListComponent implements OnInit {
   constructor(private orderService: OrderService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.loadUserOrderSummaries();
   }
 
   loadUserOrderSummaries(): void {
-
     this.orderService.getUserOrderSummaries().subscribe(response => {
       if (response.status) {
         this.orders = response.data;

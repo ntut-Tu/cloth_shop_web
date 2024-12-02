@@ -1,0 +1,19 @@
+.order-summary-container {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.order-summary-container h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.order-summary-container p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
