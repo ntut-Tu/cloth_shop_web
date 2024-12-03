@@ -9,7 +9,7 @@ import {ProductSummaryModel} from "../../../model/product-summary.model";
 })
 export class ProductsComponent implements OnInit {
   customerProducts: ProductSummaryModel[] = [];
-  userType: string = 'customer';
+  userType: string = 'guest';
   currentPage: number = 1;
   pageSize: number = 30;
 

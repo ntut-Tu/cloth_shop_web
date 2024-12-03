@@ -8,7 +8,7 @@ import {ProductSummaryModel} from "../../../model/product-summary.model";
 })
 export class ProductCardComponent {
   @Input() product!: ProductSummaryModel;
-  @Input() isVendor: boolean = false;
+  @Input() userType: String = "customer";
 
   // EventEmitter to notify parent when detail needs to be loaded
   @Output() loadDetail = new EventEmitter<ProductSummaryModel>();

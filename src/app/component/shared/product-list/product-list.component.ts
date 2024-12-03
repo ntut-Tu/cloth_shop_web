@@ -10,7 +10,7 @@ import {ProductSummaryModel} from "../../../model/product-summary.model";
 })
 export class ProductListComponent implements OnInit {
   @Input() products: ProductSummaryModel[] = [];
-  @Input() isVendor: boolean = false;
+  @Input() userType: String = 'customer';
   selectedProduct: ProductSummaryModel | null = null;
   detailedProduct: any = null;
 

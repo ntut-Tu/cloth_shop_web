@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+@keyframes particle-move {
+  0% {
+    transform: translate(0, 0) scale(0.5); /* 從中心開始 */
+    opacity: 1;
+  }
+  /*50% {*/
+  /*  transform: translate(calc(var(--random-x) * 50px), calc(var(--random-y) * 50px)) scale(1); !* 向外散開 *!*/
+  /*  opacity: 0.8;*/
+  /*}*/
+  100% {
+    transform: translate(calc(var(--random-x) * 200px), calc(var(--random-y) * 500px)) scale(1); /* 向上浮動 */
+    opacity: 0; /* 消失 */
+  }
+}
+
+@keyframes particle-flicker {
+  0%{
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 3px;
+  background-color: white;
+  border-radius: 50%;
+  animation: particle-move 2s cubic-bezier(.71,.14,.75,.19) forwards,
+  particle-flicker 1s infinite; /* 閃爍效果 */
+  z-index: 9999;
+}
+
+
+@keyframes ripple-expand {
+  0% {
+    transform: scale(0.5, 0.5); /* 初始比例 */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2, 1.5); /* 放大且保持橢圓比例 */
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border: 5px solid rgba(152, 152, 152, 0.5);
+  border-radius: 50% / 50%; /* 偏橢圓形 */
+  transform: scale(0); /* 初始縮放比例 */
+  animation: ripple-expand 1.5s ease-out forwards;
+  z-index: 2;
+  opacity: 1;
+}
+
+

@@ -16,6 +16,13 @@ import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderSummaryComponent } from './order/order-summary/order-summary.component';
 import { StoreOrderSummaryComponent } from './order/store-order-summary/store-order-summary.component';
 import { OrderItemDetailComponent } from './order/order-item-detail/order-item-detail.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -34,11 +41,18 @@ import { OrderItemDetailComponent } from './order/order-item-detail/order-item-d
     CookieService,
     CartService
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(customerRoutes),
-        SharedModule,
-        FormsModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(customerRoutes),
+    SharedModule,
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+  ]
 })
 export class CustomerModule { }

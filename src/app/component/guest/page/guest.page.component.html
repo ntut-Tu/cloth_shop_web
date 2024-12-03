@@ -1,0 +1,19 @@
+<div class="customer-container">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a routerLink="products" routerLinkActive="active">商品</a>
+    </div>
+    <div class="navbar-right">
+      <button (click)="login()">Login</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+<!--    <div class="cart-placeholder" *ngIf="showCart">-->
+<!--      <app-cart></app-cart>-->
+<!--    </div>-->
+  </div>
+</div>
