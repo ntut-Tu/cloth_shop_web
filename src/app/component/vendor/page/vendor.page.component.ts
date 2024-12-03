@@ -12,6 +12,6 @@ export class VendorPageComponent {
 
   logout() {
     // 登出邏輯
-    this.router.navigate(['/login']);  // 回首頁
+    this.router.navigate(['/']);  // 回首頁
   }
 }

@@ -30,6 +30,6 @@ export class CustomerPageComponent implements OnInit {
 
   logout() {
     // 應清除user的登入資訊
-    this.router.navigate(['/login']);  // 回首頁
+    this.router.navigate(['/']);  // 回首頁
   }
 }

@@ -11,6 +11,6 @@ export class AdminPageComponent {
 
   logout() {
     // 登出邏輯
-    this.router.navigate(['/login']);  // 回homepage
+    this.router.navigate(['/']);  // 回homepage
   }
 }
