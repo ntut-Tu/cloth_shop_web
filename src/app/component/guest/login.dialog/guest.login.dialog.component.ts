@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/business/auth.service';
 import { UserRoleModel } from '../../../model/user-role.model';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-guest-login-dialog',
   templateUrl: './guest.login.dialog.component.html',
   styleUrls: ['./guest.login.dialog.component.css']
 })
@@ -13,7 +14,12 @@ export class GuestLoginDialogComponent {
   password: string = '';
   role: UserRoleModel = UserRoleModel.Customer;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public dialogRef: MatDialogRef<GuestLoginDialogComponent>, // 用於關閉對話框
+    @Inject(MAT_DIALOG_DATA) public data: any // 傳入數據
+  ) {}
 
   onLogin() {
     this.authService.login(this.username, this.password, this.role).subscribe({
@@ -26,6 +32,7 @@ export class GuestLoginDialogComponent {
           } else if (this.role === 'vendor') {
             this.router.navigate(['/vendor']);
           }
+          this.dialogRef.close(true); // 關閉對話框，返回成功
         } else {
           alert('登入失敗，帳號密碼錯誤');
         }
@@ -35,5 +42,9 @@ export class GuestLoginDialogComponent {
         alert('登入失敗，伺服器錯誤');
       }
     });
+  }
+
+  onCancel(): void {
+    this.dialogRef.close(false); // 點擊取消時關閉對話框
   }
 }

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {GuestLoginDialogComponent} from "../login.dialog/guest.login.dialog.component";
 
 @Component({
   selector: 'app-guest.page',
@@ -8,7 +10,7 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 })
 export class GuestPageComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.checkCurrentRoute();
@@ -28,7 +30,10 @@ export class GuestPageComponent implements OnInit {
   }
 
   login() {
-    // 應清除user的登入資訊
-    this.router.navigate(['/login']);  // 回首頁
+    this.dialog.open(GuestLoginDialogComponent, {
+      width: '400px',
+      height: 'auto',
+      disableClose: true, // Prevent closing by clicking outside the dialog
+    });
   }
 }
