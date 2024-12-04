@@ -22,6 +22,9 @@ export class GuestLoginDialogComponent {
   ) {}
 
   onLogin() {
+    if (this.dialogRef.getState()) {
+      return; // Skip login if the dialog was closed with 'register'
+    }
     this.authService.login(this.username, this.password, this.role).subscribe({
       next: (isAuthenticated) => {
         if (isAuthenticated) {
@@ -46,5 +49,9 @@ export class GuestLoginDialogComponent {
 
   onCancel(): void {
     this.dialogRef.close(false); // 點擊取消時關閉對話框
+  }
+
+  onRegister() {
+    this.dialogRef.close('register'); // 點擊註冊時關閉對話框並傳遞 'register'
   }
 }

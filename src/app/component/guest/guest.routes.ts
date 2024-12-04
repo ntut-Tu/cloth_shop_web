@@ -10,8 +10,8 @@ export const guestRoutes: Routes = [
     component: GuestPageComponent,
     children: [
       { path: 'products', component: ProductsComponent },
-      { path: 'login', component: HomeLoginPageComponent },
-      { path: 'new-feature-test', component: NewFeatureTestComponent }
+      // { path: 'login', component: HomeLoginPageComponent },
+      { path: 'new-feature-test', component: NewFeatureTestComponent },
     ]
   },
 ];

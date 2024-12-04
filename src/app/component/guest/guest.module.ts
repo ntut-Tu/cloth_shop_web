@@ -18,7 +18,8 @@ import {GuestViewDetailComponent} from "./guest-view-detail/guest-view-detail.co
 import { NewFeatureTestComponent } from './new-feature-test/new-feature-test.component';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {GuestLoginDialogComponent} from "./login.dialog/guest.login.dialog.component";
-import {MatIconButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {GuestRegisterDialogComponent} from "./register.dialog/guest.register.dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {MatIconButton} from "@angular/material/button";
     GuestPageComponent,
     NewFeatureTestComponent,
     GuestLoginDialogComponent,
+    GuestRegisterDialogComponent,
     // CartComponent,
   ],
   providers:[
@@ -45,6 +47,7 @@ import {MatIconButton} from "@angular/material/button";
     MatGridList,
     MatGridTile,
     MatIconButton,
+    MatButton,
   ]
 })
 export class GuestModule { }

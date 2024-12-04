@@ -4,7 +4,7 @@
   <p>{{ product.description }}</p>
 
   <div *ngIf="product.productVariants && product.productVariants.length > 0; else errorTemplate" class="variant-selection">
-    <label for="variant">选择变体:</label>
+    <label for="variant">選擇款式:</label>
     <select id="variant" (change)="onVariantChange($event)">
       <option *ngFor="let variant of product.productVariants" [value]="variant.productVariantId">
         {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元
@@ -18,8 +18,8 @@
 
 
   <div class="price" *ngIf="selectedVariant">
-    价格: {{ selectedVariant.price }}元
+    價格: {{ selectedVariant.price }}元
   </div>
 
-  <button (click)="addToCart()">加入购物车</button>
+  <button (click)="addToCart()">加入購物車</button>
 </div>

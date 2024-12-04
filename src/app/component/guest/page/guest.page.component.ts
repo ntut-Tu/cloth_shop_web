@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {GuestLoginDialogComponent} from "../login.dialog/guest.login.dialog.component";
+import {GuestRegisterDialogComponent} from "../register.dialog/guest.register.dialog.component";
 
 @Component({
   selector: 'app-guest.page',
@@ -30,10 +31,29 @@ export class GuestPageComponent implements OnInit {
   }
 
   login() {
-    this.dialog.open(GuestLoginDialogComponent, {
+    const dialogRef = this.dialog.open(GuestLoginDialogComponent, {
       width: '400px',
       height: 'auto',
       disableClose: true, // Prevent closing by clicking outside the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'register') {
+        this.register(); // 如果結果是 'register'，則打開註冊對話框
+      }
+    });
+  }
+
+  register() {
+    const dialogRef= this.dialog.open(GuestRegisterDialogComponent, {
+      width: '400px',
+      height: 'auto',
+      disableClose: true, // Prevent closing by clicking outside the dialog
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'login') {
+        this.login(); // 如果結果是 'register'，則打開註冊對話框
+      }
     });
   }
 }

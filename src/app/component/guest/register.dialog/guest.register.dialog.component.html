@@ -1,0 +1,87 @@
+<div class="register-container">
+  <meta charset="utf-8" />
+  <button mat-icon-button class="close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <!-- 第一步：基本信息表單 -->
+  <form *ngIf="step === 1" (ngSubmit)="onNextStep()">
+    <div>
+      <label for="role">選擇角色:</label>
+      <select [(ngModel)]="role" name="role" required>
+        <option value="admin">Admin</option>
+        <option value="customer">Customer</option>
+        <option value="vendor">Vendor</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="username">帳號:</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div>
+      <label for="email">電子郵件:</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" required />
+    </div>
+
+    <div>
+      <label for="password">密碼:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <div>
+      <label for="confirmPassword">確認密碼:</label>
+      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+    </div>
+
+    <button type="submit">下一步</button>
+    <div class="login">已有帳號？
+      <button class="to-login" (click) = "onLogin()" >登入</button>
+    </div>
+  </form>
+
+  <!-- 第二步：角色特定信息表單 -->
+  <form *ngIf="step === 2" (ngSubmit)="onRegister()">
+    <div *ngIf="role === 'vendor'">
+      <h3>填寫店鋪資訊</h3>
+      <div>
+        <label for="storeAddress">店鋪地址:</label>
+        <input type="text" id="storeAddress" [(ngModel)]="storeAddress" name="storeAddress" />
+      </div>
+
+      <div>
+        <label for="storeDescription">店鋪描述:</label>
+        <input type="text" id="storeDescription" [(ngModel)]="storeDescription" name="storeDescription" />
+      </div>
+
+      <div>
+        <label for="storeLogoUrl">店鋪標誌網址:</label>
+        <input type="text" id="storeLogoUrl" [(ngModel)]="storeLogoUrl" name="storeLogoUrl" />
+      </div>
+
+      <div>
+        <label for="paymentAccount">付款帳戶:</label>
+        <input type="text" id="paymentAccount" [(ngModel)]="paymentAccount" name="paymentAccount" />
+      </div>
+    </div>
+
+    <div *ngIf="role === 'customer'">
+      <h3>填寫客戶資訊</h3>
+      <div>
+        <label for="defaultShippingAddress">預設送貨地址:</label>
+        <input type="text" id="defaultShippingAddress" [(ngModel)]="defaultShippingAddress" name="defaultShippingAddress" />
+      </div>
+
+      <div>
+        <label for="billingAddress">帳單地址:</label>
+        <input type="text" id="billingAddress" [(ngModel)]="billingAddress" name="billingAddress" />
+      </div>
+    </div>
+
+    <button type="submit">註冊</button>
+    <div class="login">已有帳號？
+      <button class="to-login" (click) = "onLogin()" >登入</button>
+    </div>
+  </form>
+
+</div>
