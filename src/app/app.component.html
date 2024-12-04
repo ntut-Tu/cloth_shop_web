@@ -1,4 +1,6 @@
-<div *ngIf="showHeader">
-  <app-header></app-header>
+<div class = "main-background">
+  <div *ngIf="showHeader">
+    <app-header></app-header>
+  </div>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

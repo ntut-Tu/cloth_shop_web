@@ -1,0 +1,28 @@
+<div class="login-container">
+  <meta charset="utf-8" />
+  <form (ngSubmit)="onLogin()">
+    <div>
+      <label for="role">選擇角色:</label>
+      <select [(ngModel)]="role" name="role" required>
+        <option value="admin">Admin</option>
+        <option value="customer">Customer</option>
+        <option value="vendor">Vendor</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="username">帳號:</label>
+      <input type="text" id="username" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div>
+      <label for="password">密碼:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <button type="submit">登入</button>
+    <div class="register"> 還沒有帳號嗎?
+      <a  routerLink="/register" routerLinkActive="active">註冊</a>
+    </div>
+  </form>
+</div>

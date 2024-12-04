@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import { EntryPageComponent } from './component/home/entry.page/entry.page.component';
 import {MatButton} from "@angular/material/button";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatButton} from "@angular/material/button";
     MatInputModule,
     MatSelectModule,
     MatButton,
+    BrowserAnimationsModule,
   ],
   providers: [],
   exports: [

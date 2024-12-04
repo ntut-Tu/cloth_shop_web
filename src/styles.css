@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-/* src/styles.css */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Animations*/
 @keyframes particle-move {
   0% {
     transform: translate(0, 0) scale(0.5); /* 從中心開始 */
@@ -61,4 +70,7 @@
   opacity: 1;
 }
 
+.body{
+  /*background-color: #a1a1a1;*/
+}
 

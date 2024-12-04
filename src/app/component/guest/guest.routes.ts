@@ -2,6 +2,7 @@ import {ProductsComponent} from "../customer/products/products.component";
 import {Routes} from "@angular/router";
 import {GuestPageComponent} from "./page/guest.page.component";
 import {HomeLoginPageComponent} from "../home/login.page/home.login.page.component";
+import {NewFeatureTestComponent} from "./new-feature-test/new-feature-test.component";
 
 export const guestRoutes: Routes = [
   {
@@ -10,6 +11,7 @@ export const guestRoutes: Routes = [
     children: [
       { path: 'products', component: ProductsComponent },
       { path: 'login', component: HomeLoginPageComponent },
+      { path: 'new-feature-test', component: NewFeatureTestComponent }
     ]
   },
 ];
