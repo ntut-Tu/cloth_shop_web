@@ -1,0 +1,12 @@
+.order-item-detail-container {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.order-item-detail-container p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}

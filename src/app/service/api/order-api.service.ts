@@ -36,7 +36,7 @@ export class OrderApiService {
    * @returns Observable，包含 ApiResponseDTO 與商家訂單摘要的列表
    */
   getStoreOrdersByOrderId(orderId: number): Observable<ApiResponseDTO<StoreOrderSummaryModel[]>> {
-    return this.http.get<ApiResponseDTO<StoreOrderSummaryModel[]>>(`${this.apiUrl}/${orderId}/stores`);
+    return this.http.get<ApiResponseDTO<StoreOrderSummaryModel[]>>(`${this.apiUrl}/${orderId}`);
   }
 
   /**
@@ -45,6 +45,6 @@ export class OrderApiService {
    * @returns Observable，包含 ApiResponseDTO 與商品詳情的列表
    */
   getOrderItemsByStoreOrderId(storeOrderId: number): Observable<ApiResponseDTO<OrderItemDetailDTO[]>> {
-    return this.http.get<ApiResponseDTO<OrderItemDetailDTO[]>>(`${this.apiUrl}/stores/${storeOrderId}/items`);
+    return this.http.get<ApiResponseDTO<OrderItemDetailDTO[]>>(`${this.apiUrl}/${storeOrderId}/items`);
   }
 }

@@ -1,8 +1,18 @@
 export interface OrderItemDetailDTO {
   orderItemId: number; //productVariantID
-  unitPrice: number;
+  unit_price: number;
   quantity: number;
-  color: string;
+  total_price: number;
+  order_image_url: string;
+  product_name: string;
   size: string;
-  price: number; // totalAmount for single productVariant
+  color: string;
 }
+// Integer order_item_id;
+// Integer unit_price;
+// Integer quantity;
+// Integer total_price;
+// String order_image_url;
+// String product_name;
+// String size;
+// String color;

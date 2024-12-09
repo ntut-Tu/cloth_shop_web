@@ -17,18 +17,13 @@ export class StoreOrderSummaryComponent {
   constructor(private orderService: OrderService) { }
 
   toggleExpand(): void {
-    if (this.isExpanded) {
-      this.isExpanded = false;
-      this.orderItems = [];
-    } else {
-      this.orderService.getOrderItemsByStoreOrderId(this.storeOrder.storeOrderId).subscribe(response => {
-        if (response.status) {
-          this.orderItems = response.data;
-          this.isExpanded = true;
-        } else {
-          console.error(response.message);
-        }
-      });
-    }
-  }
+    this.orderService.getOrderItemsByStoreOrderId(this.storeOrder.storeOrderId).subscribe(response => {
+      if (response.status) {
+        this.orderItems = response.data;
+        this.isExpanded = true;
+      } else {
+        console.error(response.message);
+      }
+    });
+}
 }

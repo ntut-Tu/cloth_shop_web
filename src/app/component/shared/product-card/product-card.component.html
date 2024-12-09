@@ -1,6 +1,6 @@
 <!-- product-card.component.html -->
 <div class="product-card" (click)="openDetail()">
-  <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" />
+  <img [src]="environment.baseUrl+product.imageUrl" alt="{{ product.name }}" class="product-image" />
   <h2>{{ product.name }}</h2>
   <div class="price">總銷量: {{ product.totalSales }}</div>
   <div class="rate">評分: {{ product.rate }}</div>

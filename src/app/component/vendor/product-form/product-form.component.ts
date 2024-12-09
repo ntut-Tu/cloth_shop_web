@@ -60,7 +60,7 @@ export class ProductFormComponent {
       this.productService.uploadProductImage(this.selectedFile).subscribe({
         next: (response) => {
           if (response.status) {
-            this.product.imageUrl = environment.baseUrl + response.data;
+            this.product.imageUrl =  response.data;
             this.createProduct();
           } else {
             console.error('Failed to upload image:', response.message);

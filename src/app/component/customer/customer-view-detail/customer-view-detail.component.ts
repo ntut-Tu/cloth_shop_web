@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
 import { CartItem, ProductDetail, ProductVariant } from "../../../model/product-summary.model";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -60,4 +61,6 @@ export class CustomerViewDetailComponent implements OnInit, OnChanges {
     console.log('加入购物车:', item);
     // alert("商品已加入购物车!");
   }
+
+    protected readonly environment = environment;
 }

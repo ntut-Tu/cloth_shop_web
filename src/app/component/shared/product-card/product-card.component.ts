@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {ProductSummaryModel} from "../../../model/product-summary.model";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-product-card',
@@ -17,4 +18,6 @@ export class ProductCardComponent {
     // Emit the event to notify the parent component
     this.loadDetail.emit(this.product);
   }
+
+    protected readonly environment = environment;
 }

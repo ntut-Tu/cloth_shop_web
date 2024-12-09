@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
 
 
 @NgModule({
@@ -41,18 +42,19 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     CookieService,
     CartService
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(customerRoutes),
-    SharedModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(customerRoutes),
+        SharedModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatListModule,
+        MatToolbarModule,
+        MatBottomSheetContainer,
+    ]
 })
 export class CustomerModule { }
