@@ -20,6 +20,23 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {GuestLoginDialogComponent} from "./login.dialog/guest.login.dialog.component";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {GuestRegisterDialogComponent} from "./register.dialog/guest.register.dialog.component";
+import {NewStyleOrderComponent} from "../customer/new-style-order/new-style-order.component";
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader, MatExpansionPanelTitle
+} from "@angular/material/expansion";
+import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef,
+  MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -28,6 +45,7 @@ import {GuestRegisterDialogComponent} from "./register.dialog/guest.register.dia
     NewFeatureTestComponent,
     GuestLoginDialogComponent,
     GuestRegisterDialogComponent,
+    NewStyleOrderComponent
     // CartComponent,
   ],
   providers:[
@@ -48,6 +66,33 @@ import {GuestRegisterDialogComponent} from "./register.dialog/guest.register.dia
     MatGridTile,
     MatIconButton,
     MatButton,
+    MatExpansionPanelHeader,
+    MatExpansionPanel,
+    MatAccordion,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatBottomSheetContainer,
+    MatAccordion,
+    MatExpansionPanelDescription,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatIconButton,
+    MatButton,
+    MatHeaderRow,
+    MatRow,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderCellDef,
+    MatColumnDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
   ]
 })
 export class GuestModule { }

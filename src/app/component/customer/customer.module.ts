@@ -24,6 +24,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
+// import { NewStyleOrderComponent } from './new-style-order/new-style-order.component';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
+import {MatButton, MatIconButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -37,24 +45,31 @@ import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
     OrderSummaryComponent,
     StoreOrderSummaryComponent,
     OrderItemDetailComponent,
+    // NewStyleOrderComponent,
   ],
   providers:[
     CookieService,
     CartService
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(customerRoutes),
-        SharedModule,
-        FormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatListModule,
-        MatToolbarModule,
-        MatBottomSheetContainer,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(customerRoutes),
+    SharedModule,
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatBottomSheetContainer,
+    MatAccordion,
+    MatExpansionPanelDescription,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatIconButton,
+    MatButton,
+  ]
 })
 export class CustomerModule { }
