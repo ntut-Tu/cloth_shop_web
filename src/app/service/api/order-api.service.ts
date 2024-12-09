@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponseDTO } from '../../model/api-response.model';
-import { OrderSummaryModel } from '../../model/order-summary.model';
-import { StoreOrderSummaryModel } from '../../model/store-order-summary.model';
-import { OrderItemDetailDTO } from '../../model/order-item-detail.model';
+import { OrderSummaryModel } from '../../model/order/order-summary.model';
+import { StoreOrderSummaryModel } from '../../model/order/store-order-summary.model';
+import { OrderItemDetailDTO } from '../../model/order/order-item-detail.model';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,8 @@ import { CustomerPageComponent } from './page/customer.page.component';
 import {ProductsComponent} from "./products/products.component";
 // import {OrdersComponent} from "./orders/orders.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
-import {OrderListComponent} from "./order/order-list/order-list.component";
+// import {OrderListComponent} from "./order/order-list/order-list.component";
+import {NewStyleOrderComponent} from "./new-style-order/new-style-order.component";
 
 
 export const customerRoutes: Routes = [
@@ -12,7 +13,7 @@ export const customerRoutes: Routes = [
     component: CustomerPageComponent,
     children: [
       { path: 'products', component: ProductsComponent },
-      { path: 'orders', component: OrderListComponent },
+      { path: 'orders', component: NewStyleOrderComponent },
       { path: 'checkout', component: CheckoutComponent },
     ]
   },

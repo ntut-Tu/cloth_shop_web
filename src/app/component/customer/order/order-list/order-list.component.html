@@ -1,9 +1,0 @@
-<div *ngFor="let order of orders" class="order-list-container">
-  <app-order-summary [order]="order" ></app-order-summary>
-</div>
-
-
-<!-- 若使用者未登入（沒有 jwtToken），顯示登入提示 -->
-<ng-template #loginPrompt>
-  <p>Please log in to view your orders.</p>
-</ng-template>

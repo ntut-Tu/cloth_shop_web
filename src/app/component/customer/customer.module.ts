@@ -12,10 +12,10 @@ import {CookieService} from "ngx-cookie-service";
 import {CartService} from "../../service/business/cart.service";
 import { CheckoutComponent } from './checkout/checkout.component';
 import {FormsModule} from "@angular/forms";
-import { OrderListComponent } from './order/order-list/order-list.component';
-import { OrderSummaryComponent } from './order/order-summary/order-summary.component';
-import { StoreOrderSummaryComponent } from './order/store-order-summary/store-order-summary.component';
-import { OrderItemDetailComponent } from './order/order-item-detail/order-item-detail.component';
+// import { OrderListComponent } from './order/order-list/order-list.component';
+// import { OrderSummaryComponent } from './order/order-summary/order-summary.component';
+// import { StoreOrderSummaryComponent } from './order/store-order-summary/store-order-summary.component';
+// import { OrderItemDetailComponent } from './order/order-item-detail/order-item-detail.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
@@ -28,10 +28,20 @@ import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
 import {
   MatAccordion,
   MatExpansionPanel,
-  MatExpansionPanelDescription,
+  MatExpansionPanelDescription, MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {MatButton, MatIconButton} from "@angular/material/button";
+import {NewStyleOrderComponent} from "./new-style-order/new-style-order.component";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
 
 
 @NgModule({
@@ -41,11 +51,11 @@ import {MatButton, MatIconButton} from "@angular/material/button";
     // OrdersComponent,
     CartComponent,
     CheckoutComponent,
-    OrderListComponent,
-    OrderSummaryComponent,
-    StoreOrderSummaryComponent,
-    OrderItemDetailComponent,
-    // NewStyleOrderComponent,
+    // OrderListComponent,
+    // OrderSummaryComponent,
+    // StoreOrderSummaryComponent,
+    // OrderItemDetailComponent,
+    NewStyleOrderComponent,
   ],
   providers:[
     CookieService,
@@ -70,6 +80,27 @@ import {MatButton, MatIconButton} from "@angular/material/button";
     MatExpansionPanelTitle,
     MatIconButton,
     MatButton,
+    MatTable,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatColumnDef,
+    MatCellDef,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    MatExpansionPanelHeader,
+    MatExpansionPanel,
+    MatAccordion,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatBottomSheetContainer,
   ]
 })
 export class CustomerModule { }

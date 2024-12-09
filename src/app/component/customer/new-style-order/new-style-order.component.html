@@ -114,9 +114,11 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
             <mat-cell *matCellDef="let item">
-              <button mat-button color="warn" (click)="applyRefund(item)">
-                申請退款
-              </button>
+              <ng-container *ngIf="order.shipStatus === 'Completed'">
+                <button mat-button color="warn" (click)="applyRefund(item)">
+                  申請退款
+                </button>
+              </ng-container>
             </mat-cell>
           </ng-container>
 

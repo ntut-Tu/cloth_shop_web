@@ -13,7 +13,7 @@ export const guestRoutes: Routes = [
       { path: 'products', component: ProductsComponent },
       // { path: 'login', component: HomeLoginPageComponent },
       { path: 'new-feature-test', component: NewFeatureTestComponent },
-      {path: 'feature-test', component: NewStyleOrderComponent}
+      // {path: 'feature-test', component: NewStyleOrderComponent}
     ]
   },
 ];
