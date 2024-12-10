@@ -1,52 +1,82 @@
-<div class="product-form">
-  <h2>Add New Product</h2>
-  <form (ngSubmit)="submitProduct()">
-    <label>
-      Name:
-      <input [(ngModel)]="product.name" name="name" required>
-    </label>
-    <label>
-      Description:
-      <textarea [(ngModel)]="product.description" name="description"></textarea>
-    </label>
-    <label>
-      Category:
-      <input [(ngModel)]="product.category" name="category" required>
-    </label>
-    <label>
-      Image File:
-      <input type="file" (change)="onFileSelected($event)">
-    </label>
+<div class="product-form mat-elevation-z8">
+  <h2 class="mat-title">Add New Product</h2>
+  <form (ngSubmit)="submitProduct()" class="product-form-container">
 
-    <!-- 變體輸入 -->
-    <div class="variant-section">
-      <h3>Product Variants</h3>
-      <div *ngFor="let variant of product.productVariants; let i = index">
-        <p>Variant {{ i + 1 }}</p>
-        <p>Color: {{ variant.color }}, Size: {{ variant.size }}, Price: {{ variant.price }}, Stock: {{ variant.stock }}</p>
-        <button type="button" (click)="removeVariant(i)">Remove</button>
-      </div>
+    <!-- Name -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="product.name" name="name" required />
+    </mat-form-field>
 
-      <h4>Add New Variant</h4>
-      <label>
-        Color:
-        <input [(ngModel)]="newVariant.color" name="color">
-      </label>
-      <label>
-        Size:
-        <input [(ngModel)]="newVariant.size" name="size">
-      </label>
-      <label>
-        Price:
-        <input type="number" [(ngModel)]="newVariant.price" name="price" min="0">
-      </label>
-      <label>
-        Stock:
-        <input type="number" [(ngModel)]="newVariant.stock" name="stock" min="0">
-      </label>
-      <button type="button" (click)="addVariant()">Add Variant</button>
-    </div>
+    <!-- Description -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="product.description" name="description"></textarea>
+    </mat-form-field>
 
-    <button type="submit">Submit Product</button>
+    <!-- Category -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Category</mat-label>
+      <input matInput [(ngModel)]="product.category" name="category" required />
+    </mat-form-field>
+
+    <!-- Image Upload -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Upload Product Image</mat-label>
+      <input type="file" matInput (change)="onFileSelected($event)" />
+    </mat-form-field>
+
+    <!-- Variants Section -->
+    <mat-card class="variant-section">
+      <mat-card-title>Product Variants</mat-card-title>
+      <mat-card-content>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let variant of product.productVariants; let i = index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Variant {{ i + 1 }}</mat-panel-title>
+              <mat-panel-description>
+                {{ variant.color }} | {{ variant.size }} | {{ variant.price | currency }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              <p>Color: {{ variant.color }}</p>
+              <p>Size: {{ variant.size }}</p>
+              <p>Price: {{ variant.price | currency }}</p>
+              <p>Stock: {{ variant.stock }}</p>
+              <button mat-raised-button color="warn" (click)="removeVariant(i)">Remove</button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Add New Variant -->
+    <mat-card class="variant-section">
+      <mat-card-title>Add New Variant</mat-card-title>
+      <mat-card-content>
+        <div class="variant-form">
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Color</mat-label>
+            <input matInput [(ngModel)]="newVariant.color" name="color" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Size</mat-label>
+            <input matInput [(ngModel)]="newVariant.size" name="size" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" [(ngModel)]="newVariant.price" name="price" min="0" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" [(ngModel)]="newVariant.stock" name="stock" min="0" />
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" (click)="addVariant()">Add Variant</button>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" class="submit-button">Submit Product</button>
   </form>
 </div>

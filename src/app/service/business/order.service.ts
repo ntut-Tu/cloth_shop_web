@@ -40,4 +40,14 @@ export class OrderService {
   getOrderItemsByStoreOrderId(storeOrderId: number): Observable<ApiResponseDTO<OrderItemDetailDTO[]>> {
     return this.orderApiService.getOrderItemsByStoreOrderId(storeOrderId);
   }
+
+  updateOrderStatus(orderId: number, status: string): void {
+    this.orderApiService.updateOrderStatus(orderId, status).subscribe(response => {
+      if (response.status) {
+        console.log('Order status updated successfully');
+      } else {
+        console.error('Failed to update order status');
+      }
+    });
+  }
 }

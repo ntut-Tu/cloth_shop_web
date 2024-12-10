@@ -47,4 +47,14 @@ export class OrderApiService {
   getOrderItemsByStoreOrderId(storeOrderId: number): Observable<ApiResponseDTO<OrderItemDetailDTO[]>> {
     return this.http.get<ApiResponseDTO<OrderItemDetailDTO[]>>(`${this.apiUrl}/${storeOrderId}/items`);
   }
+
+  /**
+   * 更新訂單狀態
+   * @param orderId - 訂單的唯一標識符
+   * @param status - 新的訂單狀態
+   * @returns Observable，包含 ApiResponseDTO 與更新結果
+   */
+  updateOrderStatus(orderId: number, status: string): Observable<ApiResponseDTO<string>> {
+    return this.http.post<ApiResponseDTO<string>>(`${this.apiUrl}/${orderId}/status`, status);
+  }
 }

@@ -1,0 +1,131 @@
+<mat-accordion>
+  <!-- 訂單摘要 -->
+  <mat-expansion-panel *ngFor="let order of orderSum" (opened)="loadStoreOrders(order.orderId)">
+    <mat-expansion-panel-header style="height: fit-content">
+      <mat-panel-title>
+        <mat-table [dataSource]="[order]" class="order-summary-table">
+          <ng-container matColumnDef="orderId">
+            <mat-header-cell *matHeaderCellDef> 訂單編號 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.orderId }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="orderDate">
+            <mat-header-cell *matHeaderCellDef> 訂單日期 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.orderDate }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <mat-header-cell *matHeaderCellDef> 總金額 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.totalAmount | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="shippingDiscountCode">
+            <mat-header-cell *matHeaderCellDef> 運費優惠券代碼 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.shippingDiscountCode || '無' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="shipStatus">
+            <mat-header-cell *matHeaderCellDef> 訂單狀態 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.shipStatus || '無' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="payStatus">
+            <mat-header-cell *matHeaderCellDef> 付款狀態 </mat-header-cell>
+            <mat-cell *matCellDef="let order"> {{ order.payStatus || '無' }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="blank">
+            <mat-header-cell *matHeaderCellDef> 確認訂單 </mat-header-cell>
+            <mat-cell *matCellDef="let order">
+              <ng-container *ngIf="order.shipStatus === 'Delivered'">
+                <button mat-stroked-button color="primary" (click)="confirmTransaction(order.orderId)" style="align-content: center">
+                  完成並撥款
+                </button>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="['orderId', 'orderDate', 'totalPrice', 'shippingDiscountCode','shipStatus','payStatus','blank']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['orderId', 'orderDate', 'totalPrice', 'shippingDiscountCode','shipStatus','payStatus','blank']"></mat-row>
+        </mat-table>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- 店家訂單 -->
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngFor="let store of storeOrders[order.orderId]"
+        (opened)="loadOrderItems(store.storeOrderId)"
+      >
+        <mat-expansion-panel-header style="height: fit-content">
+          <mat-panel-title>
+            <mat-table [dataSource]="[store]" class="store-summary-table">
+              <ng-container matColumnDef="storeOrderId">
+                <mat-header-cell *matHeaderCellDef> 店家訂單編號 </mat-header-cell>
+                <mat-cell *matCellDef="let store"> {{ store.storeOrderId }} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="storeName">
+                <mat-header-cell *matHeaderCellDef> 店家名稱 </mat-header-cell>
+                <mat-cell *matCellDef="let store"> {{ store.storeName }} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="vendorCouponCode">
+                <mat-header-cell *matHeaderCellDef> 店家優惠券代碼 </mat-header-cell>
+                <mat-cell *matCellDef="let store"> {{ store.vendorCouponCode || '無' }} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="['storeOrderId', 'storeName', 'vendorCouponCode']"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: ['storeOrderId', 'storeName', 'vendorCouponCode']"></mat-row>
+            </mat-table>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- 商品資料 -->
+        <mat-table [dataSource]="orderItems[store.storeOrderId]" class="order-item-table">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> 商品名稱 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.name }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> 單價 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.price | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef> 數量 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.quantity }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <mat-header-cell *matHeaderCellDef> 總金額 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.totalPrice | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="size">
+            <mat-header-cell *matHeaderCellDef> 尺寸 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.size }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="color">
+            <mat-header-cell *matHeaderCellDef> 顏色 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{ item.color }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <ng-container *ngIf="order.shipStatus === 'Completed'">
+                <button mat-button color="warn" (click)="applyRefund(item)">
+                  申請退款
+                </button>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions']"></mat-row>
+        </mat-table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
