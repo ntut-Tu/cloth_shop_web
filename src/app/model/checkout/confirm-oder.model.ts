@@ -1,4 +1,4 @@
-import {CouponSummaryModel, mapCouponSummary} from "../coupon/coupon.model";
+import {DiscountSummaryModel, mapDiscountSummary} from "../coupon/coupon.model";
 import {CheckoutBaseOrderModel, CheckoutBaseProductVariantModel} from "./shared-checkout.model";
 
 export interface ConfirmAmountModel extends CheckoutBaseOrderModel{
@@ -23,7 +23,7 @@ export interface ConfirmDiscountResponseModel{
   is_valid : boolean; // 過期 || type是否屬於discount_type可以用的 || 以下架 || 已超過用戶使用次數 || 是否屬於這個店家
   discount_type ?: string;  // 若可用則會顯示是哪種優惠
   reason ?: string; //拒絕原因
-  coupon ?: CouponSummaryModel;
+  coupon ?: DiscountSummaryModel;
 }
 
 // =================================Template=================================
@@ -31,7 +31,7 @@ export const mapConfirmDiscountResponse = (dto: any): ConfirmDiscountResponseMod
   is_valid: dto.isValid,
   discount_type: dto.discountType,
   reason: dto.reason,
-  coupon: dto.coupon ? mapCouponSummary(dto.coupon) : undefined,
+  coupon: dto.coupon ? mapDiscountSummary(dto.coupon) : undefined,
 });
 
 export const mapConfirmAmountResponse = (dto: any): ConfirmAmountResponseModel => ({

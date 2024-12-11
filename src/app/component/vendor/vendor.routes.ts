@@ -5,6 +5,7 @@ import { VendorPageComponent } from './page/vendor.page.component';
 import { SalesReportComponent } from './sales-report/sales-report.component';
 import { DiscountComponent } from './discount/discount.component';
 import {ProductFormComponent} from "./product-form/product-form.component";
+import {NewStyleDiscountComponent} from "./new-style-discount/new-style-discount.component";
 
 export const vendorRoutes: Routes = [
   {
@@ -13,7 +14,7 @@ export const vendorRoutes: Routes = [
     children: [
       // { path: 'product-management', component: ProductManagementComponent },
       { path: 'sales-report', component: SalesReportComponent },
-      { path: 'discount', component: DiscountComponent },
+      { path: 'discount', component: NewStyleDiscountComponent },
       { path: 'product-form', component: ProductFormComponent },
     ]
   }

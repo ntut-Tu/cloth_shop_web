@@ -16,7 +16,6 @@ import {
 } from "../../model/checkout/submit-order.model";
 import {inputTranslator, mapApiResponseData} from "../../utils/api-utils.service";
 import {map} from "rxjs/operators";
-import {CouponSummaryModel, mapCouponSummary} from "../../model/coupon/coupon.model"; // 假設 ApiResponseDTO 定義在這個路徑
 
 @Injectable({
   providedIn: 'root'

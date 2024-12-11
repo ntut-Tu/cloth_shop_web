@@ -1,0 +1,44 @@
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="openAddCouponDialog()">新增優惠券</button>
+</div>
+
+<mat-table [dataSource]="coupons" class="mat-elevation-z8">
+  <!-- 優惠券編號 -->
+  <ng-container matColumnDef="couponId">
+    <mat-header-cell *matHeaderCellDef> 優惠券編號 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.discountId }} </mat-cell>
+  </ng-container>
+
+  <!-- 優惠券代碼 -->
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> 優惠券代碼 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.code }} </mat-cell>
+  </ng-container>
+
+  <!-- 優惠類型 -->
+  <ng-container matColumnDef="discountType">
+    <mat-header-cell *matHeaderCellDef> 優惠類型 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.discountType }} </mat-cell>
+  </ng-container>
+
+  <!-- 開始日期 -->
+  <ng-container matColumnDef="startDate">
+    <mat-header-cell *matHeaderCellDef> 開始日期 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.startDate }} </mat-cell>
+  </ng-container>
+
+  <!-- 結束日期 -->
+  <ng-container matColumnDef="endDate">
+    <mat-header-cell *matHeaderCellDef> 結束日期 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.endDate }} </mat-cell>
+  </ng-container>
+
+  <!-- 狀態 -->
+  <ng-container matColumnDef="isActive">
+    <mat-header-cell *matHeaderCellDef> 狀態 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon"> {{ coupon.isActive ? '啟用' : '停用' }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
