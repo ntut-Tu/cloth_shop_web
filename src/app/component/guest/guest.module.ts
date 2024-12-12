@@ -20,6 +20,25 @@ import {GuestLoginDialogComponent} from "./login.dialog/guest.login.dialog.compo
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {GuestRegisterDialogComponent} from "./register.dialog/guest.register.dialog.component";
 import {GuestViewDetailComponent} from "./new-style-g-view-detail/guest-view-detail.component";
+import {MockNewStyleOrderComponent} from "./mock-new-style-order/mock-new-style-order.component";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
+import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription, MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
+import {ReviewComponent} from "./review/review.component";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -28,9 +47,11 @@ import {GuestViewDetailComponent} from "./new-style-g-view-detail/guest-view-det
     NewFeatureTestComponent,
     GuestLoginDialogComponent,
     GuestRegisterDialogComponent,
-    GuestViewDetailComponent
+    GuestViewDetailComponent,
+    MockNewStyleOrderComponent,
     // AddCouponTestComponent
     // CartComponent,
+    ReviewComponent
   ],
   providers:[
   ],
@@ -51,6 +72,44 @@ import {GuestViewDetailComponent} from "./new-style-g-view-detail/guest-view-det
     MatIconButton,
     MatButton,
     //------------
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatBottomSheetContainer,
+    MatAccordion,
+    MatExpansionPanelDescription,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatIconButton,
+    MatButton,
+    MatTable,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatColumnDef,
+    MatCellDef,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    MatExpansionPanelHeader,
+    MatExpansionPanel,
+    MatAccordion,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatBottomSheetContainer,
+    MatGridList,
+    MatGridTile,
+    MatDialogModule
   ]
 })
 export class GuestModule { }

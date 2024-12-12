@@ -3,6 +3,7 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {GuestLoginDialogComponent} from "../login.dialog/guest.login.dialog.component";
 import {GuestRegisterDialogComponent} from "../register.dialog/guest.register.dialog.component";
+import { ReviewComponent } from "../review/review.component";
 
 @Component({
   selector: 'app-guest.page',
