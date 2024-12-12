@@ -55,4 +55,11 @@ export class ProductApiService {
   addProduct(product: AddProductRequest): Observable<ApiResponseDTO<number>> {
     return this.http.post<ApiResponseDTO<number>>(`${this.apiUrl}/add`, product);
   }
+
+  getProductSummariesByCategory(category: string,pageNumber:number,pageSize:number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
+    const params = new HttpParams()
+      .set('page', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+    return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/category/${category}`,{params});
+  }
 }

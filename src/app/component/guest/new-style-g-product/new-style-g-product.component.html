@@ -2,8 +2,8 @@
   <mat-drawer mode="side" opened style="width: 150px">
     <h3>商品分類</h3>
     <mat-list>
-      <mat-list-item *ngFor="let category of categories" (click)="onCategorySelect(category)" [class.selected]="category === selectedCategory">
-        {{ category }}
+      <mat-list-item *ngFor="let category of categories" (click)="onCategorySelect(category.value)" [class.selected]="category.viewValue === selectedCategory">
+        {{ category.viewValue }}
       </mat-list-item>
     </mat-list>
   </mat-drawer>
@@ -30,7 +30,7 @@
           </mat-card-content>
           <mat-card-header>
             <mat-card-subtitle>User Id: {{ "fake user" }}</mat-card-subtitle>
-            <img mat-card-avatar src="https://picsum.photos/300/300/?random" />
+            <img mat-card-avatar src="https://picsum.photos/300/300/?random"  alt=""/>
           </mat-card-header>
           <mat-card-footer></mat-card-footer>
         </mat-card>
@@ -38,28 +38,3 @@
     </mat-grid-list>
   </mat-drawer-content>
 </mat-drawer-container>
-
-<div *ngIf="detailedProduct" class="guest-view-detail">
-  <img [src]="detailedProduct.imageUrl" alt="{{ detailedProduct.name }}" class="detail-image" />
-  <h2>{{ detailedProduct.name }}</h2>
-  <p>{{ detailedProduct.description }}</p>
-
-  <div *ngIf="detailedProduct.productVariants && detailedProduct.productVariants.length > 0; else errorTemplate" class="variant-selection">
-    <label for="variant">選擇款式:</label>
-    <select id="variant" (change)="onVariantChange($event)">
-      <option *ngFor="let variant of detailedProduct.productVariants" [value]="variant.productVariantId">
-        {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元
-      </option>
-    </select>
-  </div>
-
-  <ng-template #errorTemplate>
-    <p class="error-message">Product detail loading failed.</p>
-  </ng-template>
-
-  <div class="price" *ngIf="selectedVariant">
-    價格: {{ selectedVariant.price }}元
-  </div>
-
-  <button (click)="addToCart()">加入購物車</button>
-</div>

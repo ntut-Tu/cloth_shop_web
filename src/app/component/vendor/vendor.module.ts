@@ -10,8 +10,15 @@ import {DiscountComponent} from './discount/discount.component';
 import {SharedModule} from "../shared/shared.module";
 import {ProductFormComponent} from './product-form/product-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatError, MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
-import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatError, MatFormField, MatFormFieldModule, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {
+  MatCard,
+  MatCardContent,
+  MatCardFooter,
+  MatCardHeader,
+  MatCardImage, MatCardModule,
+  MatCardTitle
+} from "@angular/material/card";
 import {
   MatAccordion,
   MatExpansionPanel,
@@ -20,7 +27,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {MatInput} from "@angular/material/input";
-import {MatButton, MatButtonModule} from "@angular/material/button";
+import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {NewStyleDiscountComponent} from './new-style-discount/new-style-discount.component';
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {
@@ -36,7 +43,7 @@ import {
   MatTable
 } from "@angular/material/table";
 import {AddCouponComponent} from './add-coupon/add-coupon.component';
-import {MatOption, MatSelect} from "@angular/material/select";
+import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {
   MAT_DATEPICKER_SCROLL_STRATEGY,
   MatDatepicker,
@@ -47,10 +54,15 @@ import {
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatDialogActions, MatDialogModule} from "@angular/material/dialog";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatIcon} from "@angular/material/icon";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {Overlay, ScrollStrategyOptions} from "@angular/cdk/overlay";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {NewStyleVProduct} from "./new-style-v-product/new-style-v-product";
+import {MatDrawer, MatDrawerContainer, MatSidenavModule} from "@angular/material/sidenav";
+import {MatList, MatListItem, MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { NewStyleVProductDetailComponent } from './new-style-v-product-detail/new-style-v-product-detail.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +73,9 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
     ProductFormComponent,
     NewStyleDiscountComponent,
     AddCouponComponent,
+    NewStyleVProduct,
+    NewStyleVProductDetailComponent,
+    // EditCouponComponent,
   ],
   imports: [
     CommonModule,
@@ -113,6 +128,26 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
     MatRadioButton,
     MatButtonToggleGroup,
     MatButtonToggle,
+    MatSuffix,
+    MatDrawerContainer,
+    MatList,
+    MatListItem,
+    MatCardImage,
+    MatCardHeader,
+    MatCardFooter,
+    MatDrawer,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatGridList,
+    MatGridTile,
+    MatIconButton,
+    MatButton,
+    MatTable,
   ],
   providers:[
     MatDatepickerModule,

@@ -1,0 +1,68 @@
+mat-card {
+  display: flex;
+  flex-direction: column;
+  /*align-items: center;*/
+  justify-content: space-between;
+  height: 100%; /* 確保 mat-card 佔滿容器高度 */
+}
+mat-card-content{
+  flex-grow: 1; /* 內容區域自動填滿剩餘空間 */
+  text-align: left; /* 文字置中 */
+}
+mat-card-title,
+mat-card-content,
+mat-card-footer {
+  flex-shrink: 0; /* 固定內容區域大小，不會隨圖片縮放 */
+}
+
+mat-card.selected {
+  border: 2px solid #007bff;
+}
+
+.product-image {
+  width: 100%; /* 圖片寬度佔滿容器 */
+  height: 50%; /* 高度根據寬度自動調整，保持比例 */
+  object-fit: cover; /* 適應容器，並裁剪多餘部分 */
+  aspect-ratio: 16 / 9; /* 設定寬高比，默認為16:9 */
+  margin-bottom: 10px; /* 與其他內容間距 */
+}
+
+mat-list-item {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+mat-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+mat-list-item.selected {
+  background-color: #d0d0d0;
+  font-weight: bold;
+}
+
+.sort-by {
+  padding: 5px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  gap: 10px; /* 添加間距 */
+}
+
+.products-container {
+  flex: 3; /* 商品區域占 3/4 */
+  overflow-y: auto; /* 允許垂直滾動 */
+}
+
+.cart-container {
+  flex: 1; /* 購物車區域占 1/4 */
+  background-color: #f9f9f9; /* 添加背景區分區域 */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 提升區域感 */
+  overflow-y: auto; /* 如果內容過多，允許滾動 */
+}

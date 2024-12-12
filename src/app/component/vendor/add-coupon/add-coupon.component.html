@@ -21,17 +21,19 @@
     <mat-form-field class="example-full-width">
       <mat-label>選擇開始日期</mat-label>
       <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="startPicker.open()">選擇開始日期</button>
+<!--    <button mat-raised-button color="primary" (click)="startPicker.open()">選擇開始日期</button>-->
 
     <!-- 結束日期 -->
     <mat-form-field class="example-full-width">
       <mat-label>選擇結束日期</mat-label>
       <input matInput [matDatepicker]="endPicker" formControlName="endDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
       <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="endPicker.open()">選擇結束日期</button>
+<!--    <button mat-raised-button color="primary" (click)="endPicker.open()">選擇結束日期</button>-->
 
     <!-- Fields for Seasonal Discount -->
     <div *ngIf="isSeasonal()">

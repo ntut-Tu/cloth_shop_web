@@ -1,24 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from "../../../service/business/product.service";
-import { ProductSummaryModel } from "../../../model/product-summary.model";
-import { MatDialog } from '@angular/material/dialog';
-import {NewStyleProductDetailComponent} from "../new-style-product-detail/new-style-product-detail.component";
-import {
-  NewStyleVProductDetailComponent
-} from "../../vendor/new-style-v-product-detail/new-style-v-product-detail.component";
-import {CartComponent} from "../cart/cart.component";
-import {CartService} from "../../../service/business/cart.service";
+import { ProductService } from '../../../service/business/product.service';
+import { ProductSummaryModel } from '../../../model/product-summary.model';
+import {ApiResponseDTO} from "../../../model/api-response.model";
+import {Observable} from "rxjs";
+import {NewStyleVProductDetailComponent} from "../new-style-v-product-detail/new-style-v-product-detail.component";
+import {MatDialog} from "@angular/material/dialog";
+
+
+interface ProductVariant {
+  productVariantId: number;
+  color: string;
+  size: string;
+  price: number;
+}
+
+interface ProductSummaryModelWithVariants extends ProductSummaryModel {
+  productVariants: ProductVariant[];
+}
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-new-feature-test',
+  templateUrl: './new-style-v-product.html',
+  styleUrls: ['./new-style-v-product.css']
 })
-export class ProductsComponent implements OnInit {
+
+export class NewStyleVProduct implements OnInit {
+  // products: ProductSummaryModel[] = [];
   customerProducts: ProductSummaryModel[] = [];
   currentPage: number = 1;
   pageSize: number = 30;
-  userType: string = 'customer';
+  userType: string = 'vendor';
   detailedProduct: any = null;
   selectedVariant: any = null;
   categories:{ value: string, viewValue: string }[] = [
@@ -38,7 +49,7 @@ export class ProductsComponent implements OnInit {
   ];
   products: any[] = [];
 
-  constructor(private productService: ProductService,private dialog: MatDialog,private cartService:CartService) {}
+  constructor(private productService: ProductService,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.productService.getProductSummaries(this.currentPage, this.pageSize).subscribe((response) => {
@@ -65,15 +76,9 @@ export class ProductsComponent implements OnInit {
     this.productService.getProductDetails(product.productId).subscribe(
       (response) => {
         this.detailedProduct = response.data;
-        const dialogRef = this.dialog.open(NewStyleProductDetailComponent, {
+        this.dialog.open(NewStyleVProductDetailComponent, {
           width: '600px',
           data: this.detailedProduct, // 將產品數據傳遞到彈窗
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          if (result === 'success') {
-            // 手動刷新購物車
-            this.cartService.loadInitialCart();
-          }
         });
       },
       (error) => {

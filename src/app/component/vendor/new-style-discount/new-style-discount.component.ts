@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {DiscountSummaryModel} from "../../../model/coupon/coupon.model";
 import {CouponService} from "../../../service/business/coupon.service";
 import {AddCouponComponent} from "../add-coupon/add-coupon.component";
@@ -11,9 +11,9 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class NewStyleDiscountComponent implements OnInit {
   coupons: DiscountSummaryModel[] = [];
-  displayedColumns: string[] = ['couponId', 'code', 'discountType', 'startDate', 'endDate', 'isActive'];
+  displayedColumns: string[] = ['couponId', 'code', 'discountType', 'startDate', 'endDate', 'isActive','editButton'];
 
-  constructor(private couponService: CouponService, private dialog: MatDialog) {}
+  constructor(private couponService: CouponService, private dialog: MatDialog,private injector :Injector) {}
 
   ngOnInit(): void {
     this.loadCoupons();
@@ -35,6 +35,7 @@ export class NewStyleDiscountComponent implements OnInit {
       width: '600px',
       disableClose: true,
       panelClass: 'custom-dialog-container',
+      injector: this.injector
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -42,5 +43,21 @@ export class NewStyleDiscountComponent implements OnInit {
         this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
       }
     });
+  }
+
+  openEditCouponDialog(coupon: DiscountSummaryModel): void {
+    // const dialogRef = this.dialog.open(EditCouponComponent, {
+    //   data: coupon,
+    //   width: '600px',
+    //   disableClose: true,
+    //   panelClass: 'custom-dialog-container',
+    //   injector: this.injector
+    // });
+    //
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result === 'refresh') {
+    //     this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
+    //   }
+    // });
   }
 }

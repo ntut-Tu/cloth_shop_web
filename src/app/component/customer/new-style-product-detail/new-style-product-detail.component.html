@@ -1,0 +1,36 @@
+<mat-card class="modal-content">
+  <mat-card-header>
+    <button mat-icon-button class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img mat-card-image [src]="data?.imageUrl" alt="{{ data?.name }}" class="detail-image" />
+    <h2 mat-card-title>{{ data?.name }}</h2>
+    <p mat-card-subtitle>{{ data?.description }}</p>
+
+    <div *ngIf="data?.productVariants?.length > 0; else errorTemplate" class="variant-selection">
+      <mat-form-field appearance="fill">
+        <mat-label>選擇款式</mat-label>
+        <mat-select (selectionChange)="onVariantChange($event)">
+          <mat-option *ngFor="let variant of data.productVariants" [value]="variant.productVariantId">
+            {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <ng-template #errorTemplate>
+      <p class="error-message">商品資訊載入失敗。</p>
+    </ng-template>
+
+    <div class="price" *ngIf="selectedVariant">
+      <p>價格: {{ selectedVariant.price }}元</p>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addToCart()">加入購物車</button>
+  </mat-card-actions>
+</mat-card>

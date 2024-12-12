@@ -1,29 +1,29 @@
-<!-- product-list.component.html -->
-<div class="product-list">
-  <app-product-card
-    *ngFor="let product of products"
-    [product]="product"
-    [userType]="userType"
-    (loadDetail)="onLoadDetail($event)">
-  </app-product-card>
-</div>
+<!--&lt;!&ndash; product-list.component.html &ndash;&gt;-->
+<!--<div class="product-list">-->
+<!--  <app-product-card-->
+<!--    *ngFor="let product of products"-->
+<!--    [product]="product"-->
+<!--    [userType]="userType"-->
+<!--    (loadDetail)="onLoadDetail($event)">-->
+<!--  </app-product-card>-->
+<!--</div>-->
 
-<!-- Product detail modal -->
-<div *ngIf="selectedProduct" class="modal-backdrop" (click)="closeDetail()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <button (click)="closeDetail()" class="close-button">×</button>
+<!--&lt;!&ndash; Product detail modal &ndash;&gt;-->
+<!--<div *ngIf="selectedProduct" class="modal-backdrop" (click)="closeDetail()">-->
+<!--  <div class="modal-content" (click)="$event.stopPropagation()">-->
+<!--    <button (click)="closeDetail()" class="close-button">×</button>-->
 
-    <!-- Vendor or customer detail components -->
-    <ng-container *ngIf="userType === 'vendor' ; else customerTemplate">
-      <app-vendor-view-detail [product]="detailedProduct"></app-vendor-view-detail>
-    </ng-container>
-    <ng-template #customerTemplate>
-      <ng-container *ngIf="userType === 'customer' ; else guestTemplate">
-        <app-customer-view-detail [product]="detailedProduct"></app-customer-view-detail>
-      </ng-container>
-      <ng-template #guestTemplate>
-        <app-guest-view-detail [product]="detailedProduct"></app-guest-view-detail>
-      </ng-template>
-    </ng-template>
-  </div>
-</div>
+<!--    &lt;!&ndash; Vendor or customer detail components &ndash;&gt;-->
+<!--    <ng-container *ngIf="userType === 'vendor' ; else customerTemplate">-->
+<!--      <app-vendor-view-detail [product]="detailedProduct"></app-vendor-view-detail>-->
+<!--    </ng-container>-->
+<!--    <ng-template #customerTemplate>-->
+<!--      <ng-container *ngIf="userType === 'customer' ; else guestTemplate">-->
+<!--        <app-customer-view-detail [product]="detailedProduct"></app-customer-view-detail>-->
+<!--      </ng-container>-->
+<!--      <ng-template #guestTemplate>-->
+<!--        <app-guest-view-detail [product]="detailedProduct"></app-guest-view-detail>-->
+<!--      </ng-template>-->
+<!--    </ng-template>-->
+<!--  </div>-->
+<!--</div>-->

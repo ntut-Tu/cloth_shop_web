@@ -17,7 +17,7 @@ export class CartService {
   /**
    * 初始化購物車數據
    */
-  private loadInitialCart(): void {
+  loadInitialCart(): void {
     const cartItems = this.loadCartFromSession();
     this.cartSubject.next(cartItems);
   }
@@ -103,4 +103,5 @@ export class CartService {
     console.log(ret);
     return ret;
   }
+
 }

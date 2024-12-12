@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
 import {CartItem} from "../../../model/product-summary.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -10,11 +11,12 @@ import {CartItem} from "../../../model/product-summary.model";
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,private cdr: ChangeDetectorRef,private router:Router) {}
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(cartItems => {
       this.cartItems = cartItems;
+      this.cdr.detectChanges();
     });
   }
 

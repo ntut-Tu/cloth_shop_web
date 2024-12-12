@@ -42,6 +42,8 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
+import {NewStyleProductDetailComponent} from "./new-style-product-detail/new-style-product-detail.component";
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import {
     // StoreOrderSummaryComponent,
     // OrderItemDetailComponent,
     NewStyleOrderComponent,
+    NewStyleProductDetailComponent
   ],
   providers:[
     CookieService,
@@ -101,6 +104,8 @@ import {
     MatListModule,
     MatToolbarModule,
     MatBottomSheetContainer,
+    MatGridList,
+    MatGridTile,
   ]
 })
 export class CustomerModule { }

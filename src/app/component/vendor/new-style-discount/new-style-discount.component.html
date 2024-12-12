@@ -39,6 +39,12 @@
     <mat-cell *matCellDef="let coupon"> {{ coupon.isActive ? '啟用' : '停用' }} </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="editButton">
+    <mat-header-cell *matHeaderCellDef> 編輯 </mat-header-cell>
+    <mat-cell *matCellDef="let coupon">
+      <button mat-raised-button color="primary" (click)="openEditCouponDialog(coupon)">編輯</button>
+    </mat-cell>
+  </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>

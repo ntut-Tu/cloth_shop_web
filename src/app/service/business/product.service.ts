@@ -48,4 +48,8 @@ export class ProductService {
   uploadProductImage(file: File): Observable<ApiResponseDTO<string>> {
     return this.imageUploadApiService.uploadProductImage(file);
   }
+
+  getProductSummariesByCategory(category: string,pageNumber:number,pageSize:number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
+    return this.productApiService.getProductSummariesByCategory(category,pageNumber,pageSize);
+  }
 }
