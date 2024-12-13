@@ -39,6 +39,7 @@ import {
 } from "@angular/material/expansion";
 import {ReviewComponent} from "./review/review.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatInput} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
     MatBottomSheetContainer,
     MatGridList,
     MatGridTile,
-    MatDialogModule
+    MatDialogModule,
+    MatInput
   ]
 })
 export class GuestModule { }

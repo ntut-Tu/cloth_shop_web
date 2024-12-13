@@ -7,7 +7,7 @@ export interface RegisterRequestModel {
   role: UserRoleModel;
 
   storeAddress?: string;
-  storeDescription?: string;
+  storeDescription?: string;//
   storeLogoUrl?: string;
   paymentAccount?: string;
 

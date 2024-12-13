@@ -57,4 +57,7 @@ export class GuestPageComponent implements OnInit {
       }
     });
   }
+
+  editUserInfo() {
+  }
 }

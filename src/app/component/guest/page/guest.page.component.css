@@ -20,6 +20,11 @@
   font-size: 30px; /* 增大字体大小 */
 }
 
+.navbar-right {
+  display: flex;
+  gap: 20px; /* 增加按鈕之間的間距 */
+}
+
 .navbar-right button {
   background-color: #f44336;
   color: white;

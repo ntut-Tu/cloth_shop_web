@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Input, model, Inject } from '@angular/core';
 import { ReviewService} from "../../../service/business/review.service";
 import { Review} from "../../../model/review/review.model";
 import { ActivatedRoute } from '@angular/router';
@@ -7,12 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-review',
-  templateUrl: './review.component.html',
-  styleUrls: ['./review.component.css']
+  templateUrl: './reviewTest.component.html',
+  styleUrls: ['./reviewTest.component.css']
 })
 
 
-export class ReviewComponent implements OnInit {
+export class ReviewTestComponent implements OnInit {
   newReview: Review = {
     rating: 0,
     comment: '',
@@ -24,7 +24,7 @@ export class ReviewComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private reviewService: ReviewService,
-    public dialogRef: MatDialogRef<ReviewComponent>,
+    public dialogRef: MatDialogRef<ReviewTestComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any // 將完成訂單的 productId 注入到 reviewComponent
   ) {}
 
@@ -37,7 +37,20 @@ export class ReviewComponent implements OnInit {
     this.checkFormValidity();
   }
 
-
+  // 新增評論
+  // addReview(): void {
+  //   if (this.isFormValid) {
+  //     this.reviewService.addReview(this.newReview).subscribe(
+  //       response => {
+  //         if (response.status) this.dialogRef.close("success");
+  //         else console.error('Failed to add review:', response.message);
+  //       },
+  //       error => {
+  //         console.error('Error adding review:', error);
+  //       }
+  //     );
+  //   }
+  // }
   addReview(): void {
     if (this.isFormValid && !this.isSubmitting) {
       this.isSubmitting = true; // 開始提交時設置狀態
@@ -69,6 +82,7 @@ export class ReviewComponent implements OnInit {
       });
     }
   }
+
 
   // 關閉 dialog
   cancel(): void {
