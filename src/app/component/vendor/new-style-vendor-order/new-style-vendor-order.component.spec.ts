@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewStyleOrderComponent } from './new-style-order.component';
+import { NewStyleVendorOrderComponent } from './new-style-vendor-order.component';
 
 describe('NewStyleOrderComponent', () => {
-  let component: NewStyleOrderComponent;
-  let fixture: ComponentFixture<NewStyleOrderComponent>;
+  let component: NewStyleVendorOrderComponent;
+  let fixture: ComponentFixture<NewStyleVendorOrderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NewStyleOrderComponent]
+      declarations: [NewStyleVendorOrderComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewStyleOrderComponent);
+    fixture = TestBed.createComponent(NewStyleVendorOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

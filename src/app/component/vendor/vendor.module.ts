@@ -63,6 +63,7 @@ import {MatDrawer, MatDrawerContainer, MatSidenavModule} from "@angular/material
 import {MatList, MatListItem, MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { NewStyleVProductDetailComponent } from './new-style-v-product-detail/new-style-v-product-detail.component';
+import {NewStyleVendorOrderComponent} from "./new-style-vendor-order/new-style-vendor-order.component";
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { NewStyleVProductDetailComponent } from './new-style-v-product-detail/ne
     AddCouponComponent,
     NewStyleVProduct,
     NewStyleVProductDetailComponent,
+    NewStyleVendorOrderComponent
     // EditCouponComponent,
   ],
   imports: [

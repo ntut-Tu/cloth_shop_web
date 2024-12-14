@@ -1,0 +1,119 @@
+<mat-accordion>
+  <!-- 店家訂單 -->
+  <mat-expansion-panel *ngFor="let storeOrder of storeOrders" >
+    <mat-expansion-panel-header style="height: fit-content">
+      <mat-panel-title>
+        <mat-table [dataSource]="[storeOrder]" class="order-summary-table">
+          <ng-container matColumnDef="storeOrderId">
+            <mat-header-cell *matHeaderCellDef> 商家訂單編號 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.storeOrderId }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="orderDate">
+            <mat-header-cell *matHeaderCellDef> 訂單日期 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.orderDate }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="totalNet">
+            <mat-header-cell *matHeaderCellDef> 原始金額 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.totalNetamount | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="totalDiscount">
+            <mat-header-cell *matHeaderCellDef> 折扣金額 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.totalDiscount | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <mat-header-cell *matHeaderCellDef> 總金額 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.totalAmount | currency }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="shippingDiscountCode">
+            <mat-header-cell *matHeaderCellDef> 優惠券代碼 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.vendorCouponCode || '無' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="shipStatus">
+            <mat-header-cell *matHeaderCellDef> 訂單狀態 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.storeOrderStatus || '無' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="payStatus">
+            <mat-header-cell *matHeaderCellDef> 付款狀態 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder"> {{ storeOrder.orderPayStatus || '無' }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="blank">
+            <mat-header-cell *matHeaderCellDef> 出貨 </mat-header-cell>
+            <mat-cell *matCellDef="let storeOrder">
+              <ng-container *ngIf="storeOrder.storeOrderStatus === 'Pending'">
+                <button mat-stroked-button color="primary" (click)="updateStoreOrderStatus(storeOrder.storeOrderId)" style="align-content: center">
+                  確認出貨
+                </button>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="storeOrderHeaders"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: storeOrderHeaders"></mat-row>
+        </mat-table>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- 商品資料 -->
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let  order of storeOrder.orders">
+        <mat-expansion-panel-header style="height: fit-content">
+          <mat-panel-title>
+            <mat-table [dataSource]="[order]" class="store-summary-table">
+              <ng-container matColumnDef="productId">
+                <mat-header-cell *matHeaderCellDef> 商品編號 </mat-header-cell>
+                <mat-cell *matCellDef="let order"> {{ order.productId }} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="productName">
+                <mat-header-cell *matHeaderCellDef> 商品名稱 </mat-header-cell>
+                <mat-cell *matCellDef="let order"> {{ order.productName }} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="orderHeaders"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: orderHeaders"></mat-row>
+            </mat-table>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- 商品詳細資料 -->
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let productVar of order.productVariants">
+            <mat-expansion-panel-header style="height: fit-content">
+              <mat-table [dataSource]="[productVar]" class="order-item-table">
+                <ng-container matColumnDef="productVariantId">
+                  <mat-header-cell *matHeaderCellDef> 款式編號 </mat-header-cell>
+                  <mat-cell *matCellDef="let productVar"> {{ productVar.productVariantId }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="color">
+                  <mat-header-cell *matHeaderCellDef> 顏色 </mat-header-cell>
+                  <mat-cell *matCellDef="let productVar"> {{ productVar.color }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="size">
+                  <mat-header-cell *matHeaderCellDef> 尺寸 </mat-header-cell>
+                  <mat-cell *matCellDef="let productVar"> {{ productVar.size }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                  <mat-header-cell *matHeaderCellDef> 數量 </mat-header-cell>
+                  <mat-cell *matCellDef="let productVar"> {{ productVar.quantity }} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="productVarHeaders"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: productVarHeaders"></mat-row>
+              </mat-table>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
