@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>新增評論</h2>
+<mat-dialog-content>
+  <div *ngIf="data.productName" class="mb-3">
+    <p>商品名稱: {{data.productName}}</p>
+  </div>
+  <div class="flex-column">
+    <!-- 評分 -->
+    <mat-form-field class="w-full mb-3">
+      <mat-label>評分</mat-label>
+      <input matInput type="number" [(ngModel)]="newReview.rating"
+             (ngModelChange)="checkFormValidity()"
+             name="rating" min="1" max="5" required />
+      <mat-error *ngIf="newReview.rating < 1 || newReview.rating > 5">
+        請給予 1-5 分的評分
+      </mat-error>
+    </mat-form-field>
+    <!-- 評論 -->
+    <mat-form-field class="w-full">
+      <mat-label>評論</mat-label>
+      <textarea matInput [(ngModel)]="newReview.comment"
+                (ngModelChange)="checkFormValidity()"
+                name="comment" required rows="6"></textarea>
+      <mat-error *ngIf="!newReview.comment.trim()">
+        請填寫評論內容
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">取消</button>
+  <button mat-raised-button color="primary"
+          [disabled]="!isFormValid"
+          (click)="addReview()">送出評論</button>
+</mat-dialog-actions>

@@ -33,7 +33,8 @@ export class ProductFormComponent {
 
   constructor(private productService: ProductService, private authService: AuthService) {}
 
-  addVariant() {
+  addVariant(event: Event) {
+    event.preventDefault();// 阻止默认的表单提交行为
     // 將新變體加入 ProductVariant
     this.product.productVariants.push({ ...this.newVariant });
     // 清空新變體的表單

@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
 // import { StoreOrderSummaryComponent } from './order/store-order-summary/store-order-summary.component';
 // import { OrderItemDetailComponent } from './order/order-item-detail/order-item-detail.component';
 import {MatCardModule} from "@angular/material/card";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatError, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -44,6 +44,9 @@ import {
 } from "@angular/material/table";
 import {NewStyleProductDetailComponent} from "./new-style-product-detail/new-style-product-detail.component";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {CustomerReviewComponent} from "./customer-review/customer-review.component";
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatInput} from "@angular/material/input";
 
 
 @NgModule({
@@ -58,7 +61,8 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
     // StoreOrderSummaryComponent,
     // OrderItemDetailComponent,
     NewStyleOrderComponent,
-    NewStyleProductDetailComponent
+    NewStyleProductDetailComponent,
+    CustomerReviewComponent
   ],
   providers:[
     CookieService,
@@ -106,6 +110,12 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
     MatBottomSheetContainer,
     MatGridList,
     MatGridTile,
+    MatError,
+    MatLabel,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogTitle,
+    MatInput
   ]
 })
 export class CustomerModule { }

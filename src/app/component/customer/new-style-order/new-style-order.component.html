@@ -36,7 +36,7 @@
           <ng-container matColumnDef="blank">
             <mat-header-cell *matHeaderCellDef> 確認訂單 </mat-header-cell>
             <mat-cell *matCellDef="let order">
-              <ng-container *ngIf="order.shipStatus === 'Delivered'">
+              <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Delivered'.toLowerCase()">
                 <button mat-stroked-button color="primary" (click)="confirmTransaction(order.orderId)" style="align-content: center">
                   完成並撥款
                 </button>
@@ -83,12 +83,12 @@
         <mat-table [dataSource]="orderItems[store.storeOrderId]" class="order-item-table">
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> 商品名稱 </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{ item.name }} </mat-cell>
+            <mat-cell *matCellDef="let item"> {{ item.productName }} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="price">
             <mat-header-cell *matHeaderCellDef> 單價 </mat-header-cell>
-            <mat-cell *matCellDef="let item"> {{ item.price | currency }} </mat-cell>
+            <mat-cell *matCellDef="let item"> {{ item.unitPrice | currency }} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="quantity">
@@ -114,7 +114,7 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
             <mat-cell *matCellDef="let item">
-              <ng-container *ngIf="order.shipStatus === 'Completed'">
+              <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Completed'.toLowerCase()">
                 <button mat-button color="warn" (click)="applyRefund(item)">
                   申請退款
                 </button>
@@ -122,8 +122,19 @@
             </mat-cell>
           </ng-container>
 
-          <mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions']"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions']"></mat-row>
+          <ng-container matColumnDef="review">
+            <mat-header-cell *matHeaderCellDef> 評論 </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Completed'.toLowerCase()">
+                <button mat-button color="warn" (click)="applyReview(item)">
+                  評論
+                </button>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions', 'review']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', 'totalPrice', 'size', 'color', 'actions', 'review']"></mat-row>
         </mat-table>
       </mat-expansion-panel>
     </mat-accordion>

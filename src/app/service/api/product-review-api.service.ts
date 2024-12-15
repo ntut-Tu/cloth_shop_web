@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ApiResponseDTO } from '../../model/api-response.model';
 
 import { Review } from '../../model/review/review.model';
+import {AddReviewResponse} from "../../model/review/add-review-response.model";
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { Review } from '../../model/review/review.model';
 })
 
 export class ProductReviewApiService {
-  private apiUrl =  environment.baseUrl + 'api/products';
+  private apiUrl =  environment.baseUrl + '/api/review';
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +23,9 @@ export class ProductReviewApiService {
    * @param review - 評價資料
    * @returns 新曾評價操作的結果
    */
-  addReview(review: Review): Observable<ApiResponseDTO<any>> {
-    const url = `${this.apiUrl}/${review.productId}/reviews`;
-    return this.http.post<ApiResponseDTO<any>>(url, review);
+  addReview(review: Review): Observable<ApiResponseDTO<AddReviewResponse>> {
+    const url = `${this.apiUrl}/add`;
+    return this.http.post<ApiResponseDTO<AddReviewResponse>>(url, review);
   }
 
   // /**
