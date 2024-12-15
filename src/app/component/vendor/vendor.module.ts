@@ -64,6 +64,9 @@ import {MatList, MatListItem, MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { NewStyleVProductDetailComponent } from './new-style-v-product-detail/new-style-v-product-detail.component';
 import {NewStyleVendorOrderComponent} from "./new-style-vendor-order/new-style-vendor-order.component";
+import { VendorLedgerComponent } from './vendor-ledger/vendor-ledger.component';
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -76,7 +79,8 @@ import {NewStyleVendorOrderComponent} from "./new-style-vendor-order/new-style-v
     AddCouponComponent,
     NewStyleVProduct,
     NewStyleVProductDetailComponent,
-    NewStyleVendorOrderComponent
+    NewStyleVendorOrderComponent,
+    VendorLedgerComponent
     // EditCouponComponent,
   ],
   imports: [
@@ -150,6 +154,10 @@ import {NewStyleVendorOrderComponent} from "./new-style-vendor-order/new-style-v
     MatIconButton,
     MatButton,
     MatTable,
+    MatTabGroup,
+    MatTab,
+    NgxChartsModule,
+
   ],
   providers:[
     MatDatepickerModule,

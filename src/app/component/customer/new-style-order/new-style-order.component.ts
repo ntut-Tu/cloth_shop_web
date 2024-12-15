@@ -48,7 +48,7 @@ export class NewStyleOrderComponent implements OnInit {
   confirmTransaction(orderId: number): void {
     console.log(`訂單 ${orderId} 已完成交易`);
     this.orderService.updateOrderStatus(orderId, 'Completed');
-    // 實際業務邏輯
+    this.ngOnInit();
   }
 
   applyRefund(item: any): void {

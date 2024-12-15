@@ -34,6 +34,7 @@ export class NewStyleVendorOrderComponent implements OnInit {
     const updateResult =  this.vendorOrderService.updateStoreOrderStatus(storeOrderId,status);
     if(updateResult){
       alert("update success")
+      this.ngOnInit();
     }else {
       alert(updateResult)
     }
