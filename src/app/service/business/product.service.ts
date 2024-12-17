@@ -52,4 +52,8 @@ export class ProductService {
   getProductSummariesByCategory(category: string,pageNumber:number,pageSize:number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
     return this.productApiService.getProductSummariesByCategory(category,pageNumber,pageSize);
   }
+
+  searchProduct(searchKeyword: string,pageNumber:number,pageSize:number):Observable<ApiResponseDTO<ProductSummaryModel[]>> {
+    return this.productApiService.searchProduct(searchKeyword,pageNumber,pageSize);
+  }
 }

@@ -66,3 +66,25 @@ mat-list-item.selected {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 提升區域感 */
   overflow-y: auto; /* 如果內容過多，允許滾動 */
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 控制元素間距 */
+}
+
+.search-container .sort-by {
+  flex-shrink: 0; /* 確保排序欄位不會縮小 */
+}
+
+.search-container mat-form-field {
+  flex-shrink: 0; /* 防止欄位縮小 */
+}
+
+.search-container mat-form-field input {
+  max-width: 200px; /* 設置輸入框最大寬度 */
+}
+
+.search-container button {
+  flex-shrink: 0; /* 防止按鈕變形 */
+}

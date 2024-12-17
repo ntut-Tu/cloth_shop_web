@@ -62,4 +62,12 @@ export class ProductApiService {
       .set('pageSize', pageSize.toString());
     return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/category/${category}`,{params});
   }
+
+  searchProduct(searchKeyword: string, pageNumber: number, pageSize: number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
+    const params = new HttpParams()
+      .set('page', pageNumber.toString())
+      .set('pageSize', pageSize.toString())
+      .set('searchKeyword', searchKeyword);
+    return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/search`, { params });
+  }
 }

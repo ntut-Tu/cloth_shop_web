@@ -7,7 +7,8 @@ export interface ProductSummaryModel {
   rate: number;
   imageUrl: string;
   category: string;
-  storeDescription: string;
+  storeName: string;
+  storeImageUrl?: string;
 }
 export interface ProductVariant {
   productVariantId : number;

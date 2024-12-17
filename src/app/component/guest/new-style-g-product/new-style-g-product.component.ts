@@ -3,6 +3,7 @@ import {ProductService} from "../../../service/business/product.service";
 import {ProductSummaryModel} from "../../../model/product-summary.model";
 import {MatDialog} from "@angular/material/dialog";
 import {GuestViewDetailComponent} from "../new-style-g-view-detail/guest-view-detail.component";
+import {onImageError} from "../../../utils/image-utils.service";
 
 @Component({
   selector: 'app-products',
@@ -24,7 +25,7 @@ export class NewStyleGProductComponent implements OnInit {
     { value: 'Accessories', viewValue: '配件' },
     { value: 'Other', viewValue: '其他' }
   ];
-  selectedCategory: string = '全部';
+  selectedCategory: string = 'All';
   selectedSortOption: string = '日期';
   sortOptions: { value: string, viewValue: string }[] = [
     { value: 'sold', viewValue: '熱度' },
@@ -32,6 +33,7 @@ export class NewStyleGProductComponent implements OnInit {
     { value: 'date', viewValue: '日期' }
   ];
   products: any[] = [];
+  searchKeyword: string='';
 
   constructor(private productService: ProductService,private dialog: MatDialog) {}
 
@@ -70,4 +72,18 @@ export class NewStyleGProductComponent implements OnInit {
       }
     );
   }
+
+  onSearch() {
+    if(this.searchKeyword!=''){
+      this.productService.searchProduct(this.searchKeyword,this.currentPage, this.pageSize).subscribe((response) => {
+        if (response.status) {
+          this.products = response.data;
+        } else {
+          console.error(response.message);
+        }
+      });
+    }
+  }
+
+  protected readonly onImageError = onImageError;
 }

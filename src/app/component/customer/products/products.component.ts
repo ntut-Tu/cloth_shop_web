@@ -8,6 +8,8 @@ import {
 } from "../../vendor/new-style-v-product-detail/new-style-v-product-detail.component";
 import {CartComponent} from "../cart/cart.component";
 import {CartService} from "../../../service/business/cart.service";
+import {onImageError} from "../../../utils/image-utils.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-products',
@@ -29,7 +31,7 @@ export class ProductsComponent implements OnInit {
     { value: 'Accessories', viewValue: '配件' },
     { value: 'Other', viewValue: '其他' }
   ];
-  selectedCategory: string = '全部';
+  selectedCategory: string = 'All';
   selectedSortOption: string = '日期';
   sortOptions: { value: string, viewValue: string }[] = [
     { value: 'sold', viewValue: '熱度' },
@@ -37,6 +39,8 @@ export class ProductsComponent implements OnInit {
     { value: 'date', viewValue: '日期' }
   ];
   products: any[] = [];
+  searchKeyword: string='';
+  protected readonly onImageError = onImageError;
 
   constructor(private productService: ProductService,private dialog: MatDialog,private cartService:CartService) {}
 
@@ -81,4 +85,20 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
+
+  onSearch() {
+    if(this.searchKeyword!=''){
+      this.productService.searchProduct(this.searchKeyword,this.currentPage, this.pageSize).subscribe((response) => {
+        if (response.status) {
+          this.products = response.data;
+        } else {
+          console.error(response.message);
+        }
+      });
+    }
+  }
+
+
+
+
 }

@@ -25,35 +25,28 @@
   z-index: 1100; /* 確保在彈窗內容之上 */
 }
 
-/*!* 设置卡片的基本样式 *!*/
-/*.product-card {*/
-/*  background-color: #f9f9f9;*/
-/*  border: 1px solid #ddd;*/
-/*  border-radius: 10px;*/
-/*  padding: 30px;*/
-/*  text-align: center;*/
-/*  cursor: pointer;*/
-/*  flex-direction: column;*/
-/*  justify-content: space-between;*/
-/*  transition: box-shadow 0.3s ease;*/
-/*  height: 90%;*/
-/*}*/
-/*!* 卡片内的标题 *!*/
-/*.product-card h2 {*/
-/*  font-size: 1.2em;*/
-/*  margin: 10px 0;*/
-/*  min-height: 50px; !* 确保标题区域高度一致 *!*/
-/*  display: -webkit-box;*/
-/*  -webkit-line-clamp: 2; !* 限制标题显示两行 *!*/
-/*  -webkit-box-orient: vertical;*/
-/*  overflow: hidden;*/
-/*  text-overflow: ellipsis;*/
-/*  white-space: normal; !* 确保换行 *!*/
-/*}*/
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 控制元素間距 */
+}
 
-/*.product-card:hover {*/
-/*  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);*/
-/*}*/
+.search-container .sort-by {
+  flex-shrink: 0; /* 確保排序欄位不會縮小 */
+}
+
+.search-container mat-form-field {
+  flex-shrink: 0; /* 防止欄位縮小 */
+}
+
+.search-container mat-form-field input {
+  max-width: 200px; /* 設置輸入框最大寬度 */
+}
+
+.search-container button {
+  flex-shrink: 0; /* 防止按鈕變形 */
+}
+
 
 /* 弹窗背景 */
 .modal-backdrop {
