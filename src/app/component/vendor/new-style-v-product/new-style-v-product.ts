@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/business/product.service';
-import { ProductSummaryModel } from '../../../model/product-summary.model';
+import { ProductSummaryModel } from '../../../model/product/product-summary.model';
 import {ApiResponseDTO} from "../../../model/api-response.model";
 import {Observable} from "rxjs";
 import {NewStyleVProductDetailComponent} from "../new-style-v-product-detail/new-style-v-product-detail.component";

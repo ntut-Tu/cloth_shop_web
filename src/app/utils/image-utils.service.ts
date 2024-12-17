@@ -1,4 +1,4 @@
 export function onImageError(event: Event) {
   const imgElement = event.target as HTMLImageElement;
-  imgElement.src = "https://via.placeholder.com/250x250"; // 替代圖片的路徑
+  imgElement.src = "/assets/images/150.jpg"; // 替代圖片的路徑
 }

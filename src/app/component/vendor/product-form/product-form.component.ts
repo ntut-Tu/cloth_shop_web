@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AddProductRequest, ProductDetail, ProductVariant} from "../../../model/product-summary.model";
+import {AddProductRequest, ProductDetail, ProductVariant} from "../../../model/product/product-summary.model";
 import {ProductService} from "../../../service/business/product.service";
 import {AuthService} from "../../../service/business/auth.service";
 import {environment} from "../../../../environments/environment";

@@ -40,6 +40,7 @@ import {
 import {ReviewComponent} from "./review/review.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
+import {MatPaginator} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import {MatInput} from "@angular/material/input";
         MatGridList,
         MatGridTile,
         MatDialogModule,
-        MatInput
+        MatInput,
+        MatPaginator
     ]
 })
 export class GuestModule { }

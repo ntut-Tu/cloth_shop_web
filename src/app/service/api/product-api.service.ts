@@ -3,8 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponseDTO } from '../../model/api-response.model';
-import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product-summary.model';
+import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product/product-summary.model';
 import { map } from 'rxjs/operators';
+import {FetchProductsParams} from "../../model/product/FetchProductsParams.model";
+import {PaginatedResponse} from "../../model/product/product-summary-v2.model";
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +71,25 @@ export class ProductApiService {
       .set('pageSize', pageSize.toString())
       .set('searchKeyword', searchKeyword);
     return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/search`, { params });
+  }
+
+
+  fetchProducts(fetchParams: FetchProductsParams): Observable<ApiResponseDTO<PaginatedResponse>> {
+    let httpParams = new HttpParams()
+      .set('page', fetchParams.page.toString())
+      .set('pageSize', fetchParams.pageSize.toString())
+      .set('role', fetchParams.role);
+
+    if (fetchParams.category) {
+      httpParams = httpParams.set('category', fetchParams.category);
+    }
+    if (fetchParams.sort) {
+      httpParams = httpParams.set('sort', fetchParams.sort);
+    }
+    if (fetchParams.search) {
+      httpParams = httpParams.set('search', fetchParams.search);
+    }
+
+    return this.http.get<ApiResponseDTO<PaginatedResponse>>(`${this.apiUrl}/v2`, { params: httpParams });
   }
 }

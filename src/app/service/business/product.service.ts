@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiResponseDTO } from '../../model/api-response.model';
-import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product-summary.model';
-import { ProductApiService } from '../api/product-api.service';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ApiResponseDTO} from '../../model/api-response.model';
+import {AddProductRequest, ProductDetail, ProductSummaryModel} from '../../model/product/product-summary.model';
+import {ProductApiService} from '../api/product-api.service';
 import {ImageUploadApiService} from "../api/image-upload-api.service";
+import {FetchProductsParams} from "../../model/product/FetchProductsParams.model";
+import {PaginatedResponse} from "../../model/product/product-summary-v2.model";
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +57,11 @@ export class ProductService {
 
   searchProduct(searchKeyword: string,pageNumber:number,pageSize:number):Observable<ApiResponseDTO<ProductSummaryModel[]>> {
     return this.productApiService.searchProduct(searchKeyword,pageNumber,pageSize);
+  }
+
+
+  // -----------------------------------------------------------------------------------------------------------
+  getProducts(fetchParams:FetchProductsParams): Observable<ApiResponseDTO<PaginatedResponse>> {
+    return this.productApiService.fetchProducts(fetchParams);
   }
 }

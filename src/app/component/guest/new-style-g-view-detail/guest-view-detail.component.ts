@@ -1,7 +1,8 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges, Inject} from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
-import { CartItem, ProductDetail, ProductVariant } from "../../../model/product-summary.model";
+import { CartItem, ProductDetail, ProductVariant } from "../../../model/product/product-summary.model";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {onImageError} from "../../../utils/image-utils.service";
 
 @Component({
   selector: 'app-guest-view-detail',
@@ -32,4 +33,6 @@ export class GuestViewDetailComponent {
     alert('請登入後再加入購物車！');
     this.dialogRef.close();
   }
+
+  protected readonly onImageError = onImageError;
 }

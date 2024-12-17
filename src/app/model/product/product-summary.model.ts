@@ -1,4 +1,3 @@
-import {Product} from "./product.model";
 
 export interface ProductSummaryModel {
   productId: number;

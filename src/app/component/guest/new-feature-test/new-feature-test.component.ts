@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/business/product.service';
-import { ProductSummaryModel } from '../../../model/product-summary.model';
+import { ProductSummaryModel } from '../../../model/product/product-summary.model';
 import {fakeData} from "../fakeData";
 
 
