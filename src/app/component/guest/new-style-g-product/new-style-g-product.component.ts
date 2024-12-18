@@ -14,7 +14,7 @@ import {ProductSummaryV2ResponseDTO} from "../../../model/product/product-summar
 export class NewStyleGProductComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 30;
-  userType: string = 'customer';
+  userType: string = 'guest';
   detailedProduct: any = null;
   categories: { value: string, viewValue: string }[] = [
     { value: 'All', viewValue: '全部' },

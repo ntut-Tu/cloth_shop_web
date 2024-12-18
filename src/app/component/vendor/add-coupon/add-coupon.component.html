@@ -84,13 +84,21 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>購買商品變體 ID</mat-label>
-        <input matInput type="number" formControlName="buyVariantId" placeholder="輸入購買商品變體 ID" />
+        <mat-label>購買商品變體</mat-label>
+        <mat-select formControlName="buyVariantId">
+          <mat-option *ngFor="let product of productLists" [value]="product.productVariantId">
+            {{ product.productName }} - {{ product.size }} / {{ product.color }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>贈送商品變體 ID</mat-label>
-        <input matInput type="number" formControlName="giftVariantId" placeholder="輸入贈送商品變體 ID" />
+        <mat-label>贈送商品變體</mat-label>
+        <mat-select formControlName="giftVariantId">
+          <mat-option *ngFor="let product of productLists" [value]="product.productVariantId">
+            {{ product.productName }} - {{ product.size }} / {{ product.color }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </form>

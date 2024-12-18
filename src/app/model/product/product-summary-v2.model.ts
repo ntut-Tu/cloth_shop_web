@@ -15,3 +15,10 @@ export interface PaginatedResponse {
   items: ProductSummaryV2ResponseDTO[];
   totalRecords: number;
 }
+
+export interface ProductInfo {
+  productVariantId: number;
+  productName: string;
+  size: string;
+  color: string;
+}

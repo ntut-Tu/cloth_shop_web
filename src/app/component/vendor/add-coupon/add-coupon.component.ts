@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   BaseDiscountModel,
   DiscountDetailModel,
@@ -11,20 +11,23 @@ import {MatDialogRef} from "@angular/material/dialog";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {CouponApiService} from "../../../service/api/coupon-api.service";
+import {ProductService} from "../../../service/business/product.service";
+import {ProductInfo} from "../../../model/product/product-summary-v2.model";
 
 @Component({
   selector: 'app-add-coupon',
   templateUrl: './add-coupon.component.html',
   styleUrl: './add-coupon.component.css'
 })
-export class AddCouponComponent {
+export class AddCouponComponent implements OnInit {
   couponForm: FormGroup;
   couponTypes = [
     {value: 'Seasonal_Discount', label: '季節性優惠'},
     {value: 'Special_Discount', label: '特殊優惠'},
   ];
+  productLists: ProductInfo[] = [];
 
-  constructor(private fb: FormBuilder, private couponService: CouponService) {
+  constructor(private fb: FormBuilder, private couponService: CouponService,private productService: ProductService) {
     this.couponForm = this.fb.group({
       couponType: ['', Validators.required],
       code: ['', Validators.required],
@@ -40,6 +43,22 @@ export class AddCouponComponent {
       giftVariantId: [null],
     });
 
+  }
+
+  ngOnInit() {
+    this.onLoadProductList();
+  }
+
+  onLoadProductList(): void {
+    this.productService.getProductListForCoupon().subscribe(
+      (response) => {
+        this.productLists = response.data;
+        console.log('商品列表:', response);
+      },
+      (error) => {
+        console.error('加載商品列表失敗:', error);
+      }
+    );
   }
 
   onSubmit(): void {

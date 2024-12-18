@@ -2,64 +2,61 @@
   <mat-drawer mode="side" opened style="width: 150px">
     <h3>商品分類</h3>
     <mat-list>
-      <mat-list-item *ngFor="let category of categories" (click)="onCategorySelect(category.value)" [class.selected]="category.viewValue === selectedCategory">
+      <mat-list-item *ngFor="let category of categories"
+                     (click)="onCategorySelect(category.value)"
+                     [class.selected]="category.value === selectedCategory">
         {{ category.viewValue }}
       </mat-list-item>
     </mat-list>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="sort-by">
-      <mat-form-field appearance="fill" >
-        <mat-label>Sort By</mat-label>
-        <mat-select [(value)]="selectedSortOption">
-          <mat-option *ngFor="let option of sortOptions" [value]="option.value">
-            {{ option.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="main-container">
+      <div class="products-container">
+        <form class="search-container" (ngSubmit)="onSearch()">
+          <div class="sort-by">
+            <mat-form-field appearance="fill">
+              <mat-label>排序</mat-label>
+              <mat-select [(value)]="selectedSortOption">
+                <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+                  {{ option.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="fill" style="width: 50%;">
+            <mat-label>搜尋商品</mat-label>
+            <input matInput [(ngModel)]="searchKeyword" name="searchKeyword" placeholder="輸入商品名稱" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit">搜尋</button>
+        </form>
+        <mat-grid-list cols="5" gutterSize="10px">
+          <mat-grid-tile *ngFor="let product of products" rowspan="2">
+            <mat-card (click)="onLoadDetail(product)">
+              <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" (error)="onImageError($event)" />
+              <mat-card-title>{{ product.name }}</mat-card-title>
+              <mat-card-content>
+                <div class="price">價格範圍: {{ product.minPrice }} - {{ product.maxPrice }}</div>
+                <div class="sales">總銷量: {{ product.totalSales }}</div>
+                <div class="rate">評分: {{ product.rate }}</div>
+                <div class="category">分類: {{ product.category }}</div>
+              </mat-card-content>
+              <mat-card-header>
+                <mat-card-subtitle>賣家: {{ product.storeName }}</mat-card-subtitle>
+                <img mat-card-avatar [src]="product.storeImageUrl" alt="" (error)="onImageError($event)" />
+              </mat-card-header>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-paginator
+          [length]="totalProducts"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[10, 20, 30, 50]"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+      </div>
+      <div class="cart-container">
+        <div> login to use cart</div>
+      </div>
     </div>
-    <mat-grid-list cols="6" gutterSize="10px">
-      <mat-grid-tile *ngFor="let product of products" rowspan="2">
-        <mat-card (click)="onLoadDetail(product)">
-          <img mat-card-image [src]="product.imageUrl" alt="{{ product.name }}" class = "product-image"/>
-          <mat-card-title>{{ product.name }}</mat-card-title>
-          <mat-card-content>
-            <div class="price">總銷量: {{ product.totalSales }}</div>
-            <div class="rate">評分: {{ product.rate }}</div>
-            <div class="category">分類: {{ product.category }}</div>
-          </mat-card-content>
-          <mat-card-header>
-            <mat-card-subtitle>User Id: {{ "fake user" }}</mat-card-subtitle>
-            <img mat-card-avatar src="https://picsum.photos/300/300/?random"  alt=""/>
-          </mat-card-header>
-          <mat-card-footer></mat-card-footer>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
   </mat-drawer-content>
 </mat-drawer-container>
-
-<!--<div *ngIf="detailedProduct" class="guest-view-detail">-->
-<!--  <img [src]="detailedProduct.imageUrl" alt="{{ detailedProduct.name }}" class="detail-image" />-->
-<!--  <h2>{{ detailedProduct.name }}</h2>-->
-<!--  <p>{{ detailedProduct.description }}</p>-->
-
-<!--  <div *ngIf="detailedProduct.productVariants && detailedProduct.productVariants.length > 0; else errorTemplate" class="variant-selection">-->
-<!--    <label for="variant">選擇款式:</label>-->
-<!--    <select id="variant" (change)="onVariantChange($event)">-->
-<!--      <option *ngFor="let variant of detailedProduct.productVariants" [value]="variant.productVariantId">-->
-<!--        {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元-->
-<!--      </option>-->
-<!--    </select>-->
-<!--  </div>-->
-
-<!--  <ng-template #errorTemplate>-->
-<!--    <p class="error-message">Product detail loading failed.</p>-->
-<!--  </ng-template>-->
-
-<!--  <div class="price" *ngIf="selectedVariant">-->
-<!--    價格: {{ selectedVariant.price }}元-->
-<!--  </div>-->
-
-<!--  <button (click)="addToCart()">加入購物車</button>-->
-<!--</div>-->

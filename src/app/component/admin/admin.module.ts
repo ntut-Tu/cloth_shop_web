@@ -8,12 +8,13 @@ import { UserManagementComponent } from './user-management/user-management.compo
 // import { ProductManagementComponent } from './product-management/product-management.component';
 // import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
 import {SharedModule} from "../shared/shared.module";
+import {ProductManagementComponent} from "./product-management/product-management.component";
 
 @NgModule({
   declarations: [
     AdminPageComponent,
     UserManagementComponent,
-    // ProductManagementComponent,
+    ProductManagementComponent,
     // TransactionRecordsComponent
   ],
   imports: [

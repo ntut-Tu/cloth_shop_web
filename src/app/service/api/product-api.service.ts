@@ -6,7 +6,7 @@ import { ApiResponseDTO } from '../../model/api-response.model';
 import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product/product-summary.model';
 import { map } from 'rxjs/operators';
 import {FetchProductsParams} from "../../model/product/FetchProductsParams.model";
-import {PaginatedResponse} from "../../model/product/product-summary-v2.model";
+import {PaginatedResponse, ProductInfo} from "../../model/product/product-summary-v2.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +16,6 @@ export class ProductApiService {
   private apiUrl = environment.baseUrl + '/api/products';
 
   constructor(private http: HttpClient) {}
-
-  /**
-   * 從後端 API 獲取產品摘要列表
-   * @param page - 分頁的頁碼
-   * @param pageSize - 每頁顯示的產品數量
-   * @returns 包含產品摘要列表的 ApiResponseDTO
-   */
-  getProductSummaries(page: number, pageSize: number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('pageSize', pageSize.toString());
-
-    return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/summaries`, { params });
-  }
 
   /**
    * 從後端 API 獲取特定產品的詳細資訊
@@ -58,22 +44,6 @@ export class ProductApiService {
     return this.http.post<ApiResponseDTO<number>>(`${this.apiUrl}/add`, product);
   }
 
-  getProductSummariesByCategory(category: string,pageNumber:number,pageSize:number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
-    const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('pageSize', pageSize.toString());
-    return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/category/${category}`,{params});
-  }
-
-  searchProduct(searchKeyword: string, pageNumber: number, pageSize: number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
-    const params = new HttpParams()
-      .set('page', pageNumber.toString())
-      .set('pageSize', pageSize.toString())
-      .set('searchKeyword', searchKeyword);
-    return this.http.get<ApiResponseDTO<ProductSummaryModel[]>>(`${this.apiUrl}/search`, { params });
-  }
-
-
   fetchProducts(fetchParams: FetchProductsParams): Observable<ApiResponseDTO<PaginatedResponse>> {
     let httpParams = new HttpParams()
       .set('page', fetchParams.page.toString())
@@ -91,5 +61,9 @@ export class ProductApiService {
     }
 
     return this.http.get<ApiResponseDTO<PaginatedResponse>>(`${this.apiUrl}/v2`, { params: httpParams });
+  }
+
+  getProductListForCoupon(): Observable<ApiResponseDTO<ProductInfo[]>> {
+    return this.http.get<ApiResponseDTO<ProductInfo[]>>(`${this.apiUrl}/product-list-for-coupon`);
   }
 }
