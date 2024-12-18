@@ -17,18 +17,17 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-coupon',
-  templateUrl: './add-coupon.component.html',
-  styleUrl: './add-coupon.component.css'
+  templateUrl: './admin-add-coupon.component.html',
+  styleUrl: './admin-add-coupon.component.css'
 })
-export class AddCouponComponent implements OnInit {
+export class AdminAddCouponComponent implements OnInit {
   couponForm: FormGroup;
   couponTypes = [
-    {value: 'Seasonal_Discount', label: '季節性優惠'},
-    {value: 'Special_Discount', label: '特殊優惠'},
+    {value: 'Shipping_Discount', label: '運費優惠'}
   ];
   productLists: ProductInfo[] = [];
 
-  constructor(private dialogRef: MatDialogRef<AddCouponComponent>,private snackBar: MatSnackBar,private fb: FormBuilder, private couponService: CouponService,private productService: ProductService) {
+  constructor(private dialogRef: MatDialogRef<AdminAddCouponComponent>, private snackBar: MatSnackBar, private fb: FormBuilder, private couponService: CouponService, private productService: ProductService) {
     this.couponForm = this.fb.group({
       couponType: ['', Validators.required],
       code: ['', Validators.required],
@@ -98,7 +97,7 @@ export class AddCouponComponent implements OnInit {
   }
 
   isSeasonal(): boolean {
-    return this.couponForm.get('couponType')?.value === 'Seasonal_Discount';
+    return this.couponForm.get('couponType')?.value === 'Shipping_Discount';
   }
 
   isSpecial(): boolean {
@@ -119,7 +118,7 @@ export class AddCouponComponent implements OnInit {
       } as SpecialDiscountModel;
     }
 
-    if (formData.couponType === 'Seasonal_Discount') {
+    if (formData.couponType === 'Shipping_Discount') {
       return {
         code: formData.code,
         discount_type: formData.discountType,

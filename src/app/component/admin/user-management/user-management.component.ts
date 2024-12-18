@@ -1,69 +1,77 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { UserManageService } from "../../../service/business/user-manage.service";
-import { UserInfoModel } from "../../../model/user-info.model";
+import { UserInfoModel } from "../../../model/user-manage/user-info.model";
 
 @Component({
   selector: 'app-admin.user.management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-// TODO : receive user data from backend success, but not display in the table
-export class UserManagementComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'userName', 'email', 'role', 'establishDate', 'isActive'];
+export class UserManagementComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['id', 'userName', 'email', 'role', 'establishDate', 'isActive','ban-button'];
   dataSource = new MatTableDataSource<UserInfoModel>([]);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  @ViewChild(MatSort) sort: MatSort | null = null;
-
   totalUsers: number = 0;
-  pageSize: number = 20;
+  pageSize: number = 10;
   page: number = 0;
   selectedRow: UserInfoModel | null = null;
+  endOfData: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private userManageService: UserManageService) {}
 
+  ngAfterViewInit(): void {}
+
   ngOnInit(): void {
+    this.page = 0; // 確保每次進入頁面時從第一頁開始
     this.loadUsers();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   loadUsers(): void {
+    if (this.isLoading || this.endOfData) return;
+
+    this.isLoading = true;
     this.userManageService.getUsers(this.page, this.pageSize).subscribe(
       (response) => {
-        const data = response.data;
-        this.dataSource.data = data;
+        const newData = response.data;
+        this.dataSource.data = [...this.dataSource.data, ...newData];
+        this.totalUsers = this.dataSource.data.length;
 
-        // 动态估算总条目数
-        if (data.length < this.pageSize) {
-          this.totalUsers = this.page * this.pageSize + data.length; // 当前加载的总条目数
-        } else {
-          this.totalUsers = (this.page + 1) * this.pageSize + 1; // 假设还有更多数据
+        if (newData.length < this.pageSize) {
+          this.endOfData = true; // 如果新數據小於 pageSize，標記為結束
         }
+        this.page++;
+        this.isLoading = false;
       },
       (error) => {
         console.error('Failed to fetch users', error);
+        this.isLoading = false;
       }
     );
   }
 
-  onPageChange(event: any): void {
-    this.page = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.loadUsers();
+  // 監聽全頁滾動事件
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (
+      scrollTop + clientHeight >= scrollHeight - 1 &&
+      !this.isLoading &&
+      !this.endOfData
+    ) {
+      this.loadUsers();
+    }
   }
 
-  toggleDetails(row: UserInfoModel): void {
-    this.selectedRow = this.selectedRow === row ? null : row;
+  toggleDetails(row: UserInfoModel | null): void {
+    this.selectedRow = row;
   }
 
-  banUser(id: number) {
+  banUser(id: number | undefined) {
+    if(!id) return;
     this.userManageService.banUser(id).subscribe(
       (response) => {
         this.loadUsers();
@@ -72,6 +80,5 @@ export class UserManagementComponent implements OnInit {
         console.error('Failed to ban user', error);
       }
     );
-
   }
 }

@@ -22,3 +22,9 @@ mat-row:hover {
 mat-paginator {
   margin-top: 20px;
 }
+
+.table-container {
+  height: 100%; /* 根據需要調整高度 */
+  overflow: visible;
+  border: 1px solid #ccc; /* 選擇性加上邊框 */
+}

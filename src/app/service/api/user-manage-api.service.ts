@@ -3,7 +3,8 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ApiResponseDTO} from "../../model/api-response.model";
 import {Observable} from "rxjs";
-import {UserInfoModel} from "../../model/user-info.model";
+import {UserInfoModel} from "../../model/user-manage/user-info.model";
+import {UserLogModel} from "../../model/user-manage/user-log.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,11 @@ export class UserManageApiService {
 
 
   banUser(userId: number): Observable<ApiResponseDTO<any>> {
-    const body = { userId };
-    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/banUser`, body);
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/banUser/${userId}`, {});
   }
 
+  getUserLogs(page: number, pageSize: number): Observable<ApiResponseDTO<UserLogModel[]>> {
+    const params = { page: page.toString(), size: pageSize.toString() }; // 转换为字符串
+    return this.http.get<ApiResponseDTO<UserLogModel[]>>(`${this.apiUrl}/userLogs`, { params });
+  }
 }

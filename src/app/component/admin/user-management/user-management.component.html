@@ -1,49 +1,47 @@
-<mat-table [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{ user.id }} </mat-cell>
-  </ng-container>
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.id }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="userName">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{ user.username }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.username }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="role">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="isActive">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-    <mat-cell *matCellDef="let user">
-      <span [ngClass]="{'active-status': user.isActive, 'inactive-status': !user.isActive}">
-        {{ user.isActive ? 'Active' : 'Inactive' }}
-      </span>
-    </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="establishDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Establish Date </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.establishDate | date }} </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"
-           [class.selected]="row === selectedRow"
-           (click)="toggleDetails(row)">
-  </mat-row>
-</mat-table>
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span [ngClass]="{'active-status': user.isActive, 'inactive-status': !user.isActive}">
+          {{ user.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </mat-cell>
+    </ng-container>
 
-<ng-container *ngIf="selectedRow">
-  <div class="row-details">
-    <p>User Name: {{ selectedRow.username }}</p>
-    <p>Email: {{ selectedRow.email }}</p>
-    <p>Role: {{ selectedRow.role }}</p>
-    <p>Status: {{ selectedRow.isActive ? 'Active' : 'Inactive' }}</p>
-    <button mat-raised-button color="warn" (click)="banUser(selectedRow.id)">Ban User</button>
-  </div>
-</ng-container>
-
-<mat-paginator [length]="totalUsers" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
-</mat-paginator>
+    <ng-container matColumnDef="ban-button">
+      <mat-header-cell *matHeaderCellDef> Ban User </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-raised-button color="warn" (click)="banUser(user.id)">Ban User</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+</div>

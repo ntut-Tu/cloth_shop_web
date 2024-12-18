@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>新增優惠券</h2>
+<mat-dialog-content>
+  <form [formGroup]="couponForm">
+    <!-- 優惠類型 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>優惠類型</mat-label>
+      <mat-select formControlName="couponType">
+        <mat-option *ngFor="let type of couponTypes" [value]="type.value">
+          {{ type.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- 優惠代碼 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>優惠代碼</mat-label>
+      <input matInput formControlName="code" placeholder="輸入優惠代碼" />
+    </mat-form-field>
+
+    <!-- 開始日期 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>選擇開始日期</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+<!--    <button mat-raised-button color="primary" (click)="startPicker.open()">選擇開始日期</button>-->
+
+    <!-- 結束日期 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>選擇結束日期</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+<!--    <button mat-raised-button color="primary" (click)="endPicker.open()">選擇結束日期</button>-->
+
+    <!-- Fields for Seasonal Discount -->
+    <div *ngIf="isSeasonal()">
+      <!-- 折扣方式切換 -->
+      <mat-button-toggle-group
+        formControlName="discountType"
+        aria-label="折扣方式切換"
+        class="example-full-width"
+      >
+        <mat-button-toggle value="ratio">百分比折扣</mat-button-toggle>
+        <mat-button-toggle value="amount">固定金額折扣</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- 百分比折扣 -->
+      <div *ngIf="couponForm.get('discountType')?.value === 'ratio'">
+        <mat-form-field class="example-full-width">
+          <mat-label>折扣百分比</mat-label>
+          <input matInput type="number" formControlName="ratio" placeholder="輸入折扣百分比" />
+        </mat-form-field>
+      </div>
+
+      <!-- 固定金额折扣 -->
+      <div *ngIf="couponForm.get('discountType')?.value === 'amount'">
+        <mat-form-field class="example-full-width">
+          <mat-label>固定金額折扣</mat-label>
+          <input matInput type="number" formControlName="amount" placeholder="輸入固定金額折扣" />
+        </mat-form-field>
+      </div>
+
+      <!-- 最低消費金額 -->
+      <mat-form-field class="example-full-width">
+        <mat-label>最低消費金額</mat-label>
+        <input matInput type="number" formControlName="minimumSpend" placeholder="輸入最低消費金額" />
+      </mat-form-field>
+    </div>
+
+
+    <!-- Fields for Special Discount -->
+    <div *ngIf="isSpecial()">
+      <mat-form-field class="example-full-width">
+        <mat-label>購買數量</mat-label>
+        <input matInput type="number" formControlName="buyQuantity" placeholder="輸入購買數量" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>贈送數量</mat-label>
+        <input matInput type="number" formControlName="giftQuantity" placeholder="輸入贈送數量" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>購買商品變體</mat-label>
+        <mat-select formControlName="buyVariantId">
+          <mat-option *ngFor="let product of productLists" [value]="product.productVariantId">
+            {{ product.productName }} - {{ product.size }} / {{ product.color }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>贈送商品變體</mat-label>
+        <mat-select formControlName="giftVariantId">
+          <mat-option *ngFor="let product of productLists" [value]="product.productVariantId">
+            {{ product.productName }} - {{ product.size }} / {{ product.color }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>取消</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">提交</button>
+</mat-dialog-actions>

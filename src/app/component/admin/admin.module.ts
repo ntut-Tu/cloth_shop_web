@@ -9,16 +9,23 @@ import {UserManagementComponent} from './user-management/user-management.compone
 // import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
 import {SharedModule} from "../shared/shared.module";
 import {ProductManagementComponent} from "./product-management/product-management.component";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatListModule} from "@angular/material/list";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
+import {MatDrawer, MatDrawerContainer, MatSidenavModule} from "@angular/material/sidenav";
+import {MatList, MatListItem, MatListModule} from "@angular/material/list";
+import {MatError, MatFormField, MatFormFieldModule, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatInput} from "@angular/material/input";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {MatCardModule} from "@angular/material/card";
+import {
+  MatCard,
+  MatCardContent, MatCardFooter,
+  MatCardHeader,
+  MatCardImage,
+  MatCardModule,
+  MatCardTitle
+} from "@angular/material/card";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
-import {MatIconModule} from "@angular/material/icon";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
 import {
@@ -40,14 +47,35 @@ import {
   MatRowDef,
   MatTable, MatTableModule
 } from "@angular/material/table";
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogModule} from "@angular/material/dialog";
 import {MatSort, MatSortModule} from "@angular/material/sort";
+import { UserLogComponent } from './user-log/user-log.component';
+import {AdminDiscountComponent} from "./admin-discount/admin-discount.component";
+import {AdminAddCouponComponent} from "./admin-add-coupon/admin-add-coupon.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.component";
 
 @NgModule({
   declarations: [
     AdminPageComponent,
     UserManagementComponent,
     ProductManagementComponent,
+    UserLogComponent,
+    AdminDiscountComponent,
+    AdminAddCouponComponent,
+    AdminEditCouponComponent
     // TransactionRecordsComponent
   ],
   imports: [
@@ -97,7 +125,85 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
     MatSort,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    MatDialogModule,
+    MatDialogActions,
+    MatDialogModule,
+    MatFormField,
+    MatLabel,
+    FormsModule,
+    MatFormField,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatInput,
+    MatButton,
+    MatLabel,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
+    MatGridList,
+    MatGridTile,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatCellDef,
+    MatHeaderCellDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    MatRow,
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatSlideToggle,
+    MatError,
+    MatDialogModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIcon,
+    MatHint,
+    MatRadioGroup,
+    MatRadioButton,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    MatSuffix,
+    MatDrawerContainer,
+    MatList,
+    MatListItem,
+    MatCardImage,
+    MatCardHeader,
+    MatCardFooter,
+    MatDrawer,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatGridList,
+    MatGridTile,
+    MatIconButton,
+    MatButton,
+    MatTable,
+    MatTabGroup,
+    MatTab,
+    NgxChartsModule,
+    MatPaginator,
   ]
 })
 export class AdminModule { }

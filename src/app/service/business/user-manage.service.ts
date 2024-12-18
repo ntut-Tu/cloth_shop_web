@@ -15,4 +15,8 @@ export class UserManageService {
   banUser(userId: number) {
     return this.userManageApiService.banUser(userId);
   }
+
+  getUserLogs(page: number, pageSize: number) {
+    return this.userManageApiService.getUserLogs(page, pageSize);
+  }
 }
