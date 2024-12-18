@@ -117,3 +117,6 @@
     </mat-accordion>
   </mat-expansion-panel>
 </mat-accordion>
+<div class="load-more-button-container" *ngIf="!isLastPage">
+  <button mat-raised-button color="primary" (click)="loadMore()">載入更多</button>
+</div>

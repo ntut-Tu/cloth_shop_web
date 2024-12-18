@@ -13,6 +13,10 @@ import {VendorOrderModel} from "../../../model/order/vendor-order.model";
 })
 export class NewStyleVendorOrderComponent implements OnInit {
   storeOrders: VendorOrderModel[] = [];
+  currentPage: number = 1; // 當前頁數
+  pageSize: number = 10; // 每頁顯示數量
+  isLastPage: boolean = false; // 是否為尾頁
+
 
   storeOrderHeaders = ['storeOrderId', 'orderDate', 'totalNet','totalDiscount','totalPrice','shippingDiscountCode','shipStatus','payStatus','blank']
   orderHeaders = ['productId','productName']
@@ -26,10 +30,28 @@ export class NewStyleVendorOrderComponent implements OnInit {
 
 
   loadStoreOrders(): void {
-    this.vendorOrderService.getVendorStoreOrders().subscribe(response  => {
-      this.storeOrders = response.data;
+    this.vendorOrderService.getVendorStoreOrders(this.currentPage, this.pageSize).subscribe(response  => {
+      if (response.data.length < this.pageSize) {
+        this.isLastPage = true; // 當回傳資料少於 pageSize 時，設定為尾頁
+      } else {
+        this.isLastPage = false;
+      }
+
+      if (this.currentPage === 1) {
+        this.storeOrders = response.data; // 第一頁時直接覆蓋
+      } else {
+        this.storeOrders = [...this.storeOrders, ...response.data]; // 加載更多
+      }
     });
   }
+
+  loadMore(): void {
+    if (!this.isLastPage) {
+      this.currentPage++;
+      this.loadStoreOrders();
+    }
+  }
+
   updateStoreOrderStatus(storeOrderId:number,status:string="Shipped"):void{
     const updateResult =  this.vendorOrderService.updateStoreOrderStatus(storeOrderId,status);
     if(updateResult){

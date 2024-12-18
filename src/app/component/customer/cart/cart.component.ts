@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
 import {CartItem} from "../../../model/product/product-summary.model";
 import {Router} from "@angular/router";

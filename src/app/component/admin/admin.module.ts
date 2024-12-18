@@ -66,6 +66,7 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.component";
+import {AdminOrderComponent} from "./admin-order/admin-order.component";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.co
     UserLogComponent,
     AdminDiscountComponent,
     AdminAddCouponComponent,
-    AdminEditCouponComponent
+    AdminEditCouponComponent,
+    AdminOrderComponent
     // TransactionRecordsComponent
   ],
   imports: [

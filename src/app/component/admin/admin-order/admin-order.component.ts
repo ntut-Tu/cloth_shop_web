@@ -5,20 +5,20 @@ import { OrderItemDetailDTO } from '../../../model/order/order-item-detail.model
 import { OrderService } from '../../../service/business/order.service';
 import {ReviewComponent} from "../../guest/review/review.component";
 import {MatDialog} from "@angular/material/dialog";
-import {CustomerReviewComponent} from "../customer-review/customer-review.component";
 
 @Component({
   selector: 'app-new-style-order',
-  templateUrl: './new-style-order.component.html',
-  styleUrls: ['./new-style-order.component.css']
+  templateUrl: './admin-order.component.html',
+  styleUrls: ['./admin-order.component.css']
 })
-export class NewStyleOrderComponent implements OnInit {
+export class AdminOrderComponent implements OnInit {
   orderSum: OrderSummaryModel[] = [];
   storeOrders: { [orderId: number]: StoreOrderSummaryModel[] } = {};
   orderItems: { [storeOrderId: number]: OrderItemDetailDTO[] } = {};
   currentPage: number = 1; // 當前頁數
   pageSize: number = 10; // 每頁顯示數量
   isLastPage: boolean = false; // 是否為尾頁
+
 
   constructor(private orderService: OrderService,private dialog:MatDialog) {}
 
@@ -77,13 +77,13 @@ export class NewStyleOrderComponent implements OnInit {
     // 實際業務邏輯
   }
 
-  applyReview(item:OrderItemDetailDTO) {
-    const dialogRef = this.dialog.open(CustomerReviewComponent, {
-      width: '600px',
-      data: { productId: item.orderItemId } // 將產品數據傳遞到彈窗
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'success') {
-      }});
-  }
+  // applyReview(item:OrderItemDetailDTO) {
+  //   const dialogRef = this.dialog.open(CustomerReviewComponent, {
+  //     width: '600px',
+  //     data: { productId: item.orderItemId } // 將產品數據傳遞到彈窗
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === 'success') {
+  //     }});
+  // }
 }
