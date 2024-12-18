@@ -23,12 +23,23 @@
       <p class="error-message">商品資訊載入失敗。</p>
     </ng-template>
 
-    <div class="price" *ngIf="selectedVariant">
+    <div *ngIf="selectedVariant">
       <p>價格: {{ selectedVariant.price }}元</p>
+      <p>目前庫存: {{ selectedVariant.stock }}</p>
+      <mat-slide-toggle
+        [(ngModel)]="selectedVariant.isActive"
+        (change)="toggleActiveStatus()"
+      >{{ selectedVariant.isActive ? '已上架' : '未上架' }}</mat-slide-toggle
+      >
+      <mat-form-field class="example-full-width">
+        <mat-label>增加庫存</mat-label>
+        <input matInput type="number" [(ngModel)]="stockToAdd" placeholder="輸入增加的庫存數量" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="updateStock()">確認增加庫存</button>
     </div>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="addToCart()">加入購物車</button>
+    <button mat-raised-button color="warn" (click)="close()">關閉</button>
   </mat-card-actions>
 </mat-card>

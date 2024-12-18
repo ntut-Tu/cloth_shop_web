@@ -66,4 +66,12 @@ export class ProductApiService {
   getProductListForCoupon(): Observable<ApiResponseDTO<ProductInfo[]>> {
     return this.http.get<ApiResponseDTO<ProductInfo[]>>(`${this.apiUrl}/product-list-for-coupon`);
   }
+
+  updateProductStatus(productVariantId:number, updatedStatus: boolean) {
+    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-status/${productVariantId}`, { isActive: updatedStatus });
+  }
+
+  updateProductStock(productVariantId: number, newStock: any) {
+    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-stock/${productVariantId}`, { stock: newStock });
+  }
 }

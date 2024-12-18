@@ -49,4 +49,12 @@ export class ProductService {
   getProductListForCoupon(): Observable<ApiResponseDTO<ProductInfo[]>> {
     return this.productApiService.getProductListForCoupon();
   }
+
+  updateProductStatus(productVariantId:number, updatedStatus: boolean) {
+    return this.productApiService.updateProductStatus(productVariantId, updatedStatus);
+  }
+
+  updateProductStock(productVariantId:number, newStock: any) {
+    return this.productApiService.updateProductStock(productVariantId, newStock);
+  }
 }
