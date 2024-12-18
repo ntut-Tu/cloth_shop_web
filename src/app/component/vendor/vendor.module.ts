@@ -68,6 +68,7 @@ import {VendorLedgerComponent} from './vendor-ledger/vendor-ledger.component';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {MatPaginator} from "@angular/material/paginator";
+import { EditCouponComponent } from './edit-coupon/edit-coupon.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import {MatPaginator} from "@angular/material/paginator";
     NewStyleVProduct,
     NewStyleVProductDetailComponent,
     NewStyleVendorOrderComponent,
-    VendorLedgerComponent
+    VendorLedgerComponent,
+    EditCouponComponent
     // EditCouponComponent,
   ],
     imports: [
