@@ -17,7 +17,7 @@ import {MatInput} from "@angular/material/input";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatBottomSheetContainer} from "@angular/material/bottom-sheet";
@@ -38,9 +38,10 @@ import {
   MatHeaderRowDef,
   MatRow,
   MatRowDef,
-  MatTable
+  MatTable, MatTableModule
 } from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSort, MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -92,8 +93,11 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatGridTile,
     MatDialogModule,
     MatInput,
-    MatPaginator
-    // 使用 `forChild` 注册子路由
+    MatPaginator,
+    MatSort,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class AdminModule { }

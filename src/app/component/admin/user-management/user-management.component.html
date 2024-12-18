@@ -1,36 +1,49 @@
-<table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Account</th>
-    <th>EstablishDate</th>
-    <th>AccountStatus</th>
-    <th>AccountType</th>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-container *ngFor="let user of users; let i = index">
-    <tr (click)="toggleDetails(i)">
-      <td>{{ user.id }}</td>
-      <td>{{ user.account}}</td>
-      <td>{{ user.establishDate }}</td>
-      <td *ngIf="user.accountStatus!='active'" class="expire-status">
-        {{user.accountStatus}}
-      </td>
-      <td *ngIf="user.accountStatus=='active'" class="not-expire-status">
-        {{user.accountStatus}}
-      </td>
-      <td>{{user.accountType}}</td>
-    </tr>
-    <tr *ngIf="toggledOrderIndex === i">
-      <td colspan="5">
-        <div class="edit-user">
-          <button>
-            edit
-          </button>
-        </div>
-      </td>
-    </tr>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.id }} </mat-cell>
   </ng-container>
-  </tbody>
-</table>
+
+  <ng-container matColumnDef="userName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.username }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isActive">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <span [ngClass]="{'active-status': user.isActive, 'inactive-status': !user.isActive}">
+        {{ user.isActive ? 'Active' : 'Inactive' }}
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           [class.selected]="row === selectedRow"
+           (click)="toggleDetails(row)">
+  </mat-row>
+</mat-table>
+
+<ng-container *ngIf="selectedRow">
+  <div class="row-details">
+    <p>User Name: {{ selectedRow.username }}</p>
+    <p>Email: {{ selectedRow.email }}</p>
+    <p>Role: {{ selectedRow.role }}</p>
+    <p>Status: {{ selectedRow.isActive ? 'Active' : 'Inactive' }}</p>
+    <button mat-raised-button color="warn" (click)="banUser(selectedRow.id)">Ban User</button>
+  </div>
+</ng-container>
+
+<mat-paginator [length]="totalUsers" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
+</mat-paginator>
