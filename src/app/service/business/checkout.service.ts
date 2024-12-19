@@ -10,7 +10,7 @@ import {
 } from "../../model/checkout/confirm-oder.model";
 import { SubmitOrderModel, SubmitOrderResponseModel } from "../../model/checkout/submit-order.model";
 import { ApiResponseDTO } from "../../model/api-response.model";
-import { CartItem } from "../../model/product-summary.model";
+import { CartItem } from "../../model/product/product-summary.model";
 
 @Injectable({
   providedIn: 'root'

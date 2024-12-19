@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>修改優惠狀態</h2>
+<mat-dialog-content>
+  <form [formGroup]="couponForm">
+    <mat-slide-toggle formControlName="isActive">是否啟用</mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">取消</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">確認</button>
+</mat-dialog-actions>

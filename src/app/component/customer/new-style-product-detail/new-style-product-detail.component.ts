@@ -1,8 +1,9 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges, Inject} from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
-import { CartItem, ProductDetail, ProductVariant } from "../../../model/product-summary.model";
+import { CartItem, ProductDetail, ProductVariant } from "../../../model/product/product-summary.model";
 import {environment} from "../../../../environments/environment";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {onImageError} from "../../../utils/image-utils.service";
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -54,4 +55,5 @@ export class NewStyleProductDetailComponent{
   }
 
   protected readonly environment = environment;
+  protected readonly onImageError = onImageError;
 }

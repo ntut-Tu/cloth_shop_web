@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
 // import { StoreOrderSummaryComponent } from './order/store-order-summary/store-order-summary.component';
 // import { OrderItemDetailComponent } from './order/order-item-detail/order-item-detail.component';
 import {MatCardModule} from "@angular/material/card";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatError, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -49,6 +49,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 
 
+
 @NgModule({
   declarations: [
     CustomerPageComponent,
@@ -63,6 +64,7 @@ import {MatInput} from "@angular/material/input";
     NewStyleOrderComponent,
     NewStyleProductDetailComponent,
     ReviewTestComponent
+
   ],
   providers:[
     CookieService,

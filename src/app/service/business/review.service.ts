@@ -3,6 +3,7 @@ import { Review } from '../../model/review/review.model';
 import { ProductReviewApiService } from '../api/product-review-api.service';
 import {Observable} from "rxjs";
 import {ApiResponseDTO} from "../../model/api-response.model";
+import {AddReviewResponse} from "../../model/review/add-review-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ReviewService {
    * @param review - 評價資料
    * @returns 新增評價的操作結果
    */
-  addReview(review: Review): Observable<ApiResponseDTO<any>> {
+  addReview(review: Review): Observable<ApiResponseDTO<AddReviewResponse>> {
     return this.productReviewService.addReview(review);
   }
 

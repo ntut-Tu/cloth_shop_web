@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiResponseDTO } from '../../model/api-response.model';
-import { ProductSummaryModel, ProductDetail, AddProductRequest } from '../../model/product-summary.model';
-import { ProductApiService } from '../api/product-api.service';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ApiResponseDTO} from '../../model/api-response.model';
+import {AddProductRequest, ProductDetail, ProductSummaryModel} from '../../model/product/product-summary.model';
+import {ProductApiService} from '../api/product-api.service';
 import {ImageUploadApiService} from "../api/image-upload-api.service";
+import {FetchProductsParams} from "../../model/product/FetchProductsParams.model";
+import {PaginatedResponse, ProductInfo} from "../../model/product/product-summary-v2.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +13,6 @@ import {ImageUploadApiService} from "../api/image-upload-api.service";
 export class ProductService {
 
   constructor(private productApiService: ProductApiService,private imageUploadApiService: ImageUploadApiService) {}
-
-  /**
-   * 獲取產品摘要列表
-   * @param page - 分頁的頁碼（默認為 1）
-   * @param pageSize - 每頁顯示的產品數量（默認為 30）
-   * @returns 包含產品摘要列表的 ApiResponseDTO
-   */
-  getProductSummaries(page: number = 1, pageSize: number = 30): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
-    return this.productApiService.getProductSummaries(page, pageSize);
-  }
 
   /**
    * 獲取特定產品的詳細資訊
@@ -49,7 +41,20 @@ export class ProductService {
     return this.imageUploadApiService.uploadProductImage(file);
   }
 
-  getProductSummariesByCategory(category: string,pageNumber:number,pageSize:number): Observable<ApiResponseDTO<ProductSummaryModel[]>> {
-    return this.productApiService.getProductSummariesByCategory(category,pageNumber,pageSize);
+  // -----------------------------------------------------------------------------------------------------------
+  getProducts(fetchParams:FetchProductsParams): Observable<ApiResponseDTO<PaginatedResponse>> {
+    return this.productApiService.fetchProducts(fetchParams);
+  }
+
+  getProductListForCoupon(): Observable<ApiResponseDTO<ProductInfo[]>> {
+    return this.productApiService.getProductListForCoupon();
+  }
+
+  updateProductStatus(productVariantId:number, updatedStatus: boolean) {
+    return this.productApiService.updateProductStatus(productVariantId, updatedStatus);
+  }
+
+  updateProductStock(productVariantId:number, newStock: any) {
+    return this.productApiService.updateProductStock(productVariantId, newStock);
   }
 }
