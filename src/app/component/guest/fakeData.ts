@@ -6,7 +6,7 @@ export const fakeData =[
     totalSales: 100,
     rate: 4.5,
     category: '衣服',
-    storeDescription: 'Description for Fake Product 1',
+    storeName: 'storeName 1',
     productVariants: [
       { productVariantId: 1, color: 'Red', size: 'M', price: 100 },
       { productVariantId: 2, color: 'Blue', size: 'L', price: 120 }
@@ -19,7 +19,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '衣服',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -32,7 +32,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '褲子',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -45,7 +45,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '褲子',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -58,7 +58,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '褲子',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -71,7 +71,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '褲子',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -84,7 +84,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '配件',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -97,7 +97,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '配件',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -110,7 +110,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '配件',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -123,7 +123,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '其他',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }
@@ -136,7 +136,7 @@ export const fakeData =[
     totalSales: 200,
     rate: 4.0,
     category: '其他',
-    storeDescription: 'Description for Fake Product 2',
+    storeName: 'storeName 2',
     productVariants: [
       { productVariantId: 3, color: 'Green', size: 'S', price: 90 },
       { productVariantId: 4, color: 'Yellow', size: 'XL', price: 110 }

@@ -1,0 +1,70 @@
+<mat-tab-group>
+  <!-- 流水账 -->
+  <mat-tab label="流水账">
+    <div>
+      <table mat-table [dataSource]="ledgerData" class="mat-elevation-z8">
+        <!-- 定义列 -->
+        <ng-container matColumnDef="ledgerEntryId">
+          <th mat-header-cell *matHeaderCellDef> 交易編號 </th>
+          <td mat-cell *matCellDef="let element"> {{element.ledgerEntryId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ledgerType">
+          <th mat-header-cell *matHeaderCellDef> 交易身分 </th>
+          <td mat-cell *matCellDef="let element"> {{element.ledgerType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="transactionType">
+          <th mat-header-cell *matHeaderCellDef> 交易類型 </th>
+          <td mat-cell *matCellDef="let element"> {{element.transactionType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> 金額 </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="transactionDate">
+          <th mat-header-cell *matHeaderCellDef> 日期 </th>
+          <td mat-cell *matCellDef="let element"> {{element.transactionDate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalAmount">
+          <th mat-header-cell *matHeaderCellDef> 帳戶餘額 </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalBalance}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-tab>
+
+  <!-- 柱状图 -->
+  <mat-tab label="收入與支出">
+    <ngx-charts-bar-horizontal
+      [view]="view"
+      [results]="barChartData"
+      [gradient]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'金額'"
+      [yAxisLabel]="'類型'">
+    </ngx-charts-bar-horizontal>
+  </mat-tab>
+
+  <!-- 时序图 -->
+  <mat-tab label="時序圖">
+    <ngx-charts-line-chart
+      [view]="view"
+      [results]="lineChartData"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'日期'"
+      [yAxisLabel]="'金額'">
+    </ngx-charts-line-chart>
+  </mat-tab>
+</mat-tab-group>

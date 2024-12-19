@@ -5,6 +5,7 @@ import { ApiResponseDTO } from '../../model/api-response.model';
 import { OrderSummaryModel } from '../../model/order/order-summary.model';
 import { StoreOrderSummaryModel } from '../../model/order/store-order-summary.model';
 import { OrderItemDetailDTO } from '../../model/order/order-item-detail.model';
+import {VendorOrderModel} from "../../model/order/vendor-order.model";
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,29 @@ export class OrderApiService {
    */
   updateOrderStatus(orderId: number, status: string): Observable<ApiResponseDTO<string>> {
     return this.http.post<ApiResponseDTO<string>>(`${this.apiUrl}/${orderId}/status`, status);
+  }
+
+  /**
+   * 更新訂單狀態
+   * @param storeOrderId - 訂單id
+   * @returns Observable，包含 ApiResponseDTO 與更新結果
+   */
+  updateStoreOrderStatus(storeOrderId: number, status: string): Observable<ApiResponseDTO<string>> {
+    return this.http.post<ApiResponseDTO<string>>(`${this.apiUrl}/storeOrder/${storeOrderId}/status`, status);
+  }
+
+  /**
+   * 取得商家訂單
+   * @param page - 分頁的頁碼
+   * @param size - 每頁的資料數量
+   * @returns Observable，包含 ApiResponseDTO 與訂單列表
+   */
+  getVendorStoreOrders(page: number, size: number): Observable<ApiResponseDTO<VendorOrderModel[]>> {
+    return this.http.get<ApiResponseDTO<VendorOrderModel[]>>(`${this.apiUrl}/store`, {
+      params: {
+        page: page.toString(),
+        size: size.toString()
+      }
+    });
   }
 }

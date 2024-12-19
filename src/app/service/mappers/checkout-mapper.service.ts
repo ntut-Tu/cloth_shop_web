@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CartItem} from "../../model/product-summary.model";
+import {CartItem} from "../../model/product/product-summary.model";
 import {CheckoutBaseStoreOrderModel} from "../../model/checkout/shared-checkout.model";
 import {SubmitOrderModel} from "../../model/checkout/submit-order.model";
 import {ConfirmAmountModel} from "../../model/checkout/confirm-oder.model";

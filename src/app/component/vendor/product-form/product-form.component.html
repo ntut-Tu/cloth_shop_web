@@ -57,22 +57,22 @@
         <div class="variant-form">
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Color</mat-label>
-            <input matInput [(ngModel)]="newVariant.color" name="color" />
+            <input matInput [(ngModel)]="newVariant.color" name="newVariantColor" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Size</mat-label>
-            <input matInput [(ngModel)]="newVariant.size" name="size" />
+            <input matInput [(ngModel)]="newVariant.size" name="newVariantSize" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Price</mat-label>
-            <input matInput type="number" [(ngModel)]="newVariant.price" name="price" min="0" />
+            <input matInput type="number" [(ngModel)]="newVariant.price" name="newVariantPrice" min="0" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Stock</mat-label>
-            <input matInput type="number" [(ngModel)]="newVariant.stock" name="stock" min="0" />
+            <input matInput type="number" [(ngModel)]="newVariant.stock" name="newVariantStock" min="0" />
           </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" (click)="addVariant()">Add Variant</button>
+        <button mat-raised-button color="primary" (click)="addVariant($event)">Add Variant</button>
       </mat-card-content>
     </mat-card>
 

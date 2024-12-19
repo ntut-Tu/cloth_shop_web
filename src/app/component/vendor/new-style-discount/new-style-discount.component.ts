@@ -3,6 +3,7 @@ import {DiscountSummaryModel} from "../../../model/coupon/coupon.model";
 import {CouponService} from "../../../service/business/coupon.service";
 import {AddCouponComponent} from "../add-coupon/add-coupon.component";
 import {MatDialog} from "@angular/material/dialog";
+import {EditCouponComponent} from "../edit-coupon/edit-coupon.component";
 
 @Component({
   selector: 'app-new-style-discount',
@@ -46,18 +47,18 @@ export class NewStyleDiscountComponent implements OnInit {
   }
 
   openEditCouponDialog(coupon: DiscountSummaryModel): void {
-    // const dialogRef = this.dialog.open(EditCouponComponent, {
-    //   data: coupon,
-    //   width: '600px',
-    //   disableClose: true,
-    //   panelClass: 'custom-dialog-container',
-    //   injector: this.injector
-    // });
-    //
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === 'refresh') {
-    //     this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
-    //   }
-    // });
+    const dialogRef = this.dialog.open(EditCouponComponent, {
+      data: coupon,
+      width: '600px',
+      disableClose: true,
+      panelClass: 'custom-dialog-container',
+      injector: this.injector
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'refresh') {
+        this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
+      }
+    });
   }
 }
