@@ -42,6 +42,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 import {MatPaginator} from "@angular/material/paginator";
 
+
 @NgModule({
   declarations: [
     NewStyleGProductComponent,
