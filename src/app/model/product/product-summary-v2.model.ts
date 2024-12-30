@@ -9,6 +9,7 @@ export interface ProductSummaryV2ResponseDTO {
   storeImageUrl?: string; // 賣家頭像
   minPrice: number; // 商品最低價
   maxPrice: number; // 商品最高價
+  isActive: boolean; // 是否上架
 }
 
 export interface PaginatedResponse {

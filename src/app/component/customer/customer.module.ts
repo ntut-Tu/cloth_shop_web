@@ -47,6 +47,8 @@ import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 import {ReviewTestComponent} from "./reviewTest/reviewTest.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
+import {CustomerReviewComponent} from "./customer-review/customer-review.component";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 
@@ -63,8 +65,8 @@ import {MatInput} from "@angular/material/input";
     // OrderItemDetailComponent,
     NewStyleOrderComponent,
     NewStyleProductDetailComponent,
-    ReviewTestComponent
-
+    ReviewTestComponent,
+    CustomerReviewComponent
   ],
   providers:[
     CookieService,
@@ -188,7 +190,8 @@ import {MatInput} from "@angular/material/input";
     MatBottomSheetContainer,
     MatGridList,
     MatGridTile,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginator
   ]
 })
 export class CustomerModule { }

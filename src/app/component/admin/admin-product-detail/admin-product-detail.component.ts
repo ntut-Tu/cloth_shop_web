@@ -4,16 +4,15 @@ import { ProductService } from '../../../service/business/product.service'; // �
 
 @Component({
   selector: 'app-new-style-product-detail',
-  templateUrl: './new-style-v-product-detail.component.html',
-  styleUrls: ['./new-style-v-product-detail.component.css'],
+  templateUrl: './admin-product-detail.component.html',
+  styleUrls: ['./admin-product-detail.component.css'],
 })
-export class NewStyleVProductDetailComponent {
+export class AdminProductDetailComponent {
   selectedVariant: any;
-  stockToAdd: number = 0; // 預設增加庫存的數量為 0
   selectedVariantStatus: boolean = true;
 
   constructor(
-    public dialogRef: MatDialogRef<NewStyleVProductDetailComponent>,
+    public dialogRef: MatDialogRef<AdminProductDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private productService: ProductService // 注入服務
   ) {}
@@ -41,23 +40,6 @@ export class NewStyleVProductDetailComponent {
         },
         (error) => {
           console.error('上下架狀態更新失敗', error);
-        }
-      );
-    }
-  }
-
-  updateStock(): void {
-    if (this.selectedVariant && this.stockToAdd > 0) {
-      const newStock = this.selectedVariant.stock + this.stockToAdd;
-      this.productService.updateProductStock(this.selectedVariant.productVariantId, newStock).subscribe(
-        () => {
-          this.selectedVariant.stock = newStock;
-          this.stockToAdd = 0; // 清空輸入框
-          console.log('庫存更新成功');
-          this.dialogRef.close("success");
-        },
-        (error) => {
-          console.error('庫存更新失敗', error);
         }
       );
     }
