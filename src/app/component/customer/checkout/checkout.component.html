@@ -5,7 +5,8 @@
       <div class="store-order-container">
         <!-- 店家資訊 -->
         <div class="store-header">
-          <span class="store-id">Store ID: {{ storeOrder.store_id }}</span>
+          <span class="store-id">Store ID: {{ storeOrder.store_id }} 商家名稱: {{storeOrder.store_name}}</span>
+          <img [src]="storeOrder.store_image_url" alt="" (error)="onImageError($event)" style="width: 15px"/>
         </div>
 
         <!-- 商品列表 -->

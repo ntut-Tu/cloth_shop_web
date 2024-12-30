@@ -12,6 +12,8 @@ export interface CheckoutBaseStoreOrderModel {
   special_discount_code?: string;
   seasonal_discount_code?: string;
   product_variants: CheckoutBaseProductVariantModel[];
+  store_name: string;
+  store_image_url?: string;
 }
 
 // 基礎商品變體接口

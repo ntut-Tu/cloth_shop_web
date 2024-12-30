@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import { CheckoutService } from "../../../service/business/checkout.service";
 import { ConfirmDiscountResponseModel } from "../../../model/checkout/confirm-oder.model";
 import { ApiResponseDTO } from "../../../model/api-response.model";
+import {onImageError} from "../../../utils/image-utils.service";
 
 @Component({
   selector: 'app-checkout',
@@ -24,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   shippingAddress: string = '';
   orderId: string = '';
 
+  isFormDirty: boolean = false;
   constructor(protected checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
@@ -54,6 +56,8 @@ export class CheckoutComponent implements OnInit {
           this.discountAmount = data.discount_amount;
           this.netAmount = data.final_amount;
           this.orderId = data.order_id;
+
+          this.isFormDirty = true;
         } else {
           alert(response.message || 'Failed to confirm amount.');
         }
@@ -74,6 +78,7 @@ export class CheckoutComponent implements OnInit {
         if (response.status) {
           alert('Order submitted successfully!');
           this.checkoutService.clearOrder();
+          this.isFormDirty = false;
         } else {
           alert(response.message || 'Failed to submit order.');
         }
@@ -120,5 +125,15 @@ export class CheckoutComponent implements OnInit {
         console.error('Error cancelling checkout:', err);
       },
     });
+  }
+
+  protected readonly onImageError = onImageError;
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: BeforeUnloadEvent): void {
+    if (this.isFormDirty) {
+      $event.preventDefault();
+      $event.returnValue = '您尚未完成結帳操作，離開將導致資料遺失。是否確定要離開？';
+    }
   }
 }

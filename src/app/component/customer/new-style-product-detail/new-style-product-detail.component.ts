@@ -46,7 +46,9 @@ export class NewStyleProductDetailComponent{
       price: this.selectedVariant.price,
       quantity: 1,
       fkVendorId: this.data.fkVendorId,
-      storeDescription: this.data.storeDescription
+      storeDescription: this.data.storeDescription,
+      storeName: this.data.storeName,
+      storeImageUrl: this.data.storeLogoUrl
     };
 
     this.cartService.addToCart(cartItem);
