@@ -8,7 +8,7 @@ export interface UserProfileModel {
 }
 
 // 用戶資料
-export interface UserProfileModel {
+export interface EditUserProfileModel {
   username: string;
   email: string;
   phoneNumber: string;

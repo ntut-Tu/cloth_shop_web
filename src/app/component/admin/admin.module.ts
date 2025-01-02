@@ -67,6 +67,7 @@ import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.component";
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
+import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
 
 @NgModule({
   declarations: [
@@ -206,6 +207,7 @@ import {AdminOrderComponent} from "./admin-order/admin-order.component";
     MatTab,
     NgxChartsModule,
     MatPaginator,
+    EditUserInfoDirective,
   ]
 })
 export class AdminModule { }

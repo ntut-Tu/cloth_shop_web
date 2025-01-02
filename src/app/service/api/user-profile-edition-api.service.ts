@@ -3,22 +3,22 @@ import { environment } from "../../../environments/environment";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponseDTO } from "../../model/api-response.model";
-import { UserProfileModel, UserInfoUpdateDto } from "../../model/user-manage/user-profile.model";
+import {UserProfileModel, UserInfoUpdateDto, EditUserProfileModel} from "../../model/user-manage/user-profile.model";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserProfileEditionApiService {
-  private apiUrl = environment.baseUrl + '/api/editUserData';
+  private apiUrl = environment.baseUrl + '/api/editUserProfile';
 
   constructor(private http: HttpClient) { }
 
   /**
    * 獲取使用者資料
    */
-  getUserInfo(): Observable<ApiResponseDTO<UserProfileModel>> {
-    return this.http.get<ApiResponseDTO<UserProfileModel>>(`${this.apiUrl}/`);
+  getUserInfo(): Observable<ApiResponseDTO<EditUserProfileModel>> {
+    return this.http.get<ApiResponseDTO<EditUserProfileModel>>(`${this.apiUrl}/`);
   }
 
   /**

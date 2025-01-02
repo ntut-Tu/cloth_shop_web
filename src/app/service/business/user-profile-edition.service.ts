@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserInfoUpdateDto, UserProfileModel } from "../../model/user-manage/user-profile.model";
+import {EditUserProfileModel, UserInfoUpdateDto, UserProfileModel} from "../../model/user-manage/user-profile.model";
 import { UserProfileEditionApiService } from "../api/user-profile-edition-api.service";
 import { ImageUploadApiService } from "../api/image-upload-api.service";
 import { ApiResponseDTO } from "../../model/api-response.model";
@@ -18,7 +18,7 @@ export class UserProfileEditionService {
   /**
    * 獲取使用者資料
    */
-  getUserInfo(): Observable<ApiResponseDTO<UserProfileModel>> {
+  getUserInfo(): Observable<ApiResponseDTO<EditUserProfileModel>> {
     return this.userProfileEditionApiService.getUserInfo();
   }
 

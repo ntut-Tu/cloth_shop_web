@@ -10,7 +10,7 @@ import { UserProfileEditionService } from "../../../service/business/user-profil
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  editProfileForm!: FormGroup;
+  editProfileForm !: FormGroup;
   selectedImage: File | null = null;
   profilePicUrl!: string;
 

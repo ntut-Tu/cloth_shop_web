@@ -15,6 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {MatButton, MatIconButton} from "@angular/material/button";
+import { RefundDialogComponent } from './refund-dialog/refund-dialog.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatButton, MatIconButton} from "@angular/material/button";
     // VendorViewDetailComponent,
     // GuestViewDetailComponent,
 
-    EditProfileComponent
+    EditProfileComponent,
+    RefundDialogComponent
   ],
   imports: [
     CommonModule, MatDialogContainer, MatIconModule, MatDialogClose, MatCardModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatDialogActions, MatButton, MatDialogContent, MatDialogTitle, MatIconButton],
