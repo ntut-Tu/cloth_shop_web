@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ApiResponseDTO } from '../../model/api-response.model';
 
 import { Review } from '../../model/review/review.model';
-import {AddReviewResponse} from "../../model/review/add-review-response.model";
+import { AddReviewResponse } from "../../model/review/add-review-response.model";
 
 
 @Injectable({

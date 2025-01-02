@@ -6,6 +6,7 @@ import { OrderService } from '../../../service/business/order.service';
 import {ReviewComponent} from "../../guest/review/review.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomerReviewComponent} from "../customer-review/customer-review.component";
+import {ReviewTestComponent} from "../reviewTest/reviewTest.component";
 
 @Component({
   selector: 'app-new-style-order',
@@ -78,7 +79,7 @@ export class NewStyleOrderComponent implements OnInit {
   }
 
   applyReview(item:OrderItemDetailDTO) {
-    const dialogRef = this.dialog.open(CustomerReviewComponent, {
+    const dialogRef = this.dialog.open(ReviewTestComponent, {
       width: '600px',
       data: { productId: item.orderItemId } // 將產品數據傳遞到彈窗
     });

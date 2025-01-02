@@ -48,6 +48,7 @@ import {CustomerReviewComponent} from "./customer-review/customer-review.compone
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 import {MatPaginator} from "@angular/material/paginator";
+import {ReviewTestComponent} from "./reviewTest/reviewTest.component";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {MatPaginator} from "@angular/material/paginator";
     // OrderItemDetailComponent,
     NewStyleOrderComponent,
     NewStyleProductDetailComponent,
-    CustomerReviewComponent
+    CustomerReviewComponent,
+    ReviewTestComponent
   ],
   providers:[
     CookieService,

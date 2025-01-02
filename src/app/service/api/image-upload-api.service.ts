@@ -24,4 +24,17 @@ export class ImageUploadApiService {
 
     return this.http.post<ApiResponseDTO<string>>(`${this.apiUrl}/upload/product-image`, formData);
   }
+
+
+  /**
+   * 上傳用戶頭像
+   * @param file - 要上傳的頭像文件
+   * @return 包含用戶頭像的 URL 的 ApiResponseDTO
+   */
+  uploadPortraitImage(file: File): Observable<ApiResponseDTO<string>> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<ApiResponseDTO<string>>(`${this.apiUrl}/upload/portrait-image`, formData);
+  }
 }
