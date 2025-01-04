@@ -69,6 +69,7 @@ import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.co
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
 import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
 import { AdminLedgerComponent } from './admin-ledger/admin-ledger.component';
+import {AdminProductDetailComponent} from "./admin-product-detail/admin-product-detail.component";
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { AdminLedgerComponent } from './admin-ledger/admin-ledger.component';
     AdminAddCouponComponent,
     AdminEditCouponComponent,
     AdminOrderComponent,
-    AdminLedgerComponent
+    AdminLedgerComponent,
+    AdminProductDetailComponent
     // TransactionRecordsComponent
   ],
   imports: [
@@ -210,6 +212,17 @@ import { AdminLedgerComponent } from './admin-ledger/admin-ledger.component';
     NgxChartsModule,
     MatPaginator,
     EditUserInfoDirective,
+    MatCard,
+    MatCardHeader,
+    MatIcon,
+    MatCardContent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatTabGroup,
+    MatTab,
+
   ]
 })
 export class AdminModule { }
