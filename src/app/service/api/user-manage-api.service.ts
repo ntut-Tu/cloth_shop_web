@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ApiResponseDTO} from "../../model/api-response.model";
 import {Observable} from "rxjs";
-import {UserInfoModel} from "../../model/user-manage/user-info.model";
+import {UserProfileModel} from "../../model/user-manage/user-profile.model";
 import {UserLogModel} from "../../model/user-manage/user-log.model";
 
 @Injectable({
@@ -19,9 +19,9 @@ export class UserManageApiService {
    * 取得所有使用者列表
    * @returns 包含使用者列表的 ApiResponseDTO
    */
-  getUsers(page: number, pageSize: number): Observable<ApiResponseDTO<UserInfoModel[]>> {
+  getUsers(page: number, pageSize: number): Observable<ApiResponseDTO<UserProfileModel[]>> {
     const params = { page: page.toString(), size: pageSize.toString() }; // 转换为字符串
-    return this.http.get<ApiResponseDTO<UserInfoModel[]>>(`${this.apiUrl}/users`, { params });
+    return this.http.get<ApiResponseDTO<UserProfileModel[]>>(`${this.apiUrl}/users`, { params });
   }
 
 

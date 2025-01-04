@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { LedgerService } from "../../../service/business/ledger-service";
-import { VendorLedger } from "../../../model/ledger/vendor-ledger.model";
-import {Color} from "@swimlane/ngx-charts";
-import {group} from "@angular/animations";
+import {Component, OnInit} from '@angular/core';
+import {PlatformLedger} from "../../../model/ledger/platform-ledger.model";
+import {LedgerService} from "../../../service/business/ledger-service";
 
 @Component({
-  selector: 'app-vendor-ledger',
-  templateUrl: './vendor-ledger.component.html',
-  styleUrls: ['./vendor-ledger.component.css']
+  selector: 'app-admin-ledger',
+  templateUrl: './admin-ledger.component.html',
+  styleUrl: './admin-ledger.component.css'
 })
-export class VendorLedgerComponent implements OnInit {
-  ledgerData: VendorLedger[] = [];
+export class AdminLedgerComponent  implements OnInit {
+  ledgerData: PlatformLedger[] = [];
   displayedColumns: string[] = ['ledgerEntryId', 'ledgerType', 'transactionType', 'amount', 'transactionDate','totalAmount'];
 
   barChartData: any[] = [];
@@ -23,7 +21,7 @@ export class VendorLedgerComponent implements OnInit {
   constructor(private ledgerService: LedgerService) {}
 
   ngOnInit() {
-    this.ledgerService.getVendorLedger().subscribe(response => {
+    this.ledgerService.getPlatformLedger().subscribe(response => {
       if (response.status) {
         this.ledgerData = response.data;
 
@@ -36,7 +34,7 @@ export class VendorLedgerComponent implements OnInit {
     });
   }
 
-  calculateBarChartData(data: VendorLedger[]): any[] {
+  calculateBarChartData(data: PlatformLedger[]): any[] {
     const income = data.filter(d => d.amount > 0).reduce((sum, item) => sum + item.amount, 0);
     const expense = data.filter(d => d.amount < 0).reduce((sum, item) => sum + item.amount, 0);
     return [
@@ -45,7 +43,7 @@ export class VendorLedgerComponent implements OnInit {
     ];
   }
 
-  calculateLineChartData(data: VendorLedger[]): any[] {
+  calculateLineChartData(data: PlatformLedger[]): any[] {
     const groupedByDate = data.reduce((acc, item) => {
       if (!item.transactionDate) {
         console.warn('Missing transactionDate:', item);

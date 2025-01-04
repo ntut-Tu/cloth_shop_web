@@ -6,6 +6,7 @@ import { OrderService } from '../../../service/business/order.service';
 import {ReviewComponent} from "../../guest/review/review.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomerReviewComponent} from "../customer-review/customer-review.component";
+import {ReviewTestComponent} from "../reviewTest/reviewTest.component";
 
 @Component({
   selector: 'app-new-style-order',
@@ -20,8 +21,7 @@ export class NewStyleOrderComponent implements OnInit {
   pageSize: number = 10; // 每頁顯示數量
   isLastPage: boolean = false; // 是否為尾頁
 
-
-  constructor(private orderService: OrderService, private dialog:MatDialog) {}
+  constructor(private orderService: OrderService,private dialog:MatDialog) {}
 
   ngOnInit(): void {
     this.loadOrderSummaries();
@@ -79,8 +79,7 @@ export class NewStyleOrderComponent implements OnInit {
   }
 
   applyReview(item:OrderItemDetailDTO) {
-
-    const dialogRef = this.dialog.open(CustomerReviewComponent, {
+    const dialogRef = this.dialog.open(ReviewTestComponent, {
       width: '600px',
       data: { productId: item.orderItemId } // 將產品數據傳遞到彈窗
     });

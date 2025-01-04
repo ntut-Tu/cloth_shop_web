@@ -69,6 +69,7 @@ import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {MatPaginator} from "@angular/material/paginator";
 import { EditCouponComponent } from './edit-coupon/edit-coupon.component';
+import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { EditCouponComponent } from './edit-coupon/edit-coupon.component';
         MatTab,
         NgxChartsModule,
         MatPaginator,
+        EditUserInfoDirective,
 
     ],
   providers:[

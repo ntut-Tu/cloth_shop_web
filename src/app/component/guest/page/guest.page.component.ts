@@ -3,7 +3,8 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {GuestLoginDialogComponent} from "../login.dialog/guest.login.dialog.component";
 import {GuestRegisterDialogComponent} from "../register.dialog/guest.register.dialog.component";
-import { ReviewComponent } from "../review/review.component";
+import { EditProfileComponent } from "../../shared/edit-profile/edit-profile.component";
+import { UserProfileEditionService } from "../../../service/business/user-profile-edition.service";
 
 @Component({
   selector: 'app-guest.page',
@@ -11,8 +12,12 @@ import { ReviewComponent } from "../review/review.component";
   styleUrl: './guest.page.component.css'
 })
 export class GuestPageComponent implements OnInit {
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,private dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private userProfileEditionService: UserProfileEditionService,
+  ) {}
 
   ngOnInit(): void {
     this.checkCurrentRoute();
@@ -58,6 +63,19 @@ export class GuestPageComponent implements OnInit {
     });
   }
 
-  editUserInfo() {
+  // 提供用戶編輯資料
+  editUserInfo(): void {
+    // const fakeUserInfo = { username: 'testuser', email: 'testuser@example.com', phoneNumber: '1234567890', password: 'testpassword', profilePicUrl: 'https://via.placeholder.com/100' };
+    // const dialogRef = this.dialog.open(EditProfileComponent, {
+    //   width: '500px', height: '600px', data: fakeUserInfo // 使用假數據傳遞給對話框
+    // });
+    this.userProfileEditionService.getUserInfo().subscribe(response => {
+      const userInfo = response.data;
+      const dialogRef = this.dialog.open(EditProfileComponent, {
+        width: '800px',
+        height: 'auto',
+        data: userInfo // 傳遞用戶資料
+      });
+    });
   }
 }

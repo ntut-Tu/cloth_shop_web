@@ -44,12 +44,12 @@ import {
 } from "@angular/material/table";
 import {NewStyleProductDetailComponent} from "./new-style-product-detail/new-style-product-detail.component";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {ReviewTestComponent} from "./reviewTest/reviewTest.component";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatInput} from "@angular/material/input";
 import {CustomerReviewComponent} from "./customer-review/customer-review.component";
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatInput} from "@angular/material/input";
 import {MatPaginator} from "@angular/material/paginator";
-
+import {ReviewTestComponent} from "./reviewTest/reviewTest.component";
+import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
 
 
 @NgModule({
@@ -65,8 +65,8 @@ import {MatPaginator} from "@angular/material/paginator";
     // OrderItemDetailComponent,
     NewStyleOrderComponent,
     NewStyleProductDetailComponent,
-    ReviewTestComponent,
-    CustomerReviewComponent
+    CustomerReviewComponent,
+    ReviewTestComponent
   ],
   providers:[
     CookieService,
@@ -114,84 +114,14 @@ import {MatPaginator} from "@angular/material/paginator";
     MatBottomSheetContainer,
     MatGridList,
     MatGridTile,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatBottomSheetContainer,
-    MatAccordion,
-    MatExpansionPanelDescription,
-    MatExpansionPanel,
-    MatExpansionPanelTitle,
-    MatIconButton,
-    MatButton,
-    MatTable,
-    MatHeaderCell,
-    MatHeaderCellDef,
-    MatColumnDef,
-    MatCellDef,
-    MatCell,
-    MatHeaderRow,
-    MatRow,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatExpansionPanelHeader,
-    MatExpansionPanel,
-    MatAccordion,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatBottomSheetContainer,
-    MatGridList,
-    MatGridTile,
-    MatDialogModule,
+    MatError,
+    MatLabel,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogTitle,
     MatInput,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatBottomSheetContainer,
-    MatAccordion,
-    MatExpansionPanelDescription,
-    MatExpansionPanel,
-    MatExpansionPanelTitle,
-    MatIconButton,
-    MatButton,
-    MatTable,
-    MatHeaderCell,
-    MatHeaderCellDef,
-    MatColumnDef,
-    MatCellDef,
-    MatCell,
-    MatHeaderRow,
-    MatRow,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatExpansionPanelHeader,
-    MatExpansionPanel,
-    MatAccordion,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatBottomSheetContainer,
-    MatGridList,
-    MatGridTile,
-    MatDialogModule,
-    MatPaginator
+    MatPaginator,
+    EditUserInfoDirective
   ]
 })
 export class CustomerModule { }

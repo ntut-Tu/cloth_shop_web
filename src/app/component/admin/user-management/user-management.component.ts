@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserManageService } from "../../../service/business/user-manage.service";
-import { UserInfoModel } from "../../../model/user-manage/user-info.model";
+import { UserProfileModel } from "../../../model/user-manage/user-profile.model";
 
 @Component({
   selector: 'app-admin.user.management',
@@ -10,11 +10,11 @@ import { UserInfoModel } from "../../../model/user-manage/user-info.model";
 })
 export class UserManagementComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'userName', 'email', 'role', 'establishDate', 'isActive','ban-button'];
-  dataSource = new MatTableDataSource<UserInfoModel>([]);
+  dataSource = new MatTableDataSource<UserProfileModel>([]);
   totalUsers: number = 0;
   pageSize: number = 10;
   page: number = 0;
-  selectedRow: UserInfoModel | null = null;
+  selectedRow: UserProfileModel | null = null;
   endOfData: boolean = false;
   isLoading: boolean = false;
 
@@ -66,7 +66,7 @@ export class UserManagementComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toggleDetails(row: UserInfoModel | null): void {
+  toggleDetails(row: UserProfileModel | null): void {
     this.selectedRow = row;
   }
 
