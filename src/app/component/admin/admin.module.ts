@@ -68,6 +68,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {AdminEditCouponComponent} from "./admin-edit-coupon/admin-edit-coupon.component";
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
 import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
+import { AdminLedgerComponent } from './admin-ledger/admin-ledger.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
     AdminDiscountComponent,
     AdminAddCouponComponent,
     AdminEditCouponComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    AdminLedgerComponent
     // TransactionRecordsComponent
   ],
   imports: [

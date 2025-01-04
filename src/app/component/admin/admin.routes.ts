@@ -5,6 +5,7 @@ import { ProductManagementComponent } from './product-management/product-managem
 import {UserLogComponent} from "./user-log/user-log.component";
 import {AdminDiscountComponent} from "./admin-discount/admin-discount.component";
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
+import {AdminLedgerComponent} from "./admin-ledger/admin-ledger.component";
 // import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
 
 export const adminRoutes: Routes = [
@@ -17,6 +18,7 @@ export const adminRoutes: Routes = [
       { path: 'transaction-records', component: AdminOrderComponent },
       { path: 'user-log', component: UserLogComponent },
       { path: 'discount', component: AdminDiscountComponent },
+      { path: 'ledger', component: AdminLedgerComponent },
     ]
   }
 ];

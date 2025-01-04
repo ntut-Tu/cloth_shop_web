@@ -47,14 +47,14 @@ export class ProductManagementComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts({
       page: this.currentPage,
-      pageSize: this.pageSize,
+      pageSize: this.pageSize, // 20
       category: this.selectedCategory === 'All' ? null : this.selectedCategory,
       sort: this.selectedCategory === 'All' ? this.selectedSortOption : null,
       search: this.searchKeyword || null,
       role: this.userType
     }).subscribe((response) => {
       if (response.status) {
-        this.products = response.data.items;
+        this.products = response.data.items; //15
         this.totalProducts = response.data.totalRecords;
       } else {
         console.error(response.message);
