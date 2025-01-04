@@ -9,6 +9,13 @@ import { RefundScopeDataModel } from '../../../model/refund/refund.model';
   templateUrl: './refund-dialog.component.html',
   styleUrls: ['./refund-dialog.component.css'],
 })
+/**
+ * input : 身分,物品編號 (RefundScopeDataModel)
+ * 進來後才發 api 取得申請表單資料
+ * 依照身分及 api 回傳表單中 status 的允許修改不同欄位
+ *
+ * 此元件只包含申請後編輯與查看，創建申請不包含在此
+ */
 export class RefundDialogComponent implements OnInit {
   refundForm!: FormGroup;
 
@@ -71,7 +78,7 @@ export class RefundDialogComponent implements OnInit {
       const refundData = response.data;
       this.refundForm.patchValue(refundData);
 
-      this.enableEditableFields(['refundReason', '']);
+      this.enableEditableFields(['refundReason']);
     });
   }
 
