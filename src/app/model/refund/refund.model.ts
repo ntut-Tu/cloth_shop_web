@@ -26,3 +26,20 @@ export interface RefundScopeDataModel{
 // private String vendor_response;
 // private String admin_response;
 // private String updated_at;
+
+export function mapFormToRefundModel(formValue: any): RefundModel {
+  return {
+    refund_id: 0, // 新申請時，後端應生成此值
+    order_item_id: Number(formValue.orderItemId),
+    request_target: formValue.requestTarget,
+    status_type: formValue.statusType,
+    is_closed: formValue.isClosed === 'true' || formValue.isClosed === true,
+    refund_reason: formValue.refundReason,
+    vendor_response: formValue.vendorResponse || '',
+    admin_response: formValue.adminResponse || '',
+    created_at: '', // 此值應由後端自動生成
+    updated_at: '', // 此值應由後端自動生成
+    vendor_id: formValue.vendorId ? Number(formValue.vendorId) : 0,
+    admin_id: formValue.adminId ? Number(formValue.adminId) : 0,
+  };
+}

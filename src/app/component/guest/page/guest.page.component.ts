@@ -6,6 +6,7 @@ import {GuestRegisterDialogComponent} from "../register.dialog/guest.register.di
 import { EditProfileComponent } from "../../shared/edit-profile/edit-profile.component";
 import { UserProfileEditionService } from "../../../service/business/user-profile-edition.service";
 
+
 @Component({
   selector: 'app-guest.page',
   templateUrl: './guest.page.component.html',

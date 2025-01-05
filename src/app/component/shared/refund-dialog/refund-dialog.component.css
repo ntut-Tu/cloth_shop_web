@@ -1,0 +1,12 @@
+.refund-dialog {
+  width: 400px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-dialog-actions {
+  margin-top: 20px;
+}

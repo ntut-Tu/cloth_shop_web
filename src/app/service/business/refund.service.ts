@@ -21,4 +21,8 @@ export class RefundService {
   updateRefund(refundId:number, refundData:RefundModel) {
     return this.refundApiService.updateRefund(refundId, refundData);
   }
+
+  checkRefundRequestExist(orderItemId:number) {
+    return this.refundApiService.checkRefundRequestExist(orderItemId);
+  }
 }

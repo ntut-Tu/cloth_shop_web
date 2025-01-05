@@ -25,4 +25,8 @@ export class RefundApiService {
   updateRefund(refundId:number,refundData:RefundModel) :Observable<ApiResponseDTO<number>>{
     return this.http.put<ApiResponseDTO<number>>(`${this.apiUrl}/update/${refundId}`,refundData);
   }
+
+  checkRefundRequestExist(orderItemId: number) {
+    return this.http.get<ApiResponseDTO<boolean>>(`${this.apiUrl}/checkRequestExist/${orderItemId}`);
+  }
 }
