@@ -16,14 +16,16 @@ export class TriggerRefundDialogDirective {
   openRefundDialog(): void {
     if (!this.orderItemId || !this.userType) {
       console.error('Order Item ID or user type is missing.');
+      console.error('Order Item ID:', this.orderItemId);
+      console.error('User Type:', this.userType);
       return;
     }
-
+    console.log('Order Item ID:', this.orderItemId);
     this.dialog.open(RefundDialogComponent, {
       width: '600px',
       data: {
-        orderItemId: this.orderItemId,
-        userType: this.userType,
+        order_item_id: this.orderItemId,
+        user_type: this.userType,
       },
     });
   }

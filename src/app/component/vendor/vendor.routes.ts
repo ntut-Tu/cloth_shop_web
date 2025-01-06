@@ -8,6 +8,7 @@ import {NewStyleDiscountComponent} from "./new-style-discount/new-style-discount
 import {NewStyleVProduct} from "./new-style-v-product/new-style-v-product";
 import {NewStyleVendorOrderComponent} from "./new-style-vendor-order/new-style-vendor-order.component";
 import {VendorLedgerComponent} from "./vendor-ledger/vendor-ledger.component";
+import {RefundListComponent} from "../shared/refund-list/refund-list.component";
 
 export const vendorRoutes: Routes = [
   {
@@ -18,7 +19,8 @@ export const vendorRoutes: Routes = [
       { path: 'sales-report', component: NewStyleVendorOrderComponent },
       { path: 'discount', component: NewStyleDiscountComponent },
       { path: 'product-form', component: ProductFormComponent },
-      { path: 'ledger', component: VendorLedgerComponent }
+      { path: 'ledger', component: VendorLedgerComponent },
+      { path: 'refunds', component: RefundListComponent },
     ]
   }
 ];

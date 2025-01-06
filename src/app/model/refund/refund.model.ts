@@ -18,6 +18,13 @@ export interface RefundScopeDataModel{
   order_item_id: number;
 }
 
+export interface RefundListSumResponse{
+  refund_id: number;
+  order_item_id: number;
+  item_name: string;
+  refund_status: string;
+  is_closed: boolean;
+}
 // private Integer order_item_id;
 // private String request_target;
 // private String status_type;
@@ -41,5 +48,19 @@ export function mapFormToRefundModel(formValue: any): RefundModel {
     updated_at: '', // 此值應由後端自動生成
     vendor_id: formValue.vendorId ? Number(formValue.vendorId) : 0,
     admin_id: formValue.adminId ? Number(formValue.adminId) : 0,
+  };
+}
+
+export function mapRefundModelToForm(refundData: RefundModel): any {
+  return {
+    orderItemId: refundData.order_item_id,
+    requestTarget: refundData.request_target,
+    statusType: refundData.status_type,
+    isClosed: refundData.is_closed,
+    refundReason: refundData.refund_reason,
+    vendorResponse: refundData.vendor_response,
+    adminResponse: refundData.admin_response,
+    vendorId: refundData.vendor_id,
+    adminId: refundData.admin_id,
   };
 }

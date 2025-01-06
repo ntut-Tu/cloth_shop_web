@@ -2,7 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RefundService } from '../../../service/business/refund.service';
-import {mapFormToRefundModel, RefundModel, RefundScopeDataModel} from '../../../model/refund/refund.model';
+import {
+  mapFormToRefundModel,
+  mapRefundModelToForm,
+  RefundModel,
+  RefundScopeDataModel
+} from '../../../model/refund/refund.model';
 import {RefundStatus} from "../../../model/refund/refund-status.model";
 
 @Component({
@@ -24,7 +29,7 @@ export class RefundDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.refundForm = this.fb.group({
-      orderItemId: [{ value: '', disabled: true }],
+      orderItemId: [{ value: this.data.order_item_id, disabled: true }],
       requestTarget: [{ value: '', disabled: true }],
       statusType: [{ value: '', disabled: true }],
       isClosed: [{ value: '', disabled: true }],
@@ -50,15 +55,18 @@ export class RefundDialogComponent implements OnInit {
   }
 
   loadExistingRequest(): void {
-    this.refundService.getRefund(this.data.order_item_id).subscribe((response) => {
+    this.refundService.getRefundByOrderId(this.data.order_item_id).subscribe((response) => {
       const refundData = response.data;
-      this.refundForm.patchValue(refundData);
+      this.refundForm.patchValue(mapRefundModelToForm(refundData));
       this.handleStatus(refundData.status_type as RefundStatus);
     });
   }
 
   enableNewRequestCreation(): void {
-    this.enableEditableFields(['refundReason', 'requestTarget']);
+    this.refundForm.patchValue({
+      requestTarget: 'vendor',
+    });
+    this.enableEditableFields(['refundReason']);
   }
 
   handleStatus(status: RefundStatus): void {
@@ -103,7 +111,7 @@ export class RefundDialogComponent implements OnInit {
   }
 
   watchModeInit(): void {
-    this.refundService.getRefund(this.data.order_item_id).subscribe((response) => {
+    this.refundService.getRefundByOrderId(this.data.order_item_id).subscribe((response) => {
       const refundData = response.data;
       this.refundForm.patchValue(refundData);
     });
@@ -125,6 +133,9 @@ export class RefundDialogComponent implements OnInit {
         });
       } else {
         // 更新已有申請
+        this.refundService.updateRefund(refundModel.refund_id, refundModel).subscribe(() => {
+          this.dialogRef.close(refundModel);
+        });
         this.dialogRef.close(refundModel);
       }
     }
