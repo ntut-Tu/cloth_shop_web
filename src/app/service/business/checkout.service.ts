@@ -6,11 +6,12 @@ import {
   ConfirmAmountModel,
   ConfirmAmountResponseModel,
   ConfirmDiscountModel,
-  ConfirmDiscountResponseModel
+  ConfirmDiscountResponseModel, mapConfirmDiscountResponse
 } from "../../model/checkout/confirm-oder.model";
 import { SubmitOrderModel, SubmitOrderResponseModel } from "../../model/checkout/submit-order.model";
 import { ApiResponseDTO } from "../../model/api-response.model";
 import { CartItem } from "../../model/product/product-summary.model";
+import {mapApiResponseData} from "../../utils/api-utils.service";
 
 @Injectable({
   providedIn: 'root'
@@ -153,7 +154,7 @@ export class CheckoutService {
 
     let totalAmount = 0;
     let discountAmount = 0;
-    let shippingFee = 50; // 假設固定運費
+    let shippingFee = 60; // 假設固定運費
     currentOrder.store_orders.forEach(storeOrder => {
       storeOrder.product_variants.forEach(product => {
         const price = this.cartService.getCartItemUsingProductId(product.product_variant_id)?.price || 0;
@@ -173,5 +174,25 @@ export class CheckoutService {
 
   cancelOrder(orderId: string): Observable<ApiResponseDTO<any>> {
     return this.checkoutApiService.cancelOrder(orderId);
+  }
+
+  saveDiscountCode(code: string, type: string | undefined, storeId: number | undefined,isStore:boolean) {
+    const currentOrder = this.orderDataSubject.getValue();
+    console.log("currentOrder",currentOrder);
+    if (!currentOrder) return;
+
+    currentOrder.store_orders.forEach(storeOrder => {
+      // console.log(storeOrder.store_id);
+      if (storeOrder.store_id === storeId) {
+        if(type?.toLowerCase().includes('special')) storeOrder.special_discount_code = code;
+        else if(type?.toLowerCase().includes('seasonal')) storeOrder.seasonal_discount_code = code;
+        else if(type?.toLowerCase().includes('shipping')) currentOrder.shipping_discount_code = code;
+        else console.log('error saving discount code');
+      }else {
+        console.log('error saving discount code');
+      }
+    });
+
+    this.orderDataSubject.next(currentOrder); // 更新訂單數據
   }
 }

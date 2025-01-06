@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import { CheckoutService } from "../../../service/business/checkout.service";
-import { ConfirmDiscountResponseModel } from "../../../model/checkout/confirm-oder.model";
+import {ConfirmDiscountResponseModel, mapConfirmDiscountResponse} from "../../../model/checkout/confirm-oder.model";
 import { ApiResponseDTO } from "../../../model/api-response.model";
 import {onImageError} from "../../../utils/image-utils.service";
 
@@ -97,9 +97,12 @@ export class CheckoutComponent implements OnInit {
     if (!code) return;
     this.checkoutService.applyDiscount(code, type, storeId).subscribe({
       next: (response: ApiResponseDTO<ConfirmDiscountResponseModel>) => {
-        if (response.data.is_valid) {
+        const ret = mapConfirmDiscountResponse(response.data)
+        if (ret.is_valid) {
           alert('Discount applied successfully!');
           this.calculateTotals();
+          this.tempDiscountCode = code;
+          this.checkoutService.saveDiscountCode(code,ret.coupon?.discountType,storeId,ret.discount_type === 'store');
         } else {
           alert(response.message || 'Invalid discount code.');
         }
