@@ -36,11 +36,11 @@
           <ng-container matColumnDef="blank">
             <mat-header-cell *matHeaderCellDef> 確認訂單 </mat-header-cell>
             <mat-cell *matCellDef="let order">
-              <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Delivered'.toLowerCase()">
-                <button mat-stroked-button color="primary" (click)="confirmTransaction(order.orderId)" style="align-content: center">
-                  完成並撥款
-                </button>
-              </ng-container>
+<!--              <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Delivered'.toLowerCase()">-->
+<!--                <button mat-stroked-button color="primary" (click)="confirmTransaction(order.orderId)" style="align-content: center">-->
+<!--                  完成並撥款-->
+<!--                </button>-->
+<!--              </ng-container>-->
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="['orderId', 'orderDate', 'totalPrice', 'shippingDiscountCode','shipStatus','payStatus','blank']"></mat-header-row>

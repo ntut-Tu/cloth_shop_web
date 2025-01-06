@@ -34,7 +34,7 @@ export class ProductReviewApiService {
    * @returns 包含評價列表的 ApiResponseDTO
    */
   getProductReviews(productId: number, page: number): Observable<ApiResponseDTO<GetReviewResponseDTO[]>> {
-    const url = `${this.apiUrl}/getProductReviews/${productId}/${page}}`;
+    const url = `${this.apiUrl}/getProductReviews/${productId}/${page}`;
     return this.http.get<ApiResponseDTO<GetReviewResponseDTO[]>>(url);
   }
   //

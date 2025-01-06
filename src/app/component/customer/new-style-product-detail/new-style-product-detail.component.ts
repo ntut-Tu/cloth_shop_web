@@ -1,12 +1,11 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges, Inject, importProvidersFrom} from '@angular/core';
 import { CartService } from '../../../service/business/cart.service';
-import { CartItem, ProductDetail, ProductVariant } from "../../../model/product/product-summary.model";
 import { environment } from "../../../../environments/environment";
 import { PageEvent } from "@angular/material/paginator";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { onImageError } from "../../../utils/image-utils.service";
-import { GetReviewResponseDTO } from "../../../model/review/get-review-response.model";
 import {ReviewService} from "../../../service/business/review.service";
+import {GetReviewResponseDTO} from "../../../model/review/get-review-response.model";
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -16,7 +15,7 @@ import {ReviewService} from "../../../service/business/review.service";
 export class NewStyleProductDetailComponent implements OnInit {
   selectedVariant: any;
   reviews: GetReviewResponseDTO[] = [];
-  currentPage = 1; // 初始頁碼設置為1
+  currentPage: number = 1; // 初始頁碼設置為1
   loading = false;
   noMoreReviews = false; // 紀錄是否還有更多評論
   pageSize = 6; // 每頁顯示6則評論
