@@ -29,15 +29,16 @@ export class RefundDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.refundForm = this.fb.group({
+      refundId: [{ value: null, disabled: true }],
       orderItemId: [{ value: this.data.order_item_id, disabled: true }],
-      requestTarget: [{ value: '', disabled: true }],
-      statusType: [{ value: '', disabled: true }],
-      isClosed: [{ value: '', disabled: true }],
-      refundReason: [{ value: '', disabled: true }],
-      vendorResponse: [{ value: '', disabled: true }],
-      adminResponse: [{ value: '', disabled: true }],
-      vendorId: [{ value: '', disabled: true }],
-      adminId: [{ value: '', disabled: true }],
+      requestTarget: [{ value: null, disabled: true }],
+      statusType: [{ value: null, disabled: true }],
+      isClosed: [{ value: null, disabled: true }],
+      refundReason: [{ value: null, disabled: true }],
+      vendorResponse: [{ value: null, disabled: true }],
+      adminResponse: [{ value: null, disabled: true }],
+      vendorId: [{ value: null, disabled: true }],
+      adminId: [{ value: null, disabled: true }],
     });
 
     // 檢查是否存在退款申請
