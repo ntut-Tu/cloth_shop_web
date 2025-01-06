@@ -41,7 +41,8 @@ import {ReviewComponent} from "./review/review.component";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatInput} from "@angular/material/input";
 import {MatPaginator} from "@angular/material/paginator";
-import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
+import {EditUserInfoDirective} from "../../directive/edit-user-info.directive";
+import {TriggerRefundDialogDirective} from "../../directive/trigger-refund-dialog.directive";
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
     MatDialogModule,
     MatInput,
     MatPaginator,
-    EditUserInfoDirective
+    EditUserInfoDirective,
+    TriggerRefundDialogDirective,
   ]
 })
 export class GuestModule { }

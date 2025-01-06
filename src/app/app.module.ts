@@ -14,6 +14,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { EntryPageComponent } from './component/home/entry.page/entry.page.component';
 import {MatButton} from "@angular/material/button";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TriggerRefundDialogDirective} from "./directive/trigger-refund-dialog.directive";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     HomeRegisterPageComponent,
     EntryPageComponent,
+
   ],
   imports: [
     BrowserModule,

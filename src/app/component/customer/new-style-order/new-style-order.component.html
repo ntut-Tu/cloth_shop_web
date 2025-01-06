@@ -115,7 +115,7 @@
             <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
             <mat-cell *matCellDef="let item">
               <ng-container *ngIf="order.shipStatus.toLowerCase() === 'Completed'.toLowerCase()">
-                <button mat-button color="warn" (click)="applyRefund(item)">
+                <button mat-button color="warn" appTriggerRefundDialog [orderItemId]="item.orderItemId" [userType]="'customer'" > <!--(click)="applyRefund(item)"-->
                   申請退款
                 </button>
               </ng-container>
