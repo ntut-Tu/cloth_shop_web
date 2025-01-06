@@ -68,10 +68,10 @@ export class ProductApiService {
   }
 
   updateProductStatus(productVariantId:number, updatedStatus: boolean) {
-    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-status/${productVariantId}`, { isActive: updatedStatus });
+    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-status/${productVariantId}`,  updatedStatus );
   }
 
-  updateProductStock(productVariantId: number, newStock: any) {
-    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-stock/${productVariantId}`, { stock: newStock });
+  updateProductStock(productVariantId: number, newStock: number) {
+    return this.http.post<ApiResponseDTO<boolean>>(`${this.apiUrl}/update-stock/${productVariantId}`,  newStock );
   }
 }

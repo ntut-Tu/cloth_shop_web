@@ -22,7 +22,8 @@ export class CheckoutMapperService {
           store_id: storeId,
           special_discount_code: '',
           seasonal_discount_code: '',
-          product_variants: []
+          product_variants: [],
+          store_name: '',
         };
       }
       acc[storeId].product_variants.push({

@@ -14,11 +14,23 @@ export class RefundService {
     return this.refundApiService.createRefund(refundData);
   }
 
-  getRefund(refundId: number) {
-    return this.refundApiService.getRefund(refundId);
+  getRefundByOrderId(orderItemId: number) {
+    return this.refundApiService.getRefundByOrderId(orderItemId);
   }
 
   updateRefund(refundId:number, refundData:RefundModel) {
     return this.refundApiService.updateRefund(refundId, refundData);
+  }
+
+  checkRefundRequestExist(orderItemId:number) {
+    return this.refundApiService.checkRefundRequestExist(orderItemId);
+  }
+
+  getRefundList() {
+    return this.refundApiService.getRefundList();
+  }
+
+  getRefundById(refundId:number) {
+    return this.refundApiService.getRefundById(refundId);
   }
 }

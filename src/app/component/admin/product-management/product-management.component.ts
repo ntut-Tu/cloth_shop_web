@@ -5,6 +5,7 @@ import {GuestViewDetailComponent} from "../../guest/new-style-g-view-detail/gues
 import {PageEvent} from "@angular/material/paginator";
 import {ProductService} from "../../../service/business/product.service";
 import { onImageError } from '../../../utils/image-utils.service';
+import {AdminProductDetailComponent} from "../admin-product-detail/admin-product-detail.component";
 
 @Component({
   selector: 'app-admin.product.management',
@@ -47,14 +48,14 @@ export class ProductManagementComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts({
       page: this.currentPage,
-      pageSize: this.pageSize,
+      pageSize: this.pageSize, // 20
       category: this.selectedCategory === 'All' ? null : this.selectedCategory,
       sort: this.selectedCategory === 'All' ? this.selectedSortOption : null,
       search: this.searchKeyword || null,
       role: this.userType
     }).subscribe((response) => {
       if (response.status) {
-        this.products = response.data.items;
+        this.products = response.data.items; //15
         this.totalProducts = response.data.totalRecords;
       } else {
         console.error(response.message);
@@ -75,7 +76,7 @@ export class ProductManagementComponent implements OnInit {
     this.productService.getProductDetails(product.productId).subscribe(
       (response) => {
         this.detailedProduct = response.data;
-        const dialogRef = this.dialog.open(GuestViewDetailComponent, {
+        const dialogRef = this.dialog.open(AdminProductDetailComponent, {
           width: '600px',
           data: this.detailedProduct,
         });

@@ -11,7 +11,12 @@ import {Router} from "@angular/router";
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService,private cdr: ChangeDetectorRef,private router:Router) {}
+  constructor(private cartService: CartService,private cdr: ChangeDetectorRef,private router:Router) {
+    this.cartService.cart$.subscribe(cartItems => {
+      this.cartItems = cartItems;
+      this.cdr.detectChanges();
+    });
+  }
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(cartItems => {

@@ -38,6 +38,7 @@ export interface ProductDetail {
   storeDescription: string;
   storeAddress: string;
   storeLogoUrl: string;
+  storeName: string;
   productVariants: ProductVariant[]; // List of variants
 }
 export interface CartItem {
@@ -51,4 +52,6 @@ export interface CartItem {
   quantity: number;
   fkVendorId: number;
   storeDescription: string;
+  storeName: string;
+  storeImageUrl?: string;
 }

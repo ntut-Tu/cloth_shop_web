@@ -3,6 +3,7 @@
     <div class="navbar-left">
       <a routerLink="products" routerLinkActive="active">商品</a>
       <a routerLink="orders" routerLinkActive="active">訂單</a>
+      <a routerLink="refunds"  [queryParams]="{ user_type: 'customer' }">退款列表</a>
     </div>
     <div class="navbar-right">
       <button appEditUserInfo>編輯個人資訊</button>
@@ -14,8 +15,5 @@
     <div class="main-content">
       <router-outlet></router-outlet>
     </div>
-<!--    <div class="cart-placeholder" *ngIf="showCart">-->
-<!--      <app-cart></app-cart>-->
-<!--    </div>-->
   </div>
 </div>

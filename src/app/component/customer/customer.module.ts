@@ -49,7 +49,8 @@ import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/mater
 import {MatInput} from "@angular/material/input";
 import {MatPaginator} from "@angular/material/paginator";
 import {ReviewTestComponent} from "./reviewTest/reviewTest.component";
-import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
+import {EditUserInfoDirective} from "../../directive/edit-user-info.directive";
+import {TriggerRefundDialogDirective} from "../../directive/trigger-refund-dialog.directive";
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import {EditUserInfoDirective} from "../../directive/EditUserInfoDirective";
     MatDialogTitle,
     MatInput,
     MatPaginator,
-    EditUserInfoDirective
+    EditUserInfoDirective,
+    TriggerRefundDialogDirective
   ]
 })
 export class CustomerModule { }

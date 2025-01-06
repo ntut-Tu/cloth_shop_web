@@ -44,11 +44,7 @@ export class CheckoutApiService {
    * @returns 折扣確認結果的 Observable，包含通用 API 響應
    */
   confirmDiscount(discountRequest: ConfirmDiscountModel): Observable<ApiResponseDTO<ConfirmDiscountResponseModel>> {
-    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/confirm-discount`, discountRequest).pipe(
-      map((response) =>
-        mapApiResponseData(response, mapConfirmDiscountResponse)
-      )
-    );
+    return this.http.post<ApiResponseDTO<any>>(`${this.apiUrl}/confirm-discount`, discountRequest);
   }
 
   /**

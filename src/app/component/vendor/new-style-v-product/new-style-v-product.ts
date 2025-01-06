@@ -92,7 +92,7 @@ export class NewStyleVProduct implements OnInit {
     this.productService.getProductDetails(product.productId).subscribe(
       (response) => {
         this.detailedProduct = response.data;
-        const dialogRef = this.dialog.open(GuestViewDetailComponent, {
+        const dialogRef = this.dialog.open(NewStyleVProductDetailComponent, {
           width: '600px',
           data: this.detailedProduct,
         });
