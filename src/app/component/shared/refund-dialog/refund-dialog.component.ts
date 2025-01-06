@@ -17,7 +17,7 @@ import {RefundStatus} from "../../../model/refund/refund-status.model";
 })
 export class RefundDialogComponent implements OnInit {
   refundForm!: FormGroup;
-  refundStatuses = Object.values(RefundStatus);
+  refundStatuses: RefundStatus[] = [];
   isRequestExisting = false;
 
   constructor(
@@ -74,27 +74,35 @@ export class RefundDialogComponent implements OnInit {
     switch (status) {
       case RefundStatus.VendorPending:
         if (this.data.user_type === 'vendor') {
+          this.refundStatuses = [RefundStatus.VendorApprove, RefundStatus.VendorReject];
           this.enableEditableFields(['vendorResponse', 'statusType']);
         }
         break;
       case RefundStatus.AdminPending:
         if (this.data.user_type === 'admin') {
+          this.refundStatuses = [RefundStatus.AdminApprove, RefundStatus.AdminReject];
           this.enableEditableFields(['adminResponse', 'statusType']);
         }
         break;
       case RefundStatus.VendorApprove:
+        this.refundStatuses = Object.values(RefundStatus);
+        break;
       case RefundStatus.AdminApprove:
         this.setClosedState(true);
+        this.refundStatuses = Object.values(RefundStatus);
         break;
       case RefundStatus.VendorReject:
         if (this.data.user_type === 'customer') {
+          this.refundStatuses = [RefundStatus.AdminPending];
           this.enableEditableFields(['refundReason', 'statusType']);
         }
         break;
       case RefundStatus.AdminReject:
         this.setClosedState(true);
+        this.refundStatuses = Object.values(RefundStatus);
         break;
       default:
+        this.refundStatuses = Object.values(RefundStatus);
         this.watchModeInit();
         break;
     }
