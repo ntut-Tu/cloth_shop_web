@@ -18,7 +18,7 @@ export class EditProfileComponent implements OnInit {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userProfileService: UserProfileEditionService // 修改這裡以引入服務
+    private userProfileService: UserProfileEditionService
   ) {}
 
   ngOnInit(): void {

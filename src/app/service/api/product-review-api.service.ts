@@ -6,7 +6,7 @@ import { ApiResponseDTO } from '../../model/api-response.model';
 
 import { Review } from '../../model/review/review.model';
 import { AddReviewResponse } from "../../model/review/add-review-response.model";
-
+import { GetReviewResponseDTO } from "../../model/review/get-review-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,6 @@ export class ProductReviewApiService {
 
   /**
    * 新增評價
-   * @param productId - 產品 ID
    * @param review - 評價資料
    * @returns 新曾評價操作的結果
    */
@@ -28,13 +27,16 @@ export class ProductReviewApiService {
     return this.http.post<ApiResponseDTO<AddReviewResponse>>(url, review);
   }
 
-  // /**
-  //  * 取得產品評價列表
-  //  * @param  productId - 產品 ID
-  //  * @returns 包含評價列表的 ApiResponseDTO
-  //  */
-  // getProductReviews(productId: number): Observable<ApiResponseDTO<Review[]>> {
-  //   const url = `${this.apiUrl}/${productId}/reviews`;
-  //   return this.http.get<ApiResponseDTO<Review[]>>(url);
-  // }
+  /**
+   * 取得產品評價列表
+   * @param productId - 產品 ID
+   * @param page - 當前頁數
+   * @returns 包含評價列表的 ApiResponseDTO
+   */
+  getProductReviews(productId: number, page: number): Observable<ApiResponseDTO<GetReviewResponseDTO[]>> {
+    const url = `${this.apiUrl}/getProductReviews/${productId}/${page}}`;
+    return this.http.get<ApiResponseDTO<GetReviewResponseDTO[]>>(url);
+  }
+  //
+  // isReviewExist()
 }

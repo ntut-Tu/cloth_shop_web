@@ -4,6 +4,7 @@ import { ProductReviewApiService } from '../api/product-review-api.service';
 import { Observable } from "rxjs";
 import { ApiResponseDTO } from "../../model/api-response.model";
 import { AddReviewResponse } from "../../model/review/add-review-response.model";
+import { GetReviewResponseDTO } from "../../model/review/get-review-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,13 @@ export class ReviewService {
     return this.productReviewService.addReview(review);
   }
 
-  // /**
-  //  *  取得產品評價列表
-  //  *  @param productId - 產品 ID
-  //  *  @returns 包含評價列表的 ApiResponseDTO
-  //  */
-  // getProductReviews(productId: number): Observable<ApiResponseDTO<Review[]>> {
-  //   return this.productReviewService.getProductReviews(productId);
-  // }
+  /**
+   *  取得產品評價列表
+   *  @param productId - 產品 ID
+   *  @param page - 當前頁數
+   *  @returns 包含評價列表的 ApiResponseDTO
+   */
+  getProductReviews(productId: number, page: number): Observable<ApiResponseDTO<GetReviewResponseDTO[]>> {
+    return this.productReviewService.getProductReviews(productId, page);
+  }
 }

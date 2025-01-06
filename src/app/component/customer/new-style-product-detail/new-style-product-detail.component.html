@@ -28,6 +28,39 @@
     <div class="price" *ngIf="selectedVariant">
       <p>價格: {{ selectedVariant.price }}元</p>
     </div>
+
+    <!-- 評論部分開始 -->
+    <div class="reviews-section" *ngIf="reviews.length > 0">
+      <h3>商品評論</h3>
+      <div *ngFor="let review of reviews" class="review-item">
+        <p><strong>{{ review.customerName }}</strong>: {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+        <p>{{ review.reviewDate }}</p>
+      </div>
+      <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <button mat-button (click)="nextPage()" [disabled]="noMoreReviews">Next</button>
+    </div>
+    <div *ngIf="reviews.length === 0">
+      <p>No reviews found.</p>
+    </div>
+    <!-- 評論部分結束 -->
+<!--    &lt;!&ndash; 評論部分開始 &ndash;&gt;-->
+<!--    <div class="reviews-section" *ngIf="reviews.length > 0">-->
+<!--      <h3>商品評論</h3> <div *ngFor="let review of reviews" class="review-item">-->
+<!--      <p><strong>{{ review.customerName }}</strong>: {{ review.rating }}</p>-->
+<!--      <p>{{ review.comment }}</p>-->
+<!--      <p>{{ review.reviewDate }}</p>-->
+<!--      </div> <mat-paginator [length]="totalReviews"-->
+<!--                          [pageSize]="pageSize"-->
+<!--                          [pageSizeOptions]="[6]"-->
+<!--                          (page)="onPageChange($event)">-->
+<!--      </mat-paginator>-->
+<!--    </div>-->
+<!--    <div *ngIf="reviews.length === 0">-->
+<!--      <p>No reviews found.</p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 評論部分結束 &ndash;&gt;-->
+
   </mat-card-content>
 
   <mat-card-actions>
