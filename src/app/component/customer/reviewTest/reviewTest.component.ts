@@ -37,20 +37,6 @@ export class ReviewTestComponent implements OnInit {
     this.checkFormValidity();
   }
 
-  // 新增評論
-  // addReview(): void {
-  //   if (this.isFormValid) {
-  //     this.reviewService.addReview(this.newReview).subscribe(
-  //       response => {
-  //         if (response.status) this.dialogRef.close("success");
-  //         else console.error('Failed to add review:', response.message);
-  //       },
-  //       error => {
-  //         console.error('Error adding review:', error);
-  //       }
-  //     );
-  //   }
-  // }
   addReview(): void {
     if (this.isFormValid && !this.isSubmitting) {
       this.isSubmitting = true; // 開始提交時設置狀態
@@ -82,7 +68,6 @@ export class ReviewTestComponent implements OnInit {
       });
     }
   }
-
 
   // 關閉 dialog
   cancel(): void {

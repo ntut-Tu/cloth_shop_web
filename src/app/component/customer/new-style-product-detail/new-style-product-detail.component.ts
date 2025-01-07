@@ -4,8 +4,8 @@ import { environment } from "../../../../environments/environment";
 import { PageEvent } from "@angular/material/paginator";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { onImageError } from "../../../utils/image-utils.service";
-import {ReviewService} from "../../../service/business/review.service";
-import {GetReviewResponseDTO} from "../../../model/review/get-review-response.model";
+import { ReviewService } from "../../../service/business/review.service";
+import { GetReviewResponseDTO } from "../../../model/review/get-review-response.model";
 
 @Component({
   selector: 'app-customer-view-detail',
@@ -59,11 +59,6 @@ export class NewStyleProductDetailComponent implements OnInit {
         }
       });
   }
-
-  // // 需要 totalReviews
-  // onPageChange(event: PageEvent): void {
-  //   this.currentPage = event.pageIndex + 1; // 更新當前頁碼 this.loadReviews();
-  // }
 
   nextPage() {
     if (!this.noMoreReviews) {

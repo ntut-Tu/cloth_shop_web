@@ -15,11 +15,6 @@
   cursor: pointer;
 }
 
-.detail-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-}
 .customer-modal-content{
     background-color: #fff;
     padding: 20px;
@@ -32,4 +27,58 @@
     position: relative;
     z-index: 1001;
     text-align: center;
+}
+
+.reviews-section {
+  margin-top: 20px;
+}
+
+.review-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-stars {
+  display: flex;
+  justify-content: flex-start; /* 確保星星排列在左側 */
+}
+
+.review-stars mat-icon {
+  color: #ffd700; /* 金色 */
+}
+
+
+.review-stars .filled {
+  color: #ffd700;
+}
+
+.review-stars {
+  text-align: left;
+}
+
+.review-name {
+  font-weight: bold;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.review-comment {
+  color: #333;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  margin-top: 10px;
 }

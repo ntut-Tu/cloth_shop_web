@@ -1,7 +1,76 @@
+mat-card {
+  max-height: 80vh; /* 設置對話框的最大高度 */
+  overflow-y: auto; /* 允許垂直滾動 */
+}
+
 .detail-image{
   width: 100%;
   height: auto;
   min-height: 400px;
   min-width: 500px;
   margin-bottom: 20px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.reviews-section {
+  margin: 10px;
+}
+
+.review-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-stars {
+  display: flex;
+  justify-content: flex-start; /* 確保星星排列在左側 */
+}
+
+.review-stars mat-icon {
+  color: #ffd700; /* 金色 */
+}
+
+
+.review-stars .filled {
+  color: #ffd700;
+}
+
+.review-stars {
+  text-align: left;
+}
+
+.review-name {
+  font-weight: bold;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.review-comment {
+  color: #333;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  margin-top: 10px;
 }

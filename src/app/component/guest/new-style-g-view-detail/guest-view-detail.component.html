@@ -26,9 +26,35 @@
     <div class="price" *ngIf="selectedVariant">
       <p>價格: {{ selectedVariant.price }}元</p>
     </div>
+
   </mat-card-content>
 
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="addToCart()">加入購物車</button>
   </mat-card-actions>
+
+  <!-- 評論部分開始 -->
+  <div class="reviews-section" *ngIf="reviews.length > 0">
+    <h3>商品評價</h3>
+    <div *ngFor="let review of reviews" class="review-item">
+      <p class="review-name"><strong>{{ review.customerName }}</strong></p>
+      <div class="review-header">
+        <div class="review-stars">
+          <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'filled': star <= review.rating}">
+            star
+          </mat-icon>
+        </div>
+        <p class="review-date">{{ review.reviewDate | date:'yyyy-MM-dd HH:mm'}}</p>
+      </div>
+      <p class="review-comment">{{ review.comment }}</p>
+    </div>
+    <div class="pagination">
+      <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">上一頁</button>
+      <button mat-button (click)="nextPage()" [disabled]="noMoreReviews">下一頁</button>
+    </div>
+  </div>
+  <div *ngIf="reviews.length === 0">
+    <p>尚無評論。</p>
+  </div>
+  <!-- 評論部分結束 -->
 </mat-card>
