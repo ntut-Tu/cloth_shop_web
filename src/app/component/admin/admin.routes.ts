@@ -7,7 +7,6 @@ import {AdminDiscountComponent} from "./admin-discount/admin-discount.component"
 import {AdminOrderComponent} from "./admin-order/admin-order.component";
 import {AdminLedgerComponent} from "./admin-ledger/admin-ledger.component";
 import {RefundListComponent} from "../shared/refund-list/refund-list.component";
-// import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
 
 export const adminRoutes: Routes = [
   {

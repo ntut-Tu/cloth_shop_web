@@ -25,18 +25,10 @@ export interface RefundListSumResponse{
   refund_status: string;
   is_closed: boolean;
 }
-// private Integer order_item_id;
-// private String request_target;
-// private String status_type;
-// private Boolean is_closed;
-// private String refund_reason;
-// private String vendor_response;
-// private String admin_response;
-// private String updated_at;
 
 export function mapFormToRefundModel(formValue: any): RefundModel {
   return {
-    refund_id: Number(formValue.refundId), // 新申請時，後端應生成此值
+    refund_id: Number(formValue.refundId),
     order_item_id: Number(formValue.orderItemId),
     request_target: formValue.requestTarget,
     status_type: formValue.statusType,
@@ -44,8 +36,8 @@ export function mapFormToRefundModel(formValue: any): RefundModel {
     refund_reason: formValue.refundReason,
     vendor_response: formValue.vendorResponse || null,
     admin_response: formValue.adminResponse || null,
-    created_at: '', // 此值應由後端自動生成
-    updated_at: '', // 此值應由後端自動生成
+    created_at: '',
+    updated_at: '',
     vendor_id: formValue.vendorId ? Number(formValue.vendorId) : 0,
     admin_id: formValue.adminId ? Number(formValue.adminId) : 0,
   };

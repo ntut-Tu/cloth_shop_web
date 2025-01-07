@@ -14,4 +14,3 @@ export interface OrderSummaryDetailModel {
   shippingMethod: string;
 }
 
-// { orderId: 'O67890', orderDate: '2024-12-08', totalAmount: 300, shippingDiscountCode: null, shipStatus: 'Delivered' ,payStatus: 'Paid'},

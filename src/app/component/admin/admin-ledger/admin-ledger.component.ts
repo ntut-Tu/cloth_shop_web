@@ -13,7 +13,7 @@ export class AdminLedgerComponent  implements OnInit {
 
   barChartData: any[] = [];
   lineChartData: any[] = [];
-  view: [number, number] = [700, 400]; // 图表宽高
+  view: [number, number] = [700, 400];
 
 
 

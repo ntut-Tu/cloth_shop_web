@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductService } from '../../../service/business/product.service'; // 假設有 ProductService
+import { ProductService } from '../../../service/business/product.service';
 
 @Component({
   selector: 'app-new-style-product-detail',

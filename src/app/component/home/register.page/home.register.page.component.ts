@@ -16,16 +16,13 @@ export class HomeRegisterPageComponent {
   confirmPassword: string = '';
   role: UserRoleModel = UserRoleModel.Customer;
 
-  // Step tracking
   step: number = 1;
 
-  // Vendor-specific fields
   storeAddress?: string;
   storeDescription?: string;
   storeLogoUrl?: string;
   paymentAccount?: string;
 
-  // Customer-specific fields
   defaultShippingAddress?: string;
   billingAddress?: string;
 

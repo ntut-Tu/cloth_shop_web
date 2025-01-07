@@ -6,8 +6,3 @@ export interface UserLogModel{
   date:string;
 }
 
-// Integer log_id;
-// Integer user_id;
-// String username;
-// String action;
-// String date;

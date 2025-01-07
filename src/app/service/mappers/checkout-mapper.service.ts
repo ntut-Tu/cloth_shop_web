@@ -41,12 +41,12 @@ export class CheckoutMapperService {
     }
     return {
       ...confirmAmountModel,
-      order_id:'',// Copy fields from ConfirmAmountModel
-      payment_method: '', // Default or provided value
-      credit_card_last_four: '', // Default or provided value
-      delivery_type: '', // Default or provided value
-      pickup_store: '', // Default or provided value
-      shipping_address: '', // Default or provided value
+      order_id:'',
+      payment_method: '',
+      credit_card_last_four: '',
+      delivery_type: '',
+      pickup_store: '',
+      shipping_address: '',
     };
   }
 }

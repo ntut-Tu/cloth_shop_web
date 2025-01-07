@@ -5,7 +5,3 @@ export interface StoreOrderSummaryModel {
   vendorCouponCode?: String;
 }
 
-// storeOrderId: 'S123',
-//   storeName: '商店 A',
-//   imageUrl: 'assets/storeA-logo.png',
-//   vendorCouponCode: 'VCOUPON20',

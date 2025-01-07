@@ -39,7 +39,7 @@ export interface ProductDetail {
   storeAddress: string;
   storeLogoUrl: string;
   storeName: string;
-  productVariants: ProductVariant[]; // List of variants
+  productVariants: ProductVariant[];
 }
 export interface CartItem {
   productVariantId : number;

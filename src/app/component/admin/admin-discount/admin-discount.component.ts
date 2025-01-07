@@ -41,7 +41,7 @@ export class AdminDiscountComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'refresh') {
-        this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
+        this.loadCoupons();
       }
     });
   }
@@ -57,7 +57,7 @@ export class AdminDiscountComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'refresh') {
-        this.loadCoupons(); // 如果新增成功，重新加载优惠券列表
+        this.loadCoupons();
       }
     });
   }

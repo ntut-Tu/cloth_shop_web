@@ -8,11 +8,3 @@ export interface OrderItemDetailDTO {
   size: string;
   color: string;
 }
-// Integer order_item_id;
-// Integer unit_price;
-// Integer quantity;
-// Integer total_price;
-// String order_image_url;
-// String product_name;
-// String size;
-// String color;

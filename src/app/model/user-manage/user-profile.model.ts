@@ -24,10 +24,3 @@ export interface UserInfoUpdateDto {
   profilePicUrl: string;
 }
 
-//
-// Integer id;
-// String username;
-// String email;
-// String role;
-// String establishDate;
-// Boolean isActive;
