@@ -84,8 +84,9 @@ mat-card-subtitle {
 
 .product-image {
   width: 95%;
+  min-width: 95%;
   height: 50%; /* 固定高度，保持一致性 */
-  object-fit: cover; /* 確保圖片以適當比例顯示 */
+  /*object-fit: cover; !* 確保圖片以適當比例顯示 *!*/
   margin-bottom: 10px;
 }
 

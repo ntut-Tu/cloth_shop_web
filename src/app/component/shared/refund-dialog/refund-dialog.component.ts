@@ -74,13 +74,13 @@ export class RefundDialogComponent implements OnInit {
     switch (status) {
       case RefundStatus.VendorPending:
         if (this.data.user_type === 'vendor') {
-          this.refundStatuses = [RefundStatus.VendorApprove, RefundStatus.VendorReject];
+          this.refundStatuses = [RefundStatus.VendorApprove, RefundStatus.VendorRejected];
           this.enableEditableFields(['vendorResponse', 'statusType']);
         }
         break;
       case RefundStatus.AdminPending:
         if (this.data.user_type === 'admin') {
-          this.refundStatuses = [RefundStatus.AdminApprove, RefundStatus.AdminReject];
+          this.refundStatuses = [RefundStatus.AdminApprove, RefundStatus.AdminRejected];
           this.enableEditableFields(['adminResponse', 'statusType']);
         }
         break;
@@ -91,13 +91,13 @@ export class RefundDialogComponent implements OnInit {
         this.setClosedState(true);
         this.refundStatuses = Object.values(RefundStatus);
         break;
-      case RefundStatus.VendorReject:
+      case RefundStatus.VendorRejected:
         if (this.data.user_type === 'customer') {
           this.refundStatuses = [RefundStatus.AdminPending];
           this.enableEditableFields(['refundReason', 'statusType']);
         }
         break;
-      case RefundStatus.AdminReject:
+      case RefundStatus.AdminRejected:
         this.setClosedState(true);
         this.refundStatuses = Object.values(RefundStatus);
         break;

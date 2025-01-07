@@ -1,6 +1,6 @@
 export interface DiscountSummaryModel {
   discountId: number;
-  discountType: 'Seasonal_Discount' | 'Shipping_Discount' | 'Special_Discount';
+  discountType: string;
   code: string;
   startDate: string;
   endDate: string;

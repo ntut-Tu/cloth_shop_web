@@ -65,7 +65,10 @@
     <!-- 全局折扣 -->
     <div class="discount-input">
       <span>Shipping Discount:</span>
-      <div>
+      <div *ngIf="(checkoutService.orderData$ | async)?.shipping_discount_code as _shippingDiscountCode">
+        <span>Current Discount: {{ _shippingDiscountCode }}</span>
+      </div>
+      <div *ngIf="!(checkoutService.orderData$ | async)?.shipping_discount_code ">
         <input
           type="text"
           placeholder="Enter Shipping Discount Code"

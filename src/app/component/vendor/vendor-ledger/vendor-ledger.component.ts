@@ -37,8 +37,8 @@ export class VendorLedgerComponent implements OnInit {
   }
 
   calculateBarChartData(data: VendorLedger[]): any[] {
-    const income = data.filter(d => d.amount > 0).reduce((sum, item) => sum + item.amount, 0);
-    const expense = data.filter(d => d.amount < 0).reduce((sum, item) => sum + item.amount, 0);
+    const income = data.filter(d => d.transactionType == "income").reduce((sum, item) => sum + item.amount, 0);
+    const expense = data.filter(d => d.transactionType == "fee").reduce((sum, item) => sum + item.amount, 0);
     return [
       { name: '收入', value: income },
       { name: '支出', value: expense }

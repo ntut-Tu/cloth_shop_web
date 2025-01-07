@@ -66,7 +66,7 @@ export class NewStyleVProduct implements OnInit {
       page: this.currentPage,
       pageSize: this.pageSize,
       category: this.selectedCategory === 'All' ? null : this.selectedCategory,
-      sort: this.selectedCategory === 'All' ? this.selectedSortOption : null,
+      sort: this.selectedSortOption || null,
       search: this.searchKeyword || null,
       role: this.userType
     }).subscribe((response) => {
@@ -85,6 +85,10 @@ export class NewStyleVProduct implements OnInit {
   }
 
   onSearch(): void {
+    this.loadProducts();
+  }
+
+  onSortOptionChange(): void {
     this.loadProducts();
   }
 

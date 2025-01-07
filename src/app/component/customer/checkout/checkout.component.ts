@@ -1,8 +1,13 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
 import { CheckoutService } from "../../../service/business/checkout.service";
-import {ConfirmDiscountResponseModel, mapConfirmDiscountResponse} from "../../../model/checkout/confirm-oder.model";
+import {
+  ConfirmAmountModel,
+  ConfirmDiscountResponseModel,
+  mapConfirmDiscountResponse
+} from "../../../model/checkout/confirm-oder.model";
 import { ApiResponseDTO } from "../../../model/api-response.model";
 import {onImageError} from "../../../utils/image-utils.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-checkout',
@@ -26,11 +31,18 @@ export class CheckoutComponent implements OnInit {
   orderId: string = '';
 
   isFormDirty: boolean = false;
-  constructor(protected checkoutService: CheckoutService) {}
+  constructor(protected checkoutService: CheckoutService,private cdr: ChangeDetectorRef) {}
+
+  orderData :any;
+
 
   ngOnInit(): void {
     this.checkoutService.initializeOrder();
     this.calculateTotals();
+    this.checkoutService.orderData$.subscribe(orderData => {
+      this.orderData = orderData;
+      this.cdr.detectChanges();
+    });
   }
 
   /**
@@ -101,7 +113,12 @@ export class CheckoutComponent implements OnInit {
         if (ret.is_valid) {
           alert('Discount applied successfully!');
           this.calculateTotals();
-          this.tempDiscountCode = code;
+          if(type ==='store_order')this.tempDiscountCode = code;
+          else {
+            this.shippingDiscountCode = code;
+            this.checkoutService.saveShippingDiscountCode(code);
+            console.log('shippingDiscountCode saved',this.shippingDiscountCode);
+          }
           this.checkoutService.saveDiscountCode(code,ret.coupon?.discountType,storeId,ret.discount_type === 'store');
         } else {
           alert(response.message || 'Invalid discount code.');

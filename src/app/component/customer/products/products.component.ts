@@ -14,7 +14,7 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class ProductsComponent implements OnInit {
   currentPage: number = 1;
-  pageSize: number = 30;
+  pageSize: number = 10;
   userType: string = 'customer';
   detailedProduct: any = null;
   categories: { value: string, viewValue: string }[] = [
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
       page: this.currentPage,
       pageSize: this.pageSize,
       category: this.selectedCategory === 'All' ? null : this.selectedCategory,
-      sort: this.selectedCategory === 'All' ? this.selectedSortOption : null,
+      sort: this.selectedSortOption || null,
       search: this.searchKeyword || null,
       role: this.userType
     }).subscribe((response) => {
@@ -69,6 +69,10 @@ export class ProductsComponent implements OnInit {
   }
 
   onSearch(): void {
+    this.loadProducts();
+  }
+
+  onSortOptionChange(): void {
     this.loadProducts();
   }
 

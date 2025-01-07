@@ -186,13 +186,20 @@ export class CheckoutService {
       if (storeOrder.store_id === storeId) {
         if(type?.toLowerCase().includes('special')) storeOrder.special_discount_code = code;
         else if(type?.toLowerCase().includes('seasonal')) storeOrder.seasonal_discount_code = code;
-        else if(type?.toLowerCase().includes('shipping')) currentOrder.shipping_discount_code = code;
-        else console.log('error saving discount code');
+        else if(type?.toLowerCase().includes('platform') || type?.toLowerCase().includes('ship') || !isStore) currentOrder.shipping_discount_code = code;
+        else console.log(`error saving discount code ${type} , ${isStore}`);
       }else {
         console.log('error saving discount code');
       }
     });
 
     this.orderDataSubject.next(currentOrder); // 更新訂單數據
+  }
+
+  saveShippingDiscountCode(code: string) {
+    const currentOrder = this.orderDataSubject.getValue();
+    if(!currentOrder) return;
+    currentOrder.shipping_discount_code = code;
+    this.orderDataSubject.next(currentOrder);
   }
 }

@@ -3,6 +3,6 @@ export enum RefundStatus {
   AdminPending = 'admin_pending',
   VendorApprove = 'vendor_approve',
   AdminApprove = 'admin_approve',
-  VendorReject = 'vendor_reject',
-  AdminReject = 'admin_reject',
+  VendorRejected = 'vendor_rejected',
+  AdminRejected = 'admin_rejected',
 }
