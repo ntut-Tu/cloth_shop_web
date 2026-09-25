@@ -1,0 +1,62 @@
+<mat-card class="modal-content">
+  <mat-card-header>
+    <mat-icon class="close-button" (click)="close()">close</mat-icon>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img mat-card-image [src]="data?.imageUrl" alt="{{ data?.name }}" class="detail-image" />
+    <h2 mat-card-title>{{ data?.name }}</h2>
+    <p mat-card-subtitle>{{ data?.description }}</p>
+
+    <div *ngIf="data?.productVariants?.length > 0; else errorTemplate" class="variant-selection">
+      <mat-form-field appearance="fill">
+        <mat-label>選擇款式</mat-label>
+        <mat-select (selectionChange)="onVariantChange($event)">
+          <mat-option *ngFor="let variant of data.productVariants" [value]="variant.productVariantId">
+            {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <ng-template #errorTemplate>
+      <p class="error-message">商品資訊載入失敗。</p>
+    </ng-template>
+
+    <div *ngIf="selectedVariant">
+      <p>價格: {{ selectedVariant.price }}元</p>
+      <p>目前庫存: {{ selectedVariant.stock }}</p>
+
+      <mat-tab-group>
+        <!-- 更改狀態 Tab -->
+        <mat-tab label="更改狀態">
+          <div class="tab-content">
+            <mat-form-field appearance="fill">
+              <mat-label>選擇狀態</mat-label>
+              <mat-select [(ngModel)]="selectedVariantStatus">
+                <mat-option [value]="true">已上架</mat-option>
+                <mat-option [value]="false">未上架</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submitStatusChange()">送出</button>
+          </div>
+        </mat-tab>
+
+        <!-- 增加庫存 Tab -->
+        <mat-tab label="增加庫存">
+          <div class="tab-content">
+            <mat-form-field class="example-full-width">
+              <mat-label>增加庫存</mat-label>
+              <input matInput type="number" [(ngModel)]="stockToAdd" placeholder="輸入增加的庫存數量" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="updateStock()">確認增加庫存</button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="close()">關閉</button>
+  </mat-card-actions>
+</mat-card>

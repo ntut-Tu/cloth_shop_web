@@ -1,59 +1,30 @@
-/* 基础表格样式 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-thead th {
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
+mat-header-cell {
   font-weight: bold;
-  border-bottom: 2px solid #ddd;
+  background-color: #f2f2f2;
 }
 
-tbody td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+mat-row {
   cursor: pointer;
 }
 
-/* 悬停效果 */
-tbody tr:hover {
+mat-row:hover {
   background-color: #f9f9f9;
 }
 
-/* 订单详情展开部分的样式 */
-.edit-discount {
-  background-color: #f7f7f7;
-  padding: 15px;
-  border-top: 1px solid #ddd;
+.active-status {
+  color: #28a745;
 }
 
-.edit-discount div {
-  padding: 5px 0;
-}
-
-
-/* 按钮样式优化 */
-.edit-user button {
-  background: linear-gradient(135deg, #28a745, #218838);
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 1.1em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin: 10px 0;
-}
-
-.expire-status {
+.inactive-status {
   color: #c82333;
 }
 
-.not-expire-status {
-  color: #28a745;
+mat-paginator {
+  margin-top: 20px;
+}
+
+.table-container {
+  height: 100%; /* 根據需要調整高度 */
+  overflow: visible;
+  border: 1px solid #ccc; /* 選擇性加上邊框 */
 }

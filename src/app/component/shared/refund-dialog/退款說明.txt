@@ -1,0 +1,6 @@
+status 有 
+vendor_pending : 為顧客提出後等待商家，此時只有商家能編輯回應及更改status
+admin_pending : 為商家拒絕後顧客再向管理員申請時的狀態，此時只有管理員能編輯回應及更改status
+vendor_approve, admin_approve : 後端會有trigger自動轉成isClosed = true，此後所有角色都會是Watch_Mode
+vendor_reject : 為商家拒絕後的狀態，顧客可以編輯回應及更改status或選擇isClosed = true
+admin_reject : 為管理員拒絕的狀態，後端會有trigger自動轉成isClosed = true，此後所有角色都會是Watch_Mode

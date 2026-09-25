@@ -1,0 +1,69 @@
+<mat-card class="customer-modal-content">
+  <mat-card-header>
+    <button mat-icon-button class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img mat-card-image [src]="data?.imageUrl" alt="{{ data?.name }}" class="detail-image" (error)="onImageError($event)"/>
+    <h2 mat-card-title>{{ data?.name }}</h2>
+    <p mat-card-subtitle>{{ data?.description }}</p>
+
+    <div *ngIf="data?.productVariants?.length > 0; else errorTemplate" class="variant-selection">
+      <mat-form-field appearance="fill">
+        <mat-label>選擇款式</mat-label>
+        <mat-select (selectionChange)="onVariantChange($event)">
+          <mat-option *ngFor="let variant of data.productVariants" [value]="variant.productVariantId">
+            {{ variant.color }} - {{ variant.size }} - {{ variant.price }}元
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <ng-template #errorTemplate>
+      <p class="error-message">商品資訊載入失敗。</p>
+    </ng-template>
+
+    <div class="price" *ngIf="selectedVariant">
+      <p>價格: {{ selectedVariant.price }}元</p>
+    </div>
+
+    <!-- 評論部分開始 -->
+    <div class="reviews-section" *ngIf="reviews.length > 0">
+      <h3>商品評論</h3>
+      <div *ngFor="let review of reviews" class="review-item">
+        <p><strong>{{ review.customerName }}</strong>: {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+        <p>{{ review.reviewDate }}</p>
+      </div>
+      <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <button mat-button (click)="nextPage()" [disabled]="noMoreReviews">Next</button>
+    </div>
+    <div *ngIf="reviews.length === 0">
+      <p>No reviews found.</p>
+    </div>
+    <!-- 評論部分結束 -->
+<!--    &lt;!&ndash; 評論部分開始 &ndash;&gt;-->
+<!--    <div class="reviews-section" *ngIf="reviews.length > 0">-->
+<!--      <h3>商品評論</h3> <div *ngFor="let review of reviews" class="review-item">-->
+<!--      <p><strong>{{ review.customerName }}</strong>: {{ review.rating }}</p>-->
+<!--      <p>{{ review.comment }}</p>-->
+<!--      <p>{{ review.reviewDate }}</p>-->
+<!--      </div> <mat-paginator [length]="totalReviews"-->
+<!--                          [pageSize]="pageSize"-->
+<!--                          [pageSizeOptions]="[6]"-->
+<!--                          (page)="onPageChange($event)">-->
+<!--      </mat-paginator>-->
+<!--    </div>-->
+<!--    <div *ngIf="reviews.length === 0">-->
+<!--      <p>No reviews found.</p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 評論部分結束 &ndash;&gt;-->
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addToCart()">加入購物車</button>
+  </mat-card-actions>
+</mat-card>

@@ -2,7 +2,11 @@ import { Routes } from '@angular/router';
 import { AdminPageComponent } from './page/admin.page.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
-import { TransactionRecordsComponent } from './transaction-records/transaction-records.component';
+import {UserLogComponent} from "./user-log/user-log.component";
+import {AdminDiscountComponent} from "./admin-discount/admin-discount.component";
+import {AdminOrderComponent} from "./admin-order/admin-order.component";
+import {AdminLedgerComponent} from "./admin-ledger/admin-ledger.component";
+import {RefundListComponent} from "../shared/refund-list/refund-list.component";
 
 export const adminRoutes: Routes = [
   {
@@ -11,7 +15,11 @@ export const adminRoutes: Routes = [
     children: [
       { path: 'user-management', component: UserManagementComponent },
       { path: 'product-management', component: ProductManagementComponent },
-      { path: 'transaction-records', component: TransactionRecordsComponent }
+      { path: 'transaction-records', component: AdminOrderComponent },
+      { path: 'user-log', component: UserLogComponent },
+      { path: 'discount', component: AdminDiscountComponent },
+      { path: 'ledger', component: AdminLedgerComponent },
+      { path: 'refunds', component: RefundListComponent },
     ]
   }
 ];

@@ -1,0 +1,24 @@
+.rating-container {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.selected {
+  color: gold;
+  cursor: pointer;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+
+.stars mat-icon.active {
+  color: #fbc02d; /* 星星顏色 */
+}
+
+mat-form-field {
+  width: 80%;
+}

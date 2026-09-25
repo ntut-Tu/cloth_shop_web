@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>新增評論</h2>
+<mat-dialog-content>
+  <div *ngIf="data.productName" class="mb-3">
+    <p>商品名稱: {{data.productName}}</p>
+  </div>
+  <div class="w-full mb-3">
+    <div>
+      <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                (click)="newReview.rating = i + 1"
+                [ngClass]="{'selected': i < newReview.rating}">
+        {{i < newReview.rating ? 'star' : 'star_border'}}
+      </mat-icon>
+    </div>
+    <mat-error *ngIf="newReview.rating < 1 || newReview.rating > 5">
+      請給予 1-5 分的評分
+    </mat-error>
+  </div>
+  <mat-form-field class="w-full">
+    <mat-label>評論</mat-label>
+    <textarea matInput [(ngModel)]="newReview.comment"
+              (ngModelChange)="checkFormValidity()"
+              name="comment" required rows="6"></textarea>
+    <mat-error *ngIf="!newReview.comment.trim()">
+      請填寫評論內容
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">取消</button>
+  <button mat-raised-button color="primary"
+          [disabled]="!isFormValid"
+          (click)="addReview()">送出評論</button>
+</mat-dialog-actions>

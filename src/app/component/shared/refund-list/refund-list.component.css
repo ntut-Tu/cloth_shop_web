@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+button {
+  margin: 0 4px;
+}
+
+button[color="primary"] {
+  background-color: #1976d2;
+  color: white;
+}
+
+button[color="accent"] {
+  background-color: #388e3c;
+  color: white;
+}

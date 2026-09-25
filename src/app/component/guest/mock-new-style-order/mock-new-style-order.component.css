@@ -1,0 +1,21 @@
+/*.order-summary,*/
+/*.store-order,*/
+/*.order-item {*/
+/*  margin: 16px 0;*/
+/*}*/
+
+/*.order-summary p,*/
+/*.store-order p,*/
+/*.order-item p {*/
+/*  margin: 4px 0;*/
+/*}*/
+
+.store-logo,
+.item-image {
+  max-width: 100px;
+  max-height: 100px;
+  margin: 8px 0;
+  display: block;
+}
+
+

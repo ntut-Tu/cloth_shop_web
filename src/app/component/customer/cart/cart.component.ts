@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../../service/mock/cart.service';
-import {CartItem} from "../../../model/product";
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { CartService } from '../../../service/business/cart.service';
+import {CartItem} from "../../../model/product/product-summary.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -10,11 +11,17 @@ import {CartItem} from "../../../model/product";
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,private cdr: ChangeDetectorRef,private router:Router) {
+    this.cartService.cart$.subscribe(cartItems => {
+      this.cartItems = cartItems;
+      this.cdr.detectChanges();
+    });
+  }
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(cartItems => {
       this.cartItems = cartItems;
+      this.cdr.detectChanges();
     });
   }
 
@@ -24,7 +31,7 @@ export class CartComponent implements OnInit {
 
     if (quantity > 0) {
       item.quantity = quantity;
-      this.cartService.saveCartToCookies(this.cartItems);
+      this.cartService.saveCartToSession(this.cartItems);
     }
   }
 

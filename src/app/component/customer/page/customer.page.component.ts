@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
+import { EditProfileComponent } from "../../shared/edit-profile/edit-profile.component";
+import { UserProfileEditionService } from "../../../service/business/user-profile-edition.service";
+import {MatDialog} from "@angular/material/dialog";
+
 
 @Component({
   selector: 'app-customer-page',
@@ -9,7 +13,12 @@ import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 export class CustomerPageComponent implements OnInit {
   showCart: boolean = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private userProfileEditionService: UserProfileEditionService,
+  ) {}
 
   ngOnInit(): void {
     this.checkCurrentRoute();
@@ -28,8 +37,20 @@ export class CustomerPageComponent implements OnInit {
     this.showCart = currentRoute === 'products';
   }
 
+  // 提供用戶編輯資料
+  editUserInfo(): void {
+    this.userProfileEditionService.getUserInfo().subscribe(response => {
+      const userInfo = response.data;
+      const dialogRef = this.dialog.open(EditProfileComponent, {
+        width: '800px',
+        height: 'auto',
+        data: userInfo // 傳遞用戶資料
+      });
+    });
+  }
+
   logout() {
     // 應清除user的登入資訊
-    this.router.navigate(['/login']);  // 回首頁
+    this.router.navigate(['/']);  // 回首頁
   }
 }

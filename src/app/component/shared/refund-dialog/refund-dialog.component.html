@@ -1,0 +1,52 @@
+<div class="refund-dialog">
+  <h2 mat-dialog-title>Refund Request</h2>
+  <form [formGroup]="refundForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Order Item ID</mat-label>
+      <input matInput formControlName="orderItemId" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Request Target</mat-label>
+      <input matInput formControlName="requestTarget" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="statusType" [disabled]="refundForm.get('statusType')==null">
+        <mat-option *ngFor="let status of refundStatuses" [value]="status">
+          {{ status | titlecase }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Is Closed</mat-label>
+      <input matInput formControlName="isClosed" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Refund Reason</mat-label>
+      <textarea matInput formControlName="refundReason" [readonly]="refundForm.get('refundReason')?.disabled"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="data.user_type === 'vendor' || refundForm.get('vendorResponse')?.enabled">
+      <mat-label>Vendor Response</mat-label>
+      <textarea matInput formControlName="vendorResponse"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="data.user_type === 'admin' || refundForm.get('adminResponse')?.enabled">
+      <mat-label>Admin Response</mat-label>
+      <textarea matInput formControlName="adminResponse"></textarea>
+    </mat-form-field>
+  </form>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button color="primary" (click)="onSave()" [disabled]="refundForm.invalid">
+      Save
+    </button>
+
+    <!-- 關閉按鈕 -->
+    <button mat-button mat-dialog-close (click)="onClose()">Close</button>
+  </div>
+</div>

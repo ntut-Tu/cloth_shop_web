@@ -1,0 +1,13 @@
+.expanded-content {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.custom-dialog-container {
+  overflow: visible;
+}
+
+.cdk-overlay-container {
+  overflow: visible;
+}

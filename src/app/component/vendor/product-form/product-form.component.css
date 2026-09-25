@@ -1,0 +1,33 @@
+.product-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.variant-section {
+  margin-top: 16px;
+}
+
+.variant-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 24px;
+}

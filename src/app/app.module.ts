@@ -9,6 +9,12 @@ import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './component/shared/header/header.component';
 import {HomeRegisterPageComponent} from "./component/home/register.page/home.register.page.component";
 import {HttpClientModule} from "@angular/common/http";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import { EntryPageComponent } from './component/home/entry.page/entry.page.component';
+import {MatButton} from "@angular/material/button";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TriggerRefundDialogDirective} from "./directive/trigger-refund-dialog.directive";
 
 
 @NgModule({
@@ -18,12 +24,18 @@ import {HttpClientModule} from "@angular/common/http";
     HomeLoginPageComponent,
     HeaderComponent,
     HomeRegisterPageComponent,
+    EntryPageComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButton,
+    BrowserAnimationsModule,
   ],
   providers: [],
   exports: [

@@ -1,0 +1,15 @@
+<div class="entry-container">
+  <div class="background-overlay"></div>
+  <div class="button-container">
+<!--    <button class="entry-button"-->
+<!--            (mouseenter)="setRandomParticlePosition($event)"-->
+<!--            (click)="triggerRippleEffect($event); hideButton($event); enterSite()">-->
+<!--      Enter-->
+<!--    </button>-->
+    <button class="entry-button"
+            (mouseenter)="triggerRippleEffect($event)"
+            (click)="setRandomParticlePosition($event); hideButton($event); enterSite()">
+      Enter
+    </button>
+  </div>
+</div>

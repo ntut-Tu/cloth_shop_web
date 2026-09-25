@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeLoginPageComponent } from "./component/home/login.page/home.login.page.component";
 import { HomeRegisterPageComponent } from "./component/home/register.page/home.register.page.component";
+import { EntryPageComponent } from "./component/home/entry.page/entry.page.component";
 
 // 路由配置
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: HomeLoginPageComponent },
   { path: 'register', component: HomeRegisterPageComponent },
   {
@@ -20,7 +20,12 @@ export const routes: Routes = [
     path: 'customer',
     loadChildren: () => import('./component/customer/customer.module').then(m => m.CustomerModule)
   },
-  { path: '**', redirectTo: 'login' }
+  {
+    path: 'guest',
+    loadChildren: () => import('./component/guest/guest.module').then(m => m.GuestModule)
+  },
+  { path: 'entry', component: EntryPageComponent },
+  { path: '', redirectTo: '/entry', pathMatch: 'full' },
 ];
 
 @NgModule({

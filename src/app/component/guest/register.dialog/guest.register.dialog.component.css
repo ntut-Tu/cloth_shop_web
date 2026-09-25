@@ -1,0 +1,84 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Add padding to ensure content is not touching the edges */
+  background-color: #f7f7f7;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; /* Center the form within the dialog */
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%; /* Ensure inputs take full width of the form */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%; /* Ensure button takes full width of the form */
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.login {
+  margin-top: 20px; /* Increase distance from the button */
+  text-align: center; /* Center the text */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button:hover mat-icon {
+  color: #f44336; /* Hover 時的關閉按鈕顏色 */
+}
+
+.to-login{
+  color: #007bff;
+  background-color: rgba(255,88,88,0);
+}
+
+.to-login:hover{
+  color: #0056b3;
+  background-color: rgba(255,88,88,0);
+}
+

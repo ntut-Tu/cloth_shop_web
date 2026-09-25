@@ -4,7 +4,7 @@
   color: white;
   text-align: center;
   padding: 20px 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif; /* Updated font-family */
 }
 
 h1 {

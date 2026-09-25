@@ -1,27 +1,135 @@
-<div class="cart-container">
-  <ng-container *ngFor="let seller of cartGroupedBySeller | keyvalue">
-    <div class="seller-container">
-      <div class="seller-header">
-        <div class="seller-name">{{ seller.value[0].seller_name }}</div>
-        <div class="seller-total-price">Total: {{ calculateTotalPrice(seller.value) | currency }}</div>
-      </div>
-      <div class="product-list">
-        <ng-container *ngFor="let item of seller.value">
-          <div class="product-item">
-            <div class="product-name">{{ item.name }}</div>
-            <div class="product-quantity">
-              <input type="number" [(ngModel)]="item.quantity" min="1" (change)="updateQuantity(item)">
+<div class="checkout-container">
+  <!-- 店家分組訂單 -->
+  <ng-container *ngIf="!showOrderSummary">
+    <ng-container *ngFor="let storeOrder of (checkoutService.orderData$ | async)?.store_orders">
+      <div class="store-order-container">
+        <!-- 店家資訊 -->
+        <div class="store-header">
+          <span class="store-id">Store ID: {{ storeOrder.store_id }} 商家名稱: {{storeOrder.store_name}}</span>
+          <img [src]="storeOrder.store_image_url" alt="" (error)="onImageError($event)" style="width: 15px"/>
+        </div>
+
+        <!-- 商品列表 -->
+        <div class="store-products">
+          <ng-container *ngFor="let product of storeOrder.product_variants">
+            <div class="product-item">
+              <div class="product-name">Product ID: {{ product.product_variant_id }}</div>
+              <div class="product-quantity">
+                <label for="quantity-{{ product.product_variant_id }}">Quantity:</label>
+                <input
+                  id="quantity-{{ product.product_variant_id }}"
+                  type="number"
+                  [(ngModel)]="product.quantity"
+                  min="1"
+                  (change)="checkoutService.updateQuantity(product)"
+                  class="quantity-input"
+                />
+              </div>
+              <div class="product-price">
+                {{ product.quantity * (checkoutService.getPriceByVariantId(product.product_variant_id) || 0) | currency }}
+              </div>
+              <button class="delete-button" (click)="checkoutService.removeItem(product)">Delete</button>
             </div>
-            <div class="product-price">{{ item.price | currency }}</div>
-            <button class="delete-button" (click)="removeItem(item)">Delete</button>
+          </ng-container>
+        </div>
+
+        <!-- 店家折扣區域 -->
+        <div class="store-discounts">
+          <!-- 如果已應用優惠 -->
+          <div *ngIf="storeOrder.seasonal_discount_code  || storeOrder.special_discount_code">
+            <span>Current Discount: {{ storeOrder.special_discount_code || storeOrder.seasonal_discount_code }}</span>
           </div>
-        </ng-container>
+
+          <!-- 如果尚未應用優惠 -->
+          <div *ngIf="!(storeOrder.seasonal_discount_code  || storeOrder.special_discount_code) ">
+            <div class="discount-input">
+              <label for="discount-{{ storeOrder.store_id }}">Store Discount:</label>
+              <input
+                id="discount-{{ storeOrder.store_id }}"
+                type="text"
+                [(ngModel)]="storeOrder.tempDiscountCode"
+                placeholder="Enter Discount Code"
+              />
+              <button
+                class="apply-discount-button"
+                (click)="applyDiscount(storeOrder.tempDiscountCode || '', 'store_order', storeOrder.store_id)"
+              >
+                Apply Discount
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- 全局折扣 -->
+    <div class="discount-input">
+      <span>Shipping Discount:</span>
+      <div *ngIf="(checkoutService.orderData$ | async)?.shipping_discount_code as _shippingDiscountCode">
+        <span>Current Discount: {{ _shippingDiscountCode }}</span>
+      </div>
+      <div *ngIf="!(checkoutService.orderData$ | async)?.shipping_discount_code ">
+        <input
+          type="text"
+          placeholder="Enter Shipping Discount Code"
+          [(ngModel)]="shippingDiscountCode"
+        />
+        <button (click)="applyDiscount(shippingDiscountCode, 'order')">Apply Discount</button>
       </div>
     </div>
+
+    <!-- 下一步按鈕 -->
+    <button class="next-step-button" (click)="showOrderSummary = true; confirmAmount()">Next Step</button>
   </ng-container>
 
-  <div class="order-summary">
-    <div class="total-amount">Total Amount: {{ calculateGrandTotal() | currency }}</div>
-    <button class="submit-order" (click)="submitOrder()">Submit Order</button>
+  <!-- 訂單總結 -->
+  <div class="order-summary" *ngIf="showOrderSummary">
+    <div class="summary-row">
+      <span>Total Products:</span>
+      <span>{{ totalAmount | currency }}</span>
+    </div>
+    <div class="summary-row">
+      <span>Shipping Fee:</span>
+      <span>{{ shippingFee | currency }}</span>
+    </div>
+    <div class="summary-row">
+      <span>Discount Amount:</span>
+      <span>{{ discountAmount | currency }}</span>
+    </div>
+    <div class="summary-row">
+      <span>Final Total:</span>
+      <span>{{ netAmount | currency }}</span>
+    </div>
+    <div class="summary-row">
+      <span>Payment Method:</span>
+      <select [(ngModel)]="paymentMethod" required>
+        <option value="credit_card">Credit Card</option>
+        <option value="cash_on_delivery">Cash on Delivery</option>
+      </select>
+    </div>
+    <div class="summary-row">
+      <span>Delivery Type:</span>
+      <select [(ngModel)]="deliveryType" required>
+        <option value="delivery">Delivery</option>
+        <option value="pickup">Pickup</option>
+      </select>
+    </div>
+    <div class="summary-row" *ngIf="deliveryType === 'delivery'">
+      <span>Delivery Address:</span>
+      <input
+        type="text"
+        placeholder="Enter Delivery Address"
+        [(ngModel)]="shippingAddress"
+      />
+    </div>
+    <div class="summary-row" *ngIf="deliveryType === 'pickup'">
+      <span>Pickup Store:</span>
+      <input
+        type="text"
+        placeholder="Enter Pickup Store"
+        [(ngModel)]="pickupStore"
+      />
+    </div>
+    <button class="submit-order-button" (click)="submitOrder()">Confirm and Submit</button>
   </div>
 </div>
