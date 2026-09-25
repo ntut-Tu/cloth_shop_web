@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: `${window.location.protocol}//${window.location.hostname}`
+  baseUrl: window.location.origin
 };
